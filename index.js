@@ -27,6 +27,7 @@ const authToken = async()=>{
 
     const uri = `${domain}auth_token`;
     const res = await axios.post(uri, {"email" : email, "password" : password, "returnSecureToken" : true}).then(res=>res.data)
+    // console.log(res)
     return res
 }
 
@@ -61,5 +62,5 @@ const dischargeSummary = async()=>{
 
 
 
-
+// authToken()
 dischargeSummary()
