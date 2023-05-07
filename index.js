@@ -27,12 +27,62 @@ const authToken = async()=>{
 
     const uri = `${domain}auth_token`;
     const res = await axios.post(uri, {"email" : email, "password" : password, "returnSecureToken" : true}).then(res=>res.data)
-    // console.log(res)
+    console.log(res)
+    return res
+}
+
+/**
+ * ================
+ * 
+ * PATIENT
+ * 
+ * ==================
+ * 
+ */
+
+const getPatientById = async ()=>{
+    const token = await authToken().then(data=>data.token)
+    // passing tken in header
+     const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    }
+
+    const body ={
+        patientId :231
+    }
+    const uri =`${domain}patient_by_id`
+    const res = await axios.post(uri, body, config).then(res=>res.data)
+    console.log(res)
+    return res
+}
+
+
+const getPatientByAbhaAddress = async ()=>{
+    const token = await authToken().then(data=>data.token)
+    // passing tken in header
+     const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    }
+
+    const body ={
+        abhaAddress :`savitribilagi@sbx`
+        
+    }
+    const uri =`${domain}patient_by_abhaAddress`
+    const res = await axios.post(uri, body, config).then(res=>res.data)
+    console.log(res)
     return res
 }
 
 
 
+
+/**
+ * =====================
+ * BUNDLE
+ * =====================
+ * 
+ */
 
 const dischargeSummary = async()=>{
     // This function creates a discharge summary and returns the composition ID that you need to store for edit, read, and delete operations.
@@ -62,5 +112,10 @@ const dischargeSummary = async()=>{
 
 
 
+
+
+
 // authToken()
-dischargeSummary()
+// getPatientById()
+getPatientByAbhaAddress()
+// dischargeSummary()
