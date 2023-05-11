@@ -1,0 +1,330 @@
+openapi: 3.0.0
+info:
+  title: Nice HMS integration
+  description : Docs for integration with Nice HMS Triple milestone certified HIMS
+  version : 1.0.0
+  contact: 
+   email : nicehms21@gmail.com
+   name : Nice HMS
+paths :
+  /auth_token:
+    post:
+      description : This retuns auth token for pupose of getiing used in header as bearer token
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref : "#/components/schemas/authTokenReq"
+      responses :
+        "200":
+          description : "200 response"
+          content:
+            application/json:
+              schema:
+                $ref : "#/components/schemas/authTokenRes"
+  
+  
+  
+  
+  
+  /patient_by_id:
+    post:
+      security:
+        - bearerAuth: []
+      description : This retuns patient by Nice HMS id
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref : "#/components/schemas/PatientByIdReq"
+      responses :
+        "200":
+          description : "200 response"
+          content:
+            application/json:
+              schema:
+                $ref : "#/components/schemas/PatientRes"
+                
+  /patient_by_abhaAddress:
+    post:
+      security:
+        - bearerAuth: []
+      description : This retuns patient by Nice HMS id
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref : "#/components/schemas/PatientByAbhaAddressReq"
+      responses :
+        "200":
+          description : "200 response"
+          content:
+            application/json:
+              schema:
+                $ref : "#/components/schemas/PatientRes"          
+
+
+                     
+  /opd_patient:
+      post:
+        security:
+          - bearerAuth: []
+        description : This creates OPD Visit and care Context in ABDM. terms. Please note that you can use patientId given Nice HMS or ABHA address for this api
+        requestBody:
+          description: Optional description in *Markdown*
+          required: true
+          content:
+            application/json:
+              schema:
+                  $ref : "#/components/schemas/OpdPatientReq"
+        responses :
+          "200":
+            description : "200 response"
+            content:
+              application/json:
+                schema:
+                  $ref : "#/components/schemas/EncounterRes"                
+            
+          
+          
+components:
+  securitySchemes:
+    bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT  
+  schemas:
+    authTokenReq:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    authTokenRes:
+      type: object
+      properties:
+        token:
+          type: string           
+    
+    
+    
+    
+    PatientByIdReq:
+      type: object
+      required:
+        - patientId
+      properties:
+        patientId:
+          type: integer
+    
+    PatientByAbhaAddressReq:
+      type: object
+      required:
+        - abhaAddress
+      properties:
+        abhaAddress:
+          type: string
+          example : "abcd@sbx"
+    PatientRes:
+      type: object
+      properties:
+        patient:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: int32
+              example: '231'
+            prefix:
+              type: string
+              example: Mr
+            firstName:
+              type: string
+              example: Umesh
+            middleName:
+              type: string
+              example: ''
+            lastName:
+              type: string
+              example: Bilagi
+            gender:
+              type: string
+              example: Male
+            dob:
+              type: string
+              format: date-time
+              example: '1989-04-26T00:00:00.000Z'
+            orgId:
+              type: integer
+              format: int32
+              example: '1'
+            gcpFhirId:
+              type: string
+              example: b6165fd2-b76a-48e3-81ad-202b3919d668
+            abhaAddress:
+              type: string
+              example: ''
+            abhaNumber:
+              type: string
+              example: ''
+            district:
+              type: string
+              example: Dharwad
+            state:
+              type: string
+              example: KARNATAKA
+            mobile:
+              type: string
+              example: '09343403620'
+            address:
+              type: string
+              example: Hno11 , near pulley school
+    
+    
+    
+    OpdPatientReq:
+      type: object
+      required:
+        - doctorDetails
+        - date
+        
+      properties:
+
+        doctorDetails:
+          type: array
+          items:
+            type: object
+            properties:
+              doctorName:
+                type: string
+                example: Dr Umesh Bilagi
+              doctorGcpId:
+                type: string
+                example: cf4a6ab1-3f32-4b92-adc5-89489da6ca14
+        date:
+          type: string
+          format: date-time
+          example: '2023-05-08T19:21:23.918Z'
+        abhaAddress:
+          type: string
+          example: savitribilagi@sbx
+        patientId:
+          type: integer
+          example: 236
+        
+    
+    
+    EncounterRes:
+      type : object
+      properties:
+        encounter: 
+          type: object
+          properties: 
+            class: 
+              type: object
+              properties: 
+                code: 
+                  type: string
+                  example: AMB
+                display: 
+                  type: string
+                  example: ambulatory
+                system: 
+                  type: string
+                  example: http://terminology.hl7.org/CodeSystem/v3-ActCode
+            id: 
+              type: string
+              example: 65cb5b6a-f08e-4e46-a826-67e117573d71
+            meta: 
+              type: object
+              properties: 
+                lastUpdated: 
+                  type: string
+                  example: 2023-05-11T10:04:31.675645+00:00
+                profile: 
+                  type: array
+                  items: 
+                    type: string
+                    example: https://nrces.in/ndhm/fhir/r4/StructureDefinition/Encounter
+                versionId: 
+                  type: string
+                  example: MTY4Mzc5OTQ3MTY3NTY0NTAwMA
+            participant: 
+              type: array
+              items: 
+                type: object
+                properties: 
+                  individual: 
+                    type: object
+                    properties: 
+                      reference: 
+                        type: string
+                        example: Practitioner/cf4a6ab1-3f32-4b92-adc5-89489da6ca14
+                      type: 
+                        type: string
+                        example: Practitioner
+                  type: 
+                    type: array
+                    items: 
+                      type: object
+                      properties: 
+                        coding: 
+                          type: array
+                          items: 
+                            type: object
+                            properties: 
+                              code: 
+                                type: string
+                                example: ATND
+                              display: 
+                                type: string
+                                example: attender
+                              system: 
+                                type: string
+                                example: http://terminology.hl7.org/CodeSystem/v3-ParticipationType
+                        text: 
+                          type: string
+                          example: Dr Umesh Bilagi
+            period: 
+              type: object
+              properties: 
+                start: 
+                  type: string
+                  format: date-time
+                  example: 2023-05-08T19:21:23.918Z
+            resourceType: 
+              type: string
+              example: Encounter
+            status: 
+              type: string
+              example: in-progress
+            subject: 
+              type: object
+              properties: 
+                reference: 
+                  type: string
+                  example: Patient/9b4ec056-991d-4237-b1fd-a65770349610
+            text: 
+              type: object
+              properties: 
+                div: 
+                  type: string
+                  example: <div xmlns=http://www.w3.org/1999/xhtml>OPD Visit   Tue 9 May 2023 </div>
+                status: 
+                  type: string
+                  example: generated
+    
+              
+              
+              
+              
