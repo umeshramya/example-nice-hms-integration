@@ -91,11 +91,52 @@ paths :
                 schema:
                   $ref : "#/components/schemas/EncounterRes"                
             
-          
+  /admit_patient:
+    post:
+      security:
+        - bearerAuth: []
+      description : This creates admission Visit and care Context in ABDM. terms. Please note that you can use patientId given Nice HMS or ABHA address for this api
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref : "#/components/schemas/AdmitPatientReq"
+      responses :
+        "200":
+          description : "200 response"
+          content:
+            application/json:
+              schema:
+                $ref : "#/components/schemas/EncounterRes"          
+ 
+ 
+  /discharge_summary:
+      post:
+        security:
+          - bearerAuth: []
+        description : This creates Discharge Summary and notifyies to ABDM. Please note that you can use patientId given Nice HMS or ABHA address for this api
+        requestBody:
+          description: Optional description in *Markdown*
+          required: true
+          content:
+            application/json:
+              schema:
+                  $ref : "#/components/schemas/DischargeSummarytReq"
+        responses :
+          "200":
+            description : "200 response"
+            content:
+              application/json:
+                schema:
+                  $ref : "#/components/schemas/CompositionRes"  
+ 
+ 
           
 components:
   securitySchemes:
-    bearerAuth:            # arbitrary name for the security scheme
+    bearerAuth:            
       type: http
       scheme: bearer
       bearerFormat: JWT  
@@ -105,11 +146,14 @@ components:
       required:
         - email
         - password
+        - returnSecureToken
       properties:
         email:
           type: string
         password:
           type: string
+        returnSecureToken:
+          type: boolean
     authTokenRes:
       type: object
       properties:
@@ -197,9 +241,7 @@ components:
       required:
         - doctorDetails
         - date
-        
       properties:
-
         doctorDetails:
           type: array
           items:
@@ -223,6 +265,72 @@ components:
           example: 236
         
     
+    AdmitPatientReq:
+      type: object
+      required:
+        - doctorDetails
+        - doa
+      properties:
+        doctorDetails: 
+          type: array
+          items: 
+            type: object
+            properties: 
+              doctorName: 
+                type: string
+                example: Dr Umesh Bilagi
+              doctorGcpId: 
+                type: string
+                example: cf4a6ab1-3f32-4b92-adc5-89489da6ca14
+        doa: 
+          type: string
+          format: date-time
+          example: 2023-05-10T19:21:23.918Z
+        abhaAddress: 
+          type: string
+          example: savitribilagi@sbx
+        patientId:
+          type: integer
+          example: 236
+    
+
+
+    DischargeSummarytReq:
+      type : object
+      required:
+       - doctorDetails
+       - text
+       - status
+       - date
+      properties: 
+        abhaAddress: 
+          type: string
+          example: savitribilagi@sbx
+        patientId:
+          type : integer
+          example : 236
+        text: 
+          type: string
+          example: <div>Cough with APD</div><div>cough</div><div>BP 140/80 PR 87/min RR 20/min</div>
+        doctorDetails: 
+          type: array
+          items: 
+            type: object
+            properties: 
+              doctorName: 
+                type: string
+                example: Dr Umesh Bilagi
+              doctorGcpId: 
+                type: string
+                example: cf4a6ab1-3f32-4b92-adc5-89489da6ca14
+        status: 
+          type: "string"
+          example: final or draft
+        date: 
+          type: string
+          format: date-time
+          example: 2023-05-08T19:21:23.918Z
+
     
     EncounterRes:
       type : object
@@ -325,6 +433,146 @@ components:
                   example: generated
     
               
-              
-              
-              
+    CompositionRes:
+      type : object
+      properties: 
+        composition: 
+          type: object
+          properties: 
+            author: 
+              type: array
+              items: 
+                type: object
+                properties: 
+                  display: 
+                    type: string
+                    example: Dr Umesh Bilagi
+                  reference: 
+                    type: string
+                    example: Practitioner/cf4a6ab1-3f32-4b92-adc5-89489da6ca14
+            custodian: 
+              type: object
+              properties: 
+                reference: 
+                  type: string
+                  example: Organization/fd6464c1-a8ef-4e95-aa2a-d5eac433b85d
+            date: 
+              type: string
+              format: date-time
+              example: 2023-05-08T19:21:23.918Z
+            encounter: 
+              type: object
+              properties: 
+                reference: 
+                  type: string
+                  example: Encounter/8e909449-f3f0-427c-bd45-4f8e5564e251
+            id: 
+              type: string
+              example: e721069a-cc8c-4e5e-a437-b4cfcaee11a4
+            identifier: 
+              type: object
+              properties: 
+                system: 
+                  type: string
+                  example: https://ndhm.in/phr
+                value: 
+                  type: string
+                  example: 2390bb7b-9e23-4732-a081-12b469657d87
+            language: 
+              type: string
+              example: en-IN
+            meta: 
+              type: object
+              properties: 
+                lastUpdated: 
+                  type: string
+                  example: 2023-05-11T10:06:53.692605+00:00
+                profile: 
+                  type: array
+                  items: 
+                    type: string
+                    example: https://nrces.in/ndhm/fhir/r4/StructureDefinition/DischargeSummaryRecord
+                versionId: 
+                  type: string
+                  example: MTY4Mzc5OTYxMzY5MjYwNTAwMA
+            resourceType: 
+              type: string
+              example: Composition
+            section: 
+              type: array
+              items: 
+                type: object
+                properties: 
+                  code: 
+                    type: object
+                    properties: 
+                      coding: 
+                        type: array
+                        items: 
+                          type: object
+                          properties: 
+                            code: 
+                              type: string
+                              example: 422843007
+                            display: 
+                              type: string
+                              example: Chief Complaint Section
+                            system: 
+                              type: string
+                              example: https://projecteka.in/sct
+                  entry: 
+                    type: array
+                    items: 
+                      type: object
+                      properties: 
+                        reference: 
+                          type: string
+                          example: Condition/74590d44-8674-4147-8b14-e6fd2cb708dd
+                  title: 
+                    type: string
+                    example: Presenting Problems
+            status: 
+              type: string
+              example: final
+            subject: 
+              type: object
+              properties: 
+                reference: 
+                  type: string
+                  example: Patient/9b4ec056-991d-4237-b1fd-a65770349610
+            text: 
+              type: object
+              properties: 
+                div: 
+                  type: string
+                  example: <div>....</div>
+                status: 
+                  type: string
+                  example: generated
+            title: 
+              type: string
+              example: DischargeSummary
+            type: 
+              type: object
+              properties: 
+                coding: 
+                  type: array
+                  items: 
+                    type: object
+                    properties: 
+                      code: 
+                        type: string
+                        example: 373942005
+                      display: 
+                        type: string
+                        example: Discharge summary
+                      system: 
+                        type: string
+                        example: https://ndhm.gov.in/sct
+                text: 
+                  type: string
+                  example: Discharge summary
+      
+      
+                    
+                    
