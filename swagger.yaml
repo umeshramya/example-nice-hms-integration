@@ -9,6 +9,8 @@ info:
 paths :
   /auth_token:
     post:
+      tags:
+        - Auth
       description : This retuns auth token for pupose of getiing used in header as bearer token
       requestBody:
         description: Optional description in *Markdown*
@@ -31,6 +33,8 @@ paths :
   
   /patient_by_id:
     post:
+      tags:
+        - Patient
       security:
         - bearerAuth: []
       description : This retuns patient by Nice HMS id
@@ -51,6 +55,8 @@ paths :
                 
   /patient_by_abhaAddress:
     post:
+      tags:
+        - Patient    
       security:
         - bearerAuth: []
       description : This retuns patient by Nice HMS id
@@ -73,6 +79,8 @@ paths :
                      
   /opd_patient:
       post:
+        tags:
+          - Patient Visits
         security:
           - bearerAuth: []
         description : This creates OPD Visit and care Context in ABDM. terms. Please note that you can use patientId given Nice HMS or ABHA address for this api
@@ -93,6 +101,8 @@ paths :
             
   /admit_patient:
     post:
+      tags:
+        - Patient Visits
       security:
         - bearerAuth: []
       description : This creates admission Visit and care Context in ABDM. terms. Please note that you can use patientId given Nice HMS or ABHA address for this api
@@ -112,8 +122,36 @@ paths :
                 $ref : "#/components/schemas/EncounterRes"          
  
  
+  /discharge_patient:
+    put:
+      tags:
+        - Patient Visits
+      security:
+        - bearerAuth: []
+      description : This updates the admit patinet viit by discharge date . 
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref : "#/components/schemas/DischargePatientReq"
+      responses :
+        "200":
+          description : "200 response"
+          content:
+            application/json:
+              schema:
+                $ref : "#/components/schemas/EncounterRes"          
+
+ 
+ 
+ 
+ 
   /discharge_summary:
       post:
+        tags:
+          - Documents
         security:
           - bearerAuth: []
         description : This creates Discharge Summary and notifyies to ABDM. Please note that you can use patientId given Nice HMS or ABHA address for this api
@@ -179,6 +217,7 @@ components:
         abhaAddress:
           type: string
           example : "abcd@sbx"
+    
     PatientRes:
       type: object
       properties:
@@ -246,6 +285,9 @@ components:
           type: array
           items:
             type: object
+            required :
+             - doctorName
+             - doctorGcpId            
             properties:
               doctorName:
                 type: string
@@ -275,6 +317,9 @@ components:
           type: array
           items: 
             type: object
+            required :
+             - doctorName
+             - doctorGcpId            
             properties: 
               doctorName: 
                 type: string
@@ -293,8 +338,41 @@ components:
           type: integer
           example: 236
     
+    DischargePatientReq:
+      type: object
+      required:
+        - encounterId
+        - dod
+        
+      properties:
+        doctorDetails:
+          type: array
+          items:
+            type: object
+            required :
+             - doctorName
+             - doctorGcpId
+            properties:
+              doctorName:
+                type: string
+                example : Dr Umesh Bilagi
+              doctorGcpId:
+                type: string
+                example : cf4a6ab1-3f32-4b92-adc5-89489da6ca14
+        dod:
+          type: string
+        abhaAddress:
+          type: string
+          example : savitribilagi@sbx
+        patientId:
+          type: number
+          example : 236
+        encounterId:
+          type: string
+          example: 21ba04cd-d922-4412-bfdc-c0293e638f1d
 
 
+      
     DischargeSummarytReq:
       type : object
       required:
@@ -316,6 +394,9 @@ components:
           type: array
           items: 
             type: object
+            required :
+             - doctorName
+             - doctorGcpId            
             properties: 
               doctorName: 
                 type: string
@@ -405,11 +486,18 @@ components:
                           example: Dr Umesh Bilagi
             period: 
               type: object
+              required:
+               - start
               properties: 
                 start: 
                   type: string
                   format: date-time
                   example: 2023-05-08T19:21:23.918Z
+                end: 
+                  type: string
+                  format: date-time
+                  example: 2023-05-08T29:21:23.918Z  
+                  
             resourceType: 
               type: string
               example: Encounter
