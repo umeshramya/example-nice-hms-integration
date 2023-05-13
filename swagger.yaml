@@ -208,6 +208,7 @@ components:
       properties:
         patientId:
           type: integer
+          example : 231
     
     PatientByAbhaAddressReq:
       type: object
@@ -225,10 +226,12 @@ components:
           type: object
           properties:
             id:
+              description : This is nothing but patientId
               type: integer
               format: int32
-              example: '231'
+              example: 231
             prefix:
+              enum : [Mr, Mrs, Ms, Dr, NA, Master, Er]
               type: string
               example: Mr
             firstName:
@@ -242,6 +245,7 @@ components:
               example: Bilagi
             gender:
               type: string
+              enum : [Male, Female, other, unknown ]
               example: Male
             dob:
               type: string
@@ -268,10 +272,22 @@ components:
               example: KARNATAKA
             mobile:
               type: string
-              example: '09343403620'
+              example: '9233235620'
             address:
               type: string
               example: Hno11 , near pulley school
+            panNumber:
+              type: string
+              example : APYVB3402Q
+            aadharNumber:
+              type: string
+              example : 514782451234
+            email:
+              type: string
+              example: rameshH007@gmail.com
+            alternatePhoneNumber:
+              type: string
+              example : 0836223456
     
     
     
@@ -343,7 +359,6 @@ components:
       required:
         - encounterId
         - dod
-        
       properties:
         doctorDetails:
           type: array
