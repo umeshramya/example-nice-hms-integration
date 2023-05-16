@@ -6,6 +6,13 @@ info:
   contact: 
    email : nicehms21@gmail.com
    name : Nice HMS
+servers:
+  # - url: https://us-central1-mysql-nicehms.cloudfunctions.net
+  #   description: Production server (uses live data)
+  - url: https://asia-south1-psychic-city-328609.cloudfunctions.net
+    description: Sandbox server (uses test data)
+  - url: http://127.0.0.1:5001/psychic-city-328609/asia-south1
+    description: Local server (uses test data)
 paths :
   /auth_token:
     post:
@@ -169,6 +176,29 @@ paths :
               application/json:
                 schema:
                   $ref : "#/components/schemas/CompositionRes"  
+  
+  
+  /diagnostic_report:
+      post:
+        tags:
+          - Documents
+        security:
+          - bearerAuth: []
+        description : This creates Discharge Summary and notifyies to ABDM. Please note that you can use patientId given Nice HMS or ABHA address for this api
+        requestBody:
+          description: Optional description in *Markdown*
+          required: true
+          content:
+            application/json:
+              schema:
+                  $ref : "#/components/schemas/DiagnosticReportReq"
+        responses :
+          "200":
+            description : "200 response"
+            content:
+              application/json:
+                schema:
+                  $ref : "#/components/schemas/CompositionRes"   
  
  
           
@@ -426,6 +456,67 @@ components:
           type: string
           format: date-time
           example: 2023-05-08T19:21:23.918Z
+          
+          
+    DiagnosticReportReq:
+      type : object
+      required:
+       - performer
+       - text
+       - status
+       - date
+      properties: 
+        abhaAddress: 
+          type: string
+          example: savitribilagi@sbx
+        patientId:
+          type : integer
+          example : 236
+        text: 
+          type: string
+          example: <div>Cough with APD</div><div>cough</div><div>BP 140/80 PR 87/min RR 20/min</div>
+        performer: 
+          type: array
+          items: 
+            type: object
+            required :
+             - doctorName
+             - doctorGcpId            
+            properties: 
+              doctorName: 
+                type: string
+                example: Dr Umesh Bilagi
+              doctorGcpId: 
+                type: string
+                example: cf4a6ab1-3f32-4b92-adc5-89489da6ca14
+        requester: 
+            description : This is optional field if not given than requester is considered self by patient
+            type: object
+            required :
+             - doctorName
+             - doctorGcpId            
+            properties: 
+              doctorName: 
+                type: string
+                example: Dr Umesh Bilagi
+              doctorGcpId: 
+                type: string
+                example: cf4a6ab1-3f32-4b92-adc5-89489da6ca14                
+        status: 
+          type: "string"
+          example: final or draft
+        date: 
+          type: string
+          format: date-time
+          example: 2023-05-08T19:21:23.918Z  
+        conclusion:
+          type: string
+          example: "Normal Study"
+        category:
+          enum : [Hematlogy, Biochemestry, Microbiology, Radiology , Others]
+          type : string
+          example : Radiology
+          
 
     
     EncounterRes:
