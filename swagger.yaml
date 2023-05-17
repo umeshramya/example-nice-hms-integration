@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Nice HMS integration
-  description : Docs for integration with Nice HMS Triple milestone certified HIMS
+  description : Welcome to the integration documentation for Nice HMS ABDM (Ayushman Bharath Digital mission) Triple Milestone Certified HIMS! These APIs are specifically designed for developers who are looking to incorporate ABDM APIs into their projects. We understand the complexity involved in implementing ABDM APIs, and our aim is to simplify the process for you, making it effortless to achieve ABDM compatibility within your HIMS (Health Information Management System). Whether you're a medical college, a large hospital, or a hospital chain, and currently using a non-ABDM compatibility application (whether it's on-premise or in the cloud), our APIs are here to help you leverage the benefits of ABDM within your organization. We have carefully designed these APIs to meet the requirements of ABDM, ensuring a smooth and efficient integration experience.Take advantage of our simplified implementation of complex ABDM APIs and empower your HIMS with ABDM compatibility. Enhance your data management processes and unlock the full potential of ABDM within your organization. To get started, refer to our comprehensive integration documentation, which provides detailed instructions and examples to facilitate a seamless integration process. We look forward to supporting you in successfully integrating ABDM APIs.
   version : 1.0.0
   contact: 
    email : nicehms21@gmail.com
@@ -18,9 +18,9 @@ paths :
     post:
       tags:
         - Auth
-      description : This retuns auth token for pupose of getiing used in header as bearer token
+      description : This returns an authorization token that can be used in the header as a bearer token. The token has an expiration time of 15 to 30 minutes. It is necessary to use this token in subsequent calls for authentication
       requestBody:
-        description: Optional description in *Markdown*
+        description: To obtain your email and password, please contact Nice HMS directly.
         required: true
         content:
           application/json:
@@ -46,7 +46,7 @@ paths :
         - bearerAuth: []
       description : This retuns patient by Nice HMS id
       requestBody:
-        description: Optional description in *Markdown*
+        description: The term "ID" refers to the unique identifier generated within Nice HMS.
         required: true
         content:
           application/json:
@@ -66,9 +66,8 @@ paths :
         - Patient    
       security:
         - bearerAuth: []
-      description : This retuns patient by Nice HMS id
+      description : This function enables you to retrieve a patient's information using their ABHA address, provided that the ABHA address is registered with Nice HMS under your organization. To utilize this feature, the patient must be registered in Nice HMS using their ABHA address. Registration can be completed through various methods, including Aadhar or mobile OTP verification, scanning the ABHA card QR code, or having the patient scan the QR code displayed at the reception using the PHR app. The reception-generated QR code is created by the Health Facility Registry (HFR)
       requestBody:
-        description: Optional description in *Markdown*
         required: true
         content:
           application/json:
@@ -90,7 +89,7 @@ paths :
           - Patient Visits
         security:
           - bearerAuth: []
-        description : This creates OPD Visit and care Context in ABDM. terms. Please note that you can use patientId given Nice HMS or ABHA address for this api
+        description : This function creates an OPD (Outpatient Department) visit and care context within the ABDM (Ayushman Bharat Digital Mission) framework. It is important to note that you have the option to use either the patient ID provided by Nice HMS or the ABHA address when making API requests. Before sending data, it is essential to check whether there are any OPD (Outpatient Department) active visits available
         requestBody:
           description: Optional description in *Markdown*
           required: true
@@ -112,7 +111,7 @@ paths :
         - Patient Visits
       security:
         - bearerAuth: []
-      description : This creates admission Visit and care Context in ABDM. terms. Please note that you can use patientId given Nice HMS or ABHA address for this api
+      description : This function creates an inpatient (inpatient Department) visit and care context within the ABDM (Ayushman Bharat Digital Mission) framework. It is important to note that you have the option to use either the patient ID provided by Nice HMS or the ABHA address when making API requests. Before sending data, it is essential to check whether there are any active IPD (Inpatient Department) visits available,  
       requestBody:
         description: Optional description in *Markdown*
         required: true
@@ -135,9 +134,8 @@ paths :
         - Patient Visits
       security:
         - bearerAuth: []
-      description : This updates the admit patinet viit by discharge date . 
+      description : This function updates the admission visit for a patient by specifying the discharge date. It is important to call this API before sending the discharge summary document, as it updates the discharge date accordingly. 
       requestBody:
-        description: Optional description in *Markdown*
         required: true
         content:
           application/json:
@@ -161,7 +159,7 @@ paths :
           - Documents
         security:
           - bearerAuth: []
-        description : This creates Discharge Summary and notifyies to ABDM. Please note that you can use patientId given Nice HMS or ABHA address for this api
+        description : This function creates a Discharge Summary and notifies ABDM (Ayushman Bharat Digital Mission). Please note that you have the option to use either the patient ID provided by Nice HMS or the ABHA address when using this API
         requestBody:
           description: Optional description in *Markdown*
           required: true
@@ -184,7 +182,7 @@ paths :
           - Documents
         security:
           - bearerAuth: []
-        description : This creates Discharge Summary and notifyies to ABDM. Please note that you can use patientId given Nice HMS or ABHA address for this api
+        description : This function creates a Diagnostic Report and notifies ABDM (Ayushman Bharat Digital Mission). Please note that you have the option to use either the patient ID provided by Nice HMS or the ABHA address when using this API
         requestBody:
           description: Optional description in *Markdown*
           required: true
@@ -474,8 +472,9 @@ components:
           example : 236
         text: 
           type: string
-          example: <div>Cough with APD</div><div>cough</div><div>BP 140/80 PR 87/min RR 20/min</div>
+          example: <div>Ultrasoud Report This is in text format and for CBC like reports send HTML  table</div>
         performer: 
+          description : The term "performer" refers to the individual who signs the report
           type: array
           items: 
             type: object
@@ -490,7 +489,7 @@ components:
                 type: string
                 example: cf4a6ab1-3f32-4b92-adc5-89489da6ca14
         requester: 
-            description : This is optional field if not given than requester is considered self by patient
+            description : This is an optional field. If not provided, the requester will be assumed to be the patient themselves
             type: object
             required :
              - doctorName
