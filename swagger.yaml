@@ -6,13 +6,6 @@ info:
   contact: 
    email : nicehms21@gmail.com
    name : Nice HMS
-servers:
-  # - url: https://us-central1-mysql-nicehms.cloudfunctions.net
-  #   description: Production server (uses live data)
-  - url: https://asia-south1-psychic-city-328609.cloudfunctions.net
-    description: Sandbox server (uses test data)
-  - url: http://127.0.0.1:5001/psychic-city-328609/asia-south1
-    description: Local server (uses test data)
 paths :
   /auth_token:
     post:
