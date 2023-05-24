@@ -6,6 +6,9 @@ info:
   contact: 
    email : nicehms21@gmail.com
    name : Nice HMS
+servers:
+  - url: https://asia-south1-psychic-city-328609.cloudfunctions.net
+    description: Sandbox   
 paths :
   /auth_token:
     post:
@@ -200,6 +203,27 @@ components:
       scheme: bearer
       bearerFormat: JWT  
   schemas:
+    doctorDetails: 
+      type: array
+      items: 
+        type: object
+        required :
+         - doctorName
+         - doctorGcpId            
+        properties: 
+          doctorName: 
+            type: string
+            example: Dr Umesh Bilagi
+          doctorGcpId: 
+            type: string
+            example: cf4a6ab1-3f32-4b92-adc5-89489da6ca14
+    abhaAddress: 
+      type: string
+      example: savitribilagi@sbx
+    patientId:
+      type : integer
+      example : 236    
+    
     authTokenReq:
       type: object
       required:
@@ -227,9 +251,8 @@ components:
       required:
         - patientId
       properties:
-        patientId:
-          type: integer
-          example : 231
+        patientId:  
+          $ref : "#/components/schemas/patientId"  
     
     PatientByAbhaAddressReq:
       type: object
@@ -237,8 +260,7 @@ components:
         - abhaAddress
       properties:
         abhaAddress:
-          type: string
-          example : "abcd@sbx"
+          $ref : "#/components/schemas/abhaAddress"
     
     PatientRes:
       type: object
@@ -270,7 +292,6 @@ components:
               example: Male
             dob:
               type: string
-              format: date-time
               example: '1989-04-26T00:00:00.000Z'
             orgId:
               type: integer
@@ -319,22 +340,9 @@ components:
         - date
       properties:
         doctorDetails:
-          type: array
-          items:
-            type: object
-            required :
-             - doctorName
-             - doctorGcpId            
-            properties:
-              doctorName:
-                type: string
-                example: Dr Umesh Bilagi
-              doctorGcpId:
-                type: string
-                example: cf4a6ab1-3f32-4b92-adc5-89489da6ca14
+          $ref : "#/components/schemas/doctorDetails"            
         date:
           type: string
-          format: date-time
           example: '2023-05-08T19:21:23.918Z'
         abhaAddress:
           type: string
@@ -350,30 +358,15 @@ components:
         - doctorDetails
         - doa
       properties:
-        doctorDetails: 
-          type: array
-          items: 
-            type: object
-            required :
-             - doctorName
-             - doctorGcpId            
-            properties: 
-              doctorName: 
-                type: string
-                example: Dr Umesh Bilagi
-              doctorGcpId: 
-                type: string
-                example: cf4a6ab1-3f32-4b92-adc5-89489da6ca14
+        doctorDetails:
+          $ref : "#/components/schemas/doctorDetails" 
         doa: 
           type: string
-          format: date-time
           example: 2023-05-10T19:21:23.918Z
-        abhaAddress: 
-          type: string
-          example: savitribilagi@sbx
-        patientId:
-          type: integer
-          example: 236
+        abhaAddress:
+          $ref : "#/components/schemas/abhaAddress"
+        patientId:  
+          $ref : "#/components/schemas/patientId"  
     
     DischargePatientReq:
       type: object
@@ -382,27 +375,13 @@ components:
         - dod
       properties:
         doctorDetails:
-          type: array
-          items:
-            type: object
-            required :
-             - doctorName
-             - doctorGcpId
-            properties:
-              doctorName:
-                type: string
-                example : Dr Umesh Bilagi
-              doctorGcpId:
-                type: string
-                example : cf4a6ab1-3f32-4b92-adc5-89489da6ca14
+          $ref : "#/components/schemas/doctorDetails" 
         dod:
           type: string
         abhaAddress:
-          type: string
-          example : savitribilagi@sbx
-        patientId:
-          type: number
-          example : 236
+          $ref : "#/components/schemas/abhaAddress"
+        patientId:  
+          $ref : "#/components/schemas/patientId"  
         encounterId:
           type: string
           example: 21ba04cd-d922-4412-bfdc-c0293e638f1d
@@ -417,35 +396,20 @@ components:
        - status
        - date
       properties: 
-        abhaAddress: 
-          type: string
-          example: savitribilagi@sbx
-        patientId:
-          type : integer
-          example : 236
+        abhaAddress:
+          $ref : "#/components/schemas/abhaAddress"
+        patientId:  
+          $ref : "#/components/schemas/patientId"  
         text: 
           type: string
           example: <div>Cough with APD</div><div>cough</div><div>BP 140/80 PR 87/min RR 20/min</div>
-        doctorDetails: 
-          type: array
-          items: 
-            type: object
-            required :
-             - doctorName
-             - doctorGcpId            
-            properties: 
-              doctorName: 
-                type: string
-                example: Dr Umesh Bilagi
-              doctorGcpId: 
-                type: string
-                example: cf4a6ab1-3f32-4b92-adc5-89489da6ca14
+        doctorDetails:
+          $ref : "#/components/schemas/doctorDetails" 
         status: 
           type: "string"
           example: final or draft
         date: 
           type: string
-          format: date-time
           example: 2023-05-08T19:21:23.918Z
           
           
@@ -456,50 +420,28 @@ components:
        - text
        - status
        - date
-      properties: 
-        abhaAddress: 
-          type: string
-          example: savitribilagi@sbx
-        patientId:
-          type : integer
-          example : 236
+      properties:
+        abhaAddress:
+          $ref : "#/components/schemas/abhaAddress"
+        patientId:  
+          $ref : "#/components/schemas/patientId"  
         text: 
           type: string
           example: <div>Ultrasoud Report This is in text format and for CBC like reports send HTML  table</div>
-        performer: 
-          description : The term "performer" refers to the individual who signs the report
-          type: array
-          items: 
-            type: object
-            required :
-             - doctorName
-             - doctorGcpId            
-            properties: 
-              doctorName: 
-                type: string
-                example: Dr Umesh Bilagi
-              doctorGcpId: 
-                type: string
-                example: cf4a6ab1-3f32-4b92-adc5-89489da6ca14
+        performer:
+          allOf:
+            - $ref : "#/components/schemas/doctorDetails"  
+            - description : The term "performer" refers to the individual who signs the report
+                        
         requester: 
-            description : This is an optional field. If not provided, the requester will be assumed to be the patient themselves
-            type: object
-            required :
-             - doctorName
-             - doctorGcpId            
-            properties: 
-              doctorName: 
-                type: string
-                example: Dr Umesh Bilagi
-              doctorGcpId: 
-                type: string
-                example: cf4a6ab1-3f32-4b92-adc5-89489da6ca14                
+          allOf:
+            - description : This is an optional field. If not provided, the requester will be assumed to be the patient themselves
+            - $ref : "#/components/schemas/doctorDetails"                
         status: 
           type: "string"
           example: final or draft
         date: 
           type: string
-          format: date-time
           example: 2023-05-08T19:21:23.918Z  
         conclusion:
           type: string
@@ -589,11 +531,9 @@ components:
               properties: 
                 start: 
                   type: string
-                  format: date-time
                   example: 2023-05-08T19:21:23.918Z
                 end: 
                   type: string
-                  format: date-time
                   example: 2023-05-08T29:21:23.918Z  
                   
             resourceType: 
@@ -644,7 +584,6 @@ components:
                   example: Organization/fd6464c1-a8ef-4e95-aa2a-d5eac433b85d
             date: 
               type: string
-              format: date-time
               example: 2023-05-08T19:21:23.918Z
             encounter: 
               type: object
