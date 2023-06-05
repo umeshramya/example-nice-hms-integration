@@ -334,7 +334,7 @@ components:
           example: "abcd@abdm"
         authMode:
           type: string
-          enum : ["MOBILE_OTP", "AADHAR_OTP"]
+          enum : ["MOBILE_OTP", "AADHAAR_OTP"]
     
     AbhaOtpInitRes:
       type: object
@@ -353,7 +353,7 @@ components:
                   example: "2023-06-04T06:57:19.082288652"
             mode:
               type: string
-              enum: ["MOBILE_OTP", "AADHAR_OTP"]
+              enum: ["MOBILE_OTP", "AADHAAR_OTP"]
             transactionId:
               type: string
               example: "f455d2f9-18f1-4c6e-bfd0-df5ff2449f97"
