@@ -297,6 +297,120 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Patient Register By ABHA OTP Init",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjU0NWUyNDZjNTEwNmExMGQ2MzFiMTA0M2E3MWJiNTllNWJhMGM5NGQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHN5Y2hpYy1jaXR5LTMyODYwOSIsImF1ZCI6InBzeWNoaWMtY2l0eS0zMjg2MDkiLCJhdXRoX3RpbWUiOjE2ODU5MzQyMTksInVzZXJfaWQiOiIwYWZUdmpod0puTkFhWENwZHRNT0pjSnE2MGIyIiwic3ViIjoiMGFmVHZqaHdKbk5BYVhDcGR0TU9KY0pxNjBiMiIsImlhdCI6MTY4NTkzNDIxOSwiZXhwIjoxNjg1OTM3ODE5LCJlbWFpbCI6InVtZXNoYmlsYWdpQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ1bWVzaGJpbGFnaUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.lKqpXlWm9vVfjr8r6KGqBUlcYZgv4lYppRP__B9eyAxHaScy1B3-Pp1Cz9DjYQro1Bv1GSVgFcbbXgAXDkQCMaBspaGZG5N9nrgDnoY-JKEvqu4WQdtWFba0q3jndrzI4J6Xma3dFYVO8vuMoPC6D4daL3GeA8J1NEKtHXurU0nSvB_H_k9McKBN_m4GZC4H-KNjxZeUisHb_9lRmdLpIm_jWg0j7_OCcXuH_NQTXnF09aC5SSbW3GM4fiSgIEfmUm5gyyR58lzkCwPAboJ8mONyGwY_0NdOnS2QQVtiEo1owKcKP8MnxJaFhJz8SwfC09OprAKyR6I_H_L1RHp9Wg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"abhaAddress\" : \"91711357678608@sbx\",\r\n    \"authMode\" : \"AADHAR_OTP\"\r\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/patient_register_abha_otp_init",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"patient_register_abha_otp_init"
+					]
+				},
+				"description": "This is for registering ABHA patient by using otp method eithor MOBILE_OTP or AADHAAR_OTP"
+			},
+			"response": []
+		},
+		{
+			"name": "Patient Register By ABHA OTP Confirm",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjJkM2E0YTllYjY0OTk0YzUxM2YyYzhlMGMwMTY1MzEzN2U5NTg3Y2EiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHN5Y2hpYy1jaXR5LTMyODYwOSIsImF1ZCI6InBzeWNoaWMtY2l0eS0zMjg2MDkiLCJhdXRoX3RpbWUiOjE2ODU4NTQ1OTcsInVzZXJfaWQiOiIwYWZUdmpod0puTkFhWENwZHRNT0pjSnE2MGIyIiwic3ViIjoiMGFmVHZqaHdKbk5BYVhDcGR0TU9KY0pxNjBiMiIsImlhdCI6MTY4NTg1NDU5NywiZXhwIjoxNjg1ODU4MTk3LCJlbWFpbCI6InVtZXNoYmlsYWdpQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ1bWVzaGJpbGFnaUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.QGaD4CU5djjBD9t0SC83OPtucJTjdV559_eCgxBx2sZjDhsKeHhrWkqkO5U8pjo45ZqdCdMi3n9L3r13sLBsU_G2StLrQnEw3DjUKbOy8BotW_i_N-6ww3nCjLZUvf_senNKB2TNpZEJ1zHGcyQ8AudOLuPutqfZodP4f6U2Z1uud0KTz7tFWDU6h0qmEIlOvC004xnkAn7DHLn_bUoYZltZ6wVqY01EXMqFdBHcs43s1_Y3J6wWkfhotkTRGZbb73VqHiafQ4EemhTdhui94ZFaFifb3TQ0TnpcKcTAJIaw7Zi-fMPVHrKcA9rZxygxhp1ViVms_FfKlbuvqPHawA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"otp\":\"886367\",\r\n    \"transactionId\":\"f455d2f9-18f1-4c6e-bfd0-df5ff2449f97\",\r\n    \"abhaAddress\": \"91711357678608@sbx\"\r\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/patient_register_abha_otp_confirm",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"patient_register_abha_otp_confirm"
+					]
+				},
+				"description": "This is for registering ABHA patient by using otp method eithor MOBILE_OTP or AADHAAR_OTP"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Patient",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjJkM2E0YTllYjY0OTk0YzUxM2YyYzhlMGMwMTY1MzEzN2U5NTg3Y2EiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHN5Y2hpYy1jaXR5LTMyODYwOSIsImF1ZCI6InBzeWNoaWMtY2l0eS0zMjg2MDkiLCJhdXRoX3RpbWUiOjE2ODU5MDY2MzMsInVzZXJfaWQiOiIwYWZUdmpod0puTkFhWENwZHRNT0pjSnE2MGIyIiwic3ViIjoiMGFmVHZqaHdKbk5BYVhDcGR0TU9KY0pxNjBiMiIsImlhdCI6MTY4NTkwNjYzMywiZXhwIjoxNjg1OTEwMjMzLCJlbWFpbCI6InVtZXNoYmlsYWdpQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ1bWVzaGJpbGFnaUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.UKSpMVrLmYMMYei3qP5AV675LB1SDgoilrgUsd0LTYXorqsxiVkUPQd-0aeBFrBhSb4vJ2UmDEzYp8fLbbvPLfYvJ1Mwm-nfbL-j7tZDNp5D3eJtY5MJkNIOGJHy3FwXCrRCfMO19q-KdahwanRxMskR0tGnwJ8GAzErgr6gG6p9NAI_2vQ_pMLi_zsBRwCCa3FMvooN9TtJMy-7mUpGwNYJQF1cVG9xFEGah7LWqgHdZbJGcF1UOjW7ahmEDKyPQFEwnLFraEEoXxqimFbg9ncHaGsbVlDXhbjyJdj4wuaTkvLLuAQ82EDEafwm7afcnIIwveYeaNR6RvT22YOslw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"patient\" : {\r\n    \"prefix\": \"Mr\",\r\n    \"firstName\": \"Umesh\",\r\n    \"middleName\": \"Ramachandra\",\r\n    \"lastName\": \"Bilagi\",\r\n    \"gender\": \"Male\",\r\n    \"dob\": \"1969-09-29\",\r\n    \"district\": \"DHARWAD\",\r\n    \"state\": \"KARNATAKA\",\r\n    \"mobile\": \"9343403620\",\r\n    \"internalid\" : \"THS 1234\"\r\n}\r\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/create_patient",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"create_patient"
+					]
+				},
+				"description": "This is for registering ABHA patient by using otp method eithor MOBILE_OTP or AADHAAR_OTP"
+			},
+			"response": []
 		}
 	],
 	"event": [

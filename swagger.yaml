@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Nice HMS integration
   description : Welcome to the integration documentation for Nice HMS ABDM (Ayushman Bharath Digital mission) Triple Milestone Certified HIMS! These APIs are specifically designed for developers who are looking to incorporate ABDM APIs into their projects. We understand the complexity involved in implementing ABDM APIs, and our aim is to simplify the process for you, making it effortless to achieve ABDM compatibility within your HIMS (Health Information Management System). Whether you're a medical college, a large hospital, or a hospital chain, and currently using a non-ABDM compatibility application (whether it's on-premise or in the cloud), our APIs are here to help you leverage the benefits of ABDM within your organization. We have carefully designed these APIs to meet the requirements of ABDM, ensuring a smooth and efficient integration experience.Take advantage of our simplified implementation of complex ABDM APIs and empower your HIMS with ABDM compatibility. Enhance your data management processes and unlock the full potential of ABDM within your organization. To get started, refer to our comprehensive integration documentation, which provides detailed instructions and examples to facilitate a seamless integration process. We look forward to supporting you in successfully integrating ABDM APIs.
-  version : 1.0.0
+  version : 1.1.0
   contact: 
    email : nicehms21@gmail.com
    name : Nice HMS
@@ -76,6 +76,70 @@ paths :
             application/json:
               schema:
                 $ref : "#/components/schemas/PatientRes"          
+
+  /create_patient:
+    post:
+      tags:
+        - Patient    
+      security:
+        - bearerAuth: []
+      description : This api is for creating non ABDM new patient in Nice HMS 
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref : "#/components/schemas/PatientReq"
+      responses :
+        "200":
+          description : "200 response"
+          content:
+            application/json:
+              schema:
+                $ref : "#/components/schemas/PatientRes"
+
+  /patient_register_abha_otp_init:
+    post:
+      tags:
+        - Patient    
+      security:
+        - bearerAuth: []
+      description : This api is for creating new Patient with ABHA card using Mobile or aadhar otp
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref : "#/components/schemas/AbhaOtpInitReq"
+      responses :
+        "200":
+          description : "200 response"
+          content:
+            application/json:
+              schema:
+                $ref : "#/components/schemas/AbhaOtpInitRes"       
+                
+                
+  /patient_register_abha_otp_confirm:
+    post:
+      tags:
+        - Patient    
+      security:
+        - bearerAuth: []
+      description : The "patient_register_abha_otp_confirm" API is called after the "patient_register_abha_otp_init" API. The "patient_register_abha_otp_init" API is responsible for sending an OTP to the patient and providing a transaction ID. Please include the OTP and transaction ID in the request body when using the "patient_register_abha_otp_confirm" API
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref : "#/components/schemas/AbhaOtpConfirmReq"
+      responses :
+        "200":
+          description : "200 response"
+          content:
+            application/json:
+              schema:
+                $ref : "#/components/schemas/PatientRes"                
 
 
                      
@@ -243,9 +307,6 @@ components:
         token:
           type: string           
     
-    
-    
-    
     PatientByIdReq:
       type: object
       required:
@@ -261,6 +322,133 @@ components:
       properties:
         abhaAddress:
           $ref : "#/components/schemas/abhaAddress"
+    
+    AbhaOtpInitReq:
+      type: object
+      required:
+        - abhaAddress
+        - authMode
+      properties:
+        abhaAddress:
+          type: string
+          example: "abcd@abdm"
+        authMode:
+          type: string
+          enum : ["MOBILE_OTP", "AADHAR_OTP"]
+    
+    AbhaOtpInitRes:
+      type: object
+      properties:
+        auth:
+          type: object
+          properties:
+            meta:
+              type: object
+              properties:
+                hint:
+                  type: object
+
+                expiry:
+                  type: string
+                  example: "2023-06-04T06:57:19.082288652"
+            mode:
+              type: string
+              enum: ["MOBILE_OTP", "AADHAR_OTP"]
+            transactionId:
+              type: string
+              example: "f455d2f9-18f1-4c6e-bfd0-df5ff2449f97"
+        resp:
+          type: object
+          properties:
+            requestId:
+              type: string
+              example: "48c0f79a-a3aa-465c-a07d-f1e20663d1f4"
+        error:
+          type: object
+
+        requestId:
+          type: string
+          example: "4615b2d6-6275-4122-9eba-01da0faf8aa6"
+        timestamp:
+          type: string
+          example: "2023-06-04T04:57:19.082281323"
+    
+    AbhaOtpConfirmReq:
+      type: object
+      required:
+        - otp
+        - transactionId
+        - abhaAddress
+      properties:
+        otp:
+          type: string
+          example: "886367"
+        transactionId:
+          type: string
+          example: "f455d2f9-18f1-4c6e-bfd0-df5ff2449f97"
+        abhaAddress:
+          type: string
+          example: abcd1234@abdm
+
+    
+    PatientReq:
+      type: object
+      properties:
+        patient:
+          type: object
+          required:
+            - prefix
+            - firstName
+            - gender
+            - dob
+            - district
+            - state
+            - mobile
+          properties:
+            prefix:
+              enum : [Mr, Mrs, Ms, Dr, NA, Master, Er]
+              type: string
+              example: Mr
+            firstName:
+              type: string
+              example: Umesh
+            middleName:
+              type: string
+              example: ''
+            lastName:
+              type: string
+              example: Bilagi
+            gender:
+              type: string
+              enum : [Male, Female, other, unknown ]
+              example: Male
+            dob:
+              type: string
+              example: '1989-04-26T00:00:00.000Z'
+            district:
+              type: string
+              example: Dharwad
+            state:
+              type: string
+              example: KARNATAKA
+            mobile:
+              type: string
+              example: '9233235620'
+            address:
+              type: string
+              example: Hno11 , near pulley school
+            panNumber:
+              type: string
+              example : APYVB3402Q
+            aadharNumber:
+              type: string
+              example : 514782451234
+            email:
+              type: string
+              example: rameshH007@gmail.com
+            alternatePhoneNumber:
+              type: string
+              example : 0836223456
     
     PatientRes:
       type: object
