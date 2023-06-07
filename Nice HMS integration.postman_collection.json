@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\" : \"{{email}}\",\r\n    \"password\" : \"{{password}}\",\r\n    \"returnSecureToken\" : true\r\n}",
+					"raw": "{\r\n    \"email\" : \"adbilagi@gmail.com\",\r\n    \"password\" : \"Pradyuputti@29\",\r\n    \"returnSecureToken\" : true\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -321,7 +321,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"abhaAddress\" : \"91711357678608@sbx\",\r\n    \"authMode\" : \"AADHAR_OTP\"\r\n}"
+					"raw": "{\r\n    \"abhaAddress\" : \"91711357678608@sbx\",\r\n    \"authMode\" : \"AADHAAR_OTP\"\r\n}"
 				},
 				"url": {
 					"raw": "{{base_url}}/patient_register_abha_otp_init",
