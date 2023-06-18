@@ -518,6 +518,9 @@ components:
             alternatePhoneNumber:
               type: string
               example : 0836223456
+            pincode:
+              type: number
+              example : 580030  
     
     
     
