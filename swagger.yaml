@@ -226,7 +226,7 @@ paths :
           content:
             application/json:
               schema:
-                  $ref : "#/components/schemas/DischargeSummarytReq"
+                  $ref : "#/components/schemas/DischargeSummaryReq"
         responses :
           "200":
             description : "200 response"
@@ -259,6 +259,30 @@ paths :
                   $ref : "#/components/schemas/CompositionRes"   
  
  
+ 
+  
+  /health_document:
+      post:
+        tags:
+          - Documents
+        security:
+          - bearerAuth: []
+        description : This API allows you to create a Health Document by uploading images in JPEG format. The payload should be less than 2MB in size. Upon successful creation, the API notifies the Ayushman Bharat Digital Mission (ABDM). You have the option to use either the patient ID provided by Nice HMS or the ABHA address when using this API.
+
+        requestBody:
+          description: Optional description in *Markdown*
+          required: true
+          content:
+            multipart/form-data:
+              schema:
+                  $ref : "#/components/schemas/HealthDocumentReq"
+        responses :
+          "200":
+            description : "200 response"
+            content:
+              application/json:
+                schema:
+                  $ref : "#/components/schemas/CompositionRes"  
           
 components:
   securitySchemes:
@@ -579,7 +603,7 @@ components:
 
 
       
-    DischargeSummarytReq:
+    DischargeSummaryReq:
       type : object
       required:
        - doctorDetails
@@ -641,9 +665,48 @@ components:
           enum : [Hematlogy, Biochemestry, Microbiology, Radiology , Others]
           type : string
           example : Radiology
-          
 
-    
+
+  
+    HealthDocumentReq:
+      type : object
+      required:
+       - doctorDetails
+       - text
+       - status
+       - date
+       - page1
+      properties: 
+        abhaAddress:
+          $ref : "#/components/schemas/abhaAddress"
+        patientId:  
+          $ref : "#/components/schemas/patientId"  
+        text: 
+          type: string
+          example: Title like Prescription, Lab report 
+        doctorDetails:
+          $ref : "#/components/schemas/doctorDetails" 
+        status: 
+          type: "string"
+          example: final or draft
+        date: 
+          type: string
+          example: 2023-05-08T19:21:23.918Z
+        page1: 
+          type: string
+          format: binary
+        page2: 
+          type: string
+          format: binary  
+        page3: 
+          type: string
+          format: binary                    
+        page4: 
+          type: string
+          format: binary     
+          
+          
+          
     EncounterRes:
       type : object
       properties:
