@@ -1,317 +1,338 @@
 openapi: 3.0.0
 info:
   title: Nice HMS integration
-  description : Welcome to the integration documentation for Nice HMS ABDM (Ayushman Bharath Digital mission) Triple Milestone Certified HIMS! These APIs are specifically designed for developers who are looking to incorporate ABDM APIs into their projects. We understand the complexity involved in implementing ABDM APIs, and our aim is to simplify the process for you, making it effortless to achieve ABDM compatibility within your HIMS (Health Information Management System). Whether you're a medical college, a large hospital, or a hospital chain, and currently using a non-ABDM compatibility application (whether it's on-premise or in the cloud), our APIs are here to help you leverage the benefits of ABDM within your organization. We have carefully designed these APIs to meet the requirements of ABDM, ensuring a smooth and efficient integration experience.Take advantage of our simplified implementation of complex ABDM APIs and empower your HIMS with ABDM compatibility. Enhance your data management processes and unlock the full potential of ABDM within your organization. To get started, refer to our comprehensive integration documentation, which provides detailed instructions and examples to facilitate a seamless integration process. We look forward to supporting you in successfully integrating ABDM APIs.
-  version : 1.1.0
-  contact: 
-   email : nicehms21@gmail.com
-   name : Nice HMS
+  description: Welcome to the integration documentation for Nice HMS ABDM (Ayushman Bharath Digital mission) Triple Milestone Certified HIMS! These APIs are specifically designed for developers who are looking to incorporate ABDM APIs into their projects. We understand the complexity involved in implementing ABDM APIs, and our aim is to simplify the process for you, making it effortless to achieve ABDM compatibility within your HIMS (Health Information Management System). Whether you're a medical college, a large hospital, or a hospital chain, and currently using a non-ABDM compatibility application (whether it's on-premise or in the cloud), our APIs are here to help you leverage the benefits of ABDM within your organization. We have carefully designed these APIs to meet the requirements of ABDM, ensuring a smooth and efficient integration experience.Take advantage of our simplified implementation of complex ABDM APIs and empower your HIMS with ABDM compatibility. Enhance your data management processes and unlock the full potential of ABDM within your organization. To get started, refer to our comprehensive integration documentation, which provides detailed instructions and examples to facilitate a seamless integration process. We look forward to supporting you in successfully integrating ABDM APIs.
+  version: 1.1.0
+  contact:
+    email: nicehms21@gmail.com
+    name: Nice HMS
 servers:
-  - url: https://asia-south1-psychic-city-328609.cloudfunctions.net
-    description: Sandbox   
-paths :
+  - url: ""
+    description: Sandbox
+paths:
   /auth_token:
     post:
       tags:
         - Auth
-      description : This returns an authorization token that can be used in the header as a bearer token. The token has an expiration time of 15 to 30 minutes. It is necessary to use this token in subsequent calls for authentication
+      description: This returns an authorization token that can be used in the header as a bearer token. The token has an expiration time of 15 to 30 minutes. It is necessary to use this token in subsequent calls for authentication
       requestBody:
         description: To obtain your email and password, please contact Nice HMS directly.
         required: true
         content:
           application/json:
             schema:
-                $ref : "#/components/schemas/authTokenReq"
-      responses :
+              $ref: "#/components/schemas/authTokenReq"
+      responses:
         "200":
-          description : "200 response"
+          description: "200 response"
           content:
             application/json:
               schema:
-                $ref : "#/components/schemas/authTokenRes"
-  
-  
-  
-  
-  
+                $ref: "#/components/schemas/authTokenRes"
+
   /patient_by_id:
     post:
       tags:
         - Patient
       security:
         - bearerAuth: []
-      description : This retuns patient by Nice HMS id
+      description: This retuns patient by Nice HMS id
       requestBody:
         description: The term "ID" refers to the unique identifier generated within Nice HMS.
         required: true
         content:
           application/json:
             schema:
-                $ref : "#/components/schemas/PatientByIdReq"
-      responses :
+              $ref: "#/components/schemas/PatientByIdReq"
+      responses:
         "200":
-          description : "200 response"
+          description: "200 response"
           content:
             application/json:
               schema:
-                $ref : "#/components/schemas/PatientRes"
-                
+                $ref: "#/components/schemas/PatientRes"
+
   /patient_by_abhaAddress:
     post:
       tags:
-        - Patient    
+        - Patient
       security:
         - bearerAuth: []
-      description : This function enables you to retrieve a patient's information using their ABHA address, provided that the ABHA address is registered with Nice HMS under your organization. To utilize this feature, the patient must be registered in Nice HMS using their ABHA address. Registration can be completed through various methods, including Aadhar or mobile OTP verification, scanning the ABHA card QR code, or having the patient scan the QR code displayed at the reception using the PHR app. The reception-generated QR code is created by the Health Facility Registry (HFR)
+      description: This function enables you to retrieve a patient's information using their ABHA address, provided that the ABHA address is registered with Nice HMS under your organization. To utilize this feature, the patient must be registered in Nice HMS using their ABHA address. Registration can be completed through various methods, including Aadhar or mobile OTP verification, scanning the ABHA card QR code, or having the patient scan the QR code displayed at the reception using the PHR app. The reception-generated QR code is created by the Health Facility Registry (HFR)
       requestBody:
         required: true
         content:
           application/json:
             schema:
-                $ref : "#/components/schemas/PatientByAbhaAddressReq"
-      responses :
+              $ref: "#/components/schemas/PatientByAbhaAddressReq"
+      responses:
         "200":
-          description : "200 response"
+          description: "200 response"
           content:
             application/json:
               schema:
-                $ref : "#/components/schemas/PatientRes"          
+                $ref: "#/components/schemas/PatientRes"
 
   /create_patient:
     post:
       tags:
-        - Patient    
+        - Patient
       security:
         - bearerAuth: []
-      description : This api is for creating non ABDM new patient in Nice HMS 
+      description: This api is for creating non ABDM new patient in Nice HMS
       requestBody:
         required: true
         content:
           application/json:
             schema:
-                $ref : "#/components/schemas/PatientReq"
-      responses :
+              $ref: "#/components/schemas/PatientReq"
+      responses:
         "200":
-          description : "200 response"
+          description: "200 response"
           content:
             application/json:
               schema:
-                $ref : "#/components/schemas/PatientRes"
+                $ref: "#/components/schemas/PatientRes"
 
   /patient_register_abha_otp_init:
     post:
       tags:
-        - Patient    
+        - Patient
       security:
         - bearerAuth: []
-      description : This api is for creating new Patient with ABHA card using Mobile or aadhar otp
+      description: This api is for creating new Patient with ABHA card using Mobile or aadhar otp
       requestBody:
         required: true
         content:
           application/json:
             schema:
-                $ref : "#/components/schemas/AbhaOtpInitReq"
-      responses :
+              $ref: "#/components/schemas/AbhaOtpInitReq"
+      responses:
         "200":
-          description : "200 response"
+          description: "200 response"
           content:
             application/json:
               schema:
-                $ref : "#/components/schemas/AbhaOtpInitRes"       
-                
-                
+                $ref: "#/components/schemas/AbhaOtpInitRes"
+
   /patient_register_abha_otp_confirm:
     post:
       tags:
-        - Patient    
+        - Patient
       security:
         - bearerAuth: []
-      description : The "patient_register_abha_otp_confirm" API is called after the "patient_register_abha_otp_init" API. The "patient_register_abha_otp_init" API is responsible for sending an OTP to the patient and providing a transaction ID. Please include the OTP and transaction ID in the request body when using the "patient_register_abha_otp_confirm" API
+      description: The "patient_register_abha_otp_confirm" API is called after the "patient_register_abha_otp_init" API. The "patient_register_abha_otp_init" API is responsible for sending an OTP to the patient and providing a transaction ID. Please include the OTP and transaction ID in the request body when using the "patient_register_abha_otp_confirm" API
       requestBody:
         required: true
         content:
           application/json:
             schema:
-                $ref : "#/components/schemas/AbhaOtpConfirmReq"
-      responses :
+              $ref: "#/components/schemas/AbhaOtpConfirmReq"
+      responses:
         "200":
-          description : "200 response"
+          description: "200 response"
           content:
             application/json:
               schema:
-                $ref : "#/components/schemas/PatientRes"                
+                $ref: "#/components/schemas/PatientRes"
 
-
-                     
   /opd_patient:
-      post:
-        tags:
-          - Patient Visits
-        security:
-          - bearerAuth: []
-        description : This function creates an OPD (Outpatient Department) visit and care context within the ABDM (Ayushman Bharat Digital Mission) framework. It is important to note that you have the option to use either the patient ID provided by Nice HMS or the ABHA address when making API requests. Before sending data, it is essential to check whether there are any OPD (Outpatient Department) active visits available
-        requestBody:
-          description: Optional description in *Markdown*
-          required: true
-          content:
-            application/json:
-              schema:
-                  $ref : "#/components/schemas/OpdPatientReq"
-        responses :
-          "200":
-            description : "200 response"
-            content:
-              application/json:
-                schema:
-                  $ref : "#/components/schemas/EncounterRes"                
-            
-  /admit_patient:
     post:
       tags:
         - Patient Visits
       security:
         - bearerAuth: []
-      description : This function creates an inpatient (inpatient Department) visit and care context within the ABDM (Ayushman Bharat Digital Mission) framework. It is important to note that you have the option to use either the patient ID provided by Nice HMS or the ABHA address when making API requests. Before sending data, it is essential to check whether there are any active IPD (Inpatient Department) visits available,  
+      description: This function creates an OPD (Outpatient Department) visit and care context within the ABDM (Ayushman Bharat Digital Mission) framework. It is important to note that you have the option to use either the patient ID provided by Nice HMS or the ABHA address when making API requests. Before sending data, it is essential to check whether there are any OPD (Outpatient Department) active visits available
       requestBody:
         description: Optional description in *Markdown*
         required: true
         content:
           application/json:
             schema:
-                $ref : "#/components/schemas/AdmitPatientReq"
-      responses :
+              $ref: "#/components/schemas/OpdPatientReq"
+      responses:
         "200":
-          description : "200 response"
+          description: "200 response"
           content:
             application/json:
               schema:
-                $ref : "#/components/schemas/EncounterRes"          
- 
- 
+                $ref: "#/components/schemas/EncounterRes"
+
+  /admit_patient:
+    post:
+      tags:
+        - Patient Visits
+      security:
+        - bearerAuth: []
+      description: This function creates an inpatient (inpatient Department) visit and care context within the ABDM (Ayushman Bharat Digital Mission) framework. It is important to note that you have the option to use either the patient ID provided by Nice HMS or the ABHA address when making API requests. Before sending data, it is essential to check whether there are any active IPD (Inpatient Department) visits available,
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdmitPatientReq"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EncounterRes"
+
   /discharge_patient:
     put:
       tags:
         - Patient Visits
       security:
         - bearerAuth: []
-      description : This function updates the admission visit for a patient by specifying the discharge date. It is important to call this API before sending the discharge summary document, as it updates the discharge date accordingly. 
+      description: This function updates the admission visit for a patient by specifying the discharge date. It is important to call this API before sending the discharge summary document, as it updates the discharge date accordingly.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-                $ref : "#/components/schemas/DischargePatientReq"
-      responses :
+              $ref: "#/components/schemas/DischargePatientReq"
+      responses:
         "200":
-          description : "200 response"
+          description: "200 response"
           content:
             application/json:
               schema:
-                $ref : "#/components/schemas/EncounterRes"          
+                $ref: "#/components/schemas/EncounterRes"
 
- 
- 
- 
- 
   /discharge_summary:
-      post:
-        tags:
-          - Documents
-        security:
-          - bearerAuth: []
-        description : This function creates a Discharge Summary and notifies ABDM (Ayushman Bharat Digital Mission). Please note that you have the option to use either the patient ID provided by Nice HMS or the ABHA address when using this API
-        requestBody:
-          description: Optional description in *Markdown*
-          required: true
+    post:
+      tags:
+        - Documents
+      security:
+        - bearerAuth: []
+      description: This function creates a Discharge Summary and notifies ABDM (Ayushman Bharat Digital Mission). Please note that you have the option to use either the patient ID provided by Nice HMS or the ABHA address when using this API
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DischargeSummaryReq"
+      responses:
+        "200":
+          description: "200 response"
           content:
             application/json:
               schema:
-                  $ref : "#/components/schemas/DischargeSummaryReq"
-        responses :
-          "200":
-            description : "200 response"
-            content:
-              application/json:
-                schema:
-                  $ref : "#/components/schemas/CompositionRes"  
-  
-  
-  /diagnostic_report:
-      post:
-        tags:
-          - Documents
-        security:
-          - bearerAuth: []
-        description : This function creates a Diagnostic Report and notifies ABDM (Ayushman Bharat Digital Mission). Please note that you have the option to use either the patient ID provided by Nice HMS or the ABHA address when using this API
-        requestBody:
-          description: Optional description in *Markdown*
-          required: true
-          content:
-            application/json:
-              schema:
-                  $ref : "#/components/schemas/DiagnosticReportReq"
-        responses :
-          "200":
-            description : "200 response"
-            content:
-              application/json:
-                schema:
-                  $ref : "#/components/schemas/CompositionRes"   
- 
- 
- 
-  
-  /health_document:
-      post:
-        tags:
-          - Documents
-        security:
-          - bearerAuth: []
-        description : This API allows you to create a Health Document by uploading images in JPEG format. The payload should be less than 2MB in size. Upon successful creation, the API notifies the Ayushman Bharat Digital Mission (ABDM). You have the option to use either the patient ID provided by Nice HMS or the ABHA address when using this API.
+                $ref: "#/components/schemas/CompositionRes"
 
-        requestBody:
-          description: Optional description in *Markdown*
-          required: true
+  /diagnostic_report:
+    post:
+      tags:
+        - Documents
+      security:
+        - bearerAuth: []
+      description: This function creates a Diagnostic Report and notifies ABDM (Ayushman Bharat Digital Mission). Please note that you have the option to use either the patient ID provided by Nice HMS or the ABHA address when using this API
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DiagnosticReportReq"
+      responses:
+        "200":
+          description: "200 response"
           content:
-            multipart/form-data:
+            application/json:
               schema:
-                  $ref : "#/components/schemas/HealthDocumentReq"
-        responses :
-          "200":
-            description : "200 response"
-            content:
-              application/json:
-                schema:
-                  $ref : "#/components/schemas/CompositionRes"  
-          
+                $ref: "#/components/schemas/CompositionRes"
+
+  /op_consultation:
+    post:
+      tags:
+        - Documents
+      security:
+        - bearerAuth: []
+      description: This endpoint allows you to create an OPD Consultation and send the necessary information to Ayushman Bharat Digital Mission (ABDM). You can identify the patient either by the patient ID obtained from Nice HMS or the ABHA address
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OpConsultationReq"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CompositionRes"
+
+  /health_document:
+    post:
+      tags:
+        - Documents
+      security:
+        - bearerAuth: []
+      description: This API allows you to create a Health Document by uploading images in JPEG format. The payload should be less than 2MB in size. Upon successful creation, the API notifies the Ayushman Bharat Digital Mission (ABDM). You have the option to use either the patient ID provided by Nice HMS or the ABHA address when using this API.
+
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/HealthDocumentReq"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CompositionRes"
+
 components:
   securitySchemes:
-    bearerAuth:            
+    bearerAuth:
       type: http
       scheme: bearer
-      bearerFormat: JWT  
+      bearerFormat: JWT
   schemas:
-    doctorDetails: 
+    medicines:
       type: array
-      items: 
+      items:
         type: object
-        required :
-         - doctorName
-         - doctorGcpId            
-        properties: 
-          doctorName: 
+        properties:
+          drug:
+            type: string
+          frequency:
+            type: string
+          instruction:
+            type: string
+          duration:
+            type: string
+          route:
+            type: string
+    doctorDetails:
+      type: array
+      items:
+        type: object
+        required:
+          - doctorName
+          - doctorGcpId
+        properties:
+          doctorName:
             type: string
             example: Dr Umesh Bilagi
-          doctorGcpId: 
+          doctorGcpId:
             type: string
             example: cf4a6ab1-3f32-4b92-adc5-89489da6ca14
-    abhaAddress: 
+    abhaAddress:
       type: string
       example: savitribilagi@sbx
     patientId:
-      type : integer
-      example : 236    
-    
+      type: integer
+      example: 236
+
     authTokenReq:
       type: object
       required:
@@ -329,24 +350,24 @@ components:
       type: object
       properties:
         token:
-          type: string           
-    
+          type: string
+
     PatientByIdReq:
       type: object
       required:
         - patientId
       properties:
-        patientId:  
-          $ref : "#/components/schemas/patientId"  
-    
+        patientId:
+          $ref: "#/components/schemas/patientId"
+
     PatientByAbhaAddressReq:
       type: object
       required:
         - abhaAddress
       properties:
         abhaAddress:
-          $ref : "#/components/schemas/abhaAddress"
-    
+          $ref: "#/components/schemas/abhaAddress"
+
     AbhaOtpInitReq:
       type: object
       required:
@@ -358,8 +379,8 @@ components:
           example: "abcd@abdm"
         authMode:
           type: string
-          enum : ["MOBILE_OTP", "AADHAAR_OTP"]
-    
+          enum: ["MOBILE_OTP", "AADHAAR_OTP"]
+
     AbhaOtpInitRes:
       type: object
       properties:
@@ -396,7 +417,7 @@ components:
         timestamp:
           type: string
           example: "2023-06-04T04:57:19.082281323"
-    
+
     AbhaOtpConfirmReq:
       type: object
       required:
@@ -414,7 +435,6 @@ components:
           type: string
           example: abcd1234@abdm
 
-    
     PatientReq:
       type: object
       properties:
@@ -430,7 +450,7 @@ components:
             - mobile
           properties:
             prefix:
-              enum : [Mr, Mrs, Ms, Dr, NA, Master, Er]
+              enum: [Mr, Mrs, Ms, Dr, NA, Master, Er]
               type: string
               example: Mr
             firstName:
@@ -438,17 +458,17 @@ components:
               example: Umesh
             middleName:
               type: string
-              example: ''
+              example: ""
             lastName:
               type: string
               example: Bilagi
             gender:
               type: string
-              enum : [Male, Female, other, unknown ]
+              enum: [Male, Female, other, unknown]
               example: Male
             dob:
               type: string
-              example: '1989-04-26T00:00:00.000Z'
+              example: "1989-04-26T00:00:00.000Z"
             district:
               type: string
               example: Dharwad
@@ -457,23 +477,23 @@ components:
               example: KARNATAKA
             mobile:
               type: string
-              example: '9233235620'
+              example: "9233235620"
             address:
               type: string
               example: Hno11 , near pulley school
             panNumber:
               type: string
-              example : APYVB3402Q
+              example: APYVB3402Q
             aadharNumber:
               type: string
-              example : 514782451234
+              example: 514782451234
             email:
               type: string
               example: rameshH007@gmail.com
             alternatePhoneNumber:
               type: string
-              example : 0836223456
-    
+              example: 0836223456
+
     PatientRes:
       type: object
       properties:
@@ -481,12 +501,12 @@ components:
           type: object
           properties:
             id:
-              description : This is nothing but patientId
+              description: This is nothing but patientId
               type: integer
               format: int32
               example: 231
             prefix:
-              enum : [Mr, Mrs, Ms, Dr, NA, Master, Er]
+              enum: [Mr, Mrs, Ms, Dr, NA, Master, Er]
               type: string
               example: Mr
             firstName:
@@ -494,30 +514,30 @@ components:
               example: Umesh
             middleName:
               type: string
-              example: ''
+              example: ""
             lastName:
               type: string
               example: Bilagi
             gender:
               type: string
-              enum : [Male, Female, other, unknown ]
+              enum: [Male, Female, other, unknown]
               example: Male
             dob:
               type: string
-              example: '1989-04-26T00:00:00.000Z'
+              example: "1989-04-26T00:00:00.000Z"
             orgId:
               type: integer
               format: int32
-              example: '1'
+              example: "1"
             gcpFhirId:
               type: string
               example: b6165fd2-b76a-48e3-81ad-202b3919d668
             abhaAddress:
               type: string
-              example: ''
+              example: ""
             abhaNumber:
               type: string
-              example: ''
+              example: ""
             district:
               type: string
               example: Dharwad
@@ -526,28 +546,26 @@ components:
               example: KARNATAKA
             mobile:
               type: string
-              example: '9233235620'
+              example: "9233235620"
             address:
               type: string
               example: Hno11 , near pulley school
             panNumber:
               type: string
-              example : APYVB3402Q
+              example: APYVB3402Q
             aadharNumber:
               type: string
-              example : 514782451234
+              example: 514782451234
             email:
               type: string
               example: rameshH007@gmail.com
             alternatePhoneNumber:
               type: string
-              example : 0836223456
+              example: 0836223456
             pincode:
               type: number
-              example : 580030  
-    
-    
-    
+              example: 580030
+
     OpdPatientReq:
       type: object
       required:
@@ -555,18 +573,17 @@ components:
         - date
       properties:
         doctorDetails:
-          $ref : "#/components/schemas/doctorDetails"            
+          $ref: "#/components/schemas/doctorDetails"
         date:
           type: string
-          example: '2023-05-08T19:21:23.918Z'
+          example: "2023-05-08T19:21:23.918Z"
         abhaAddress:
           type: string
           example: savitribilagi@sbx
         patientId:
           type: integer
           example: 236
-        
-    
+
     AdmitPatientReq:
       type: object
       required:
@@ -574,15 +591,15 @@ components:
         - doa
       properties:
         doctorDetails:
-          $ref : "#/components/schemas/doctorDetails" 
-        doa: 
+          $ref: "#/components/schemas/doctorDetails"
+        doa:
           type: string
           example: 2023-05-10T19:21:23.918Z
         abhaAddress:
-          $ref : "#/components/schemas/abhaAddress"
-        patientId:  
-          $ref : "#/components/schemas/patientId"  
-    
+          $ref: "#/components/schemas/abhaAddress"
+        patientId:
+          $ref: "#/components/schemas/patientId"
+
     DischargePatientReq:
       type: object
       required:
@@ -590,368 +607,402 @@ components:
         - dod
       properties:
         doctorDetails:
-          $ref : "#/components/schemas/doctorDetails" 
+          $ref: "#/components/schemas/doctorDetails"
         dod:
           type: string
         abhaAddress:
-          $ref : "#/components/schemas/abhaAddress"
-        patientId:  
-          $ref : "#/components/schemas/patientId"  
+          $ref: "#/components/schemas/abhaAddress"
+        patientId:
+          $ref: "#/components/schemas/patientId"
         encounterId:
           type: string
           example: 21ba04cd-d922-4412-bfdc-c0293e638f1d
 
-
-      
     DischargeSummaryReq:
-      type : object
+      type: object
       required:
-       - doctorDetails
-       - text
-       - status
-       - date
-      properties: 
+        - doctorDetails
+        - text
+        - status
+        - date
+      properties:
         abhaAddress:
-          $ref : "#/components/schemas/abhaAddress"
-        patientId:  
-          $ref : "#/components/schemas/patientId"  
-        text: 
+          $ref: "#/components/schemas/abhaAddress"
+        patientId:
+          $ref: "#/components/schemas/patientId"
+        text:
           type: string
           example: <div>Cough with APD</div><div>cough</div><div>BP 140/80 PR 87/min RR 20/min</div>
         doctorDetails:
-          $ref : "#/components/schemas/doctorDetails" 
-        status: 
+          $ref: "#/components/schemas/doctorDetails"
+        status:
           type: "string"
           example: final or draft
-        date: 
+        date:
           type: string
           example: 2023-05-08T19:21:23.918Z
-          
-          
-    DiagnosticReportReq:
-      type : object
+
+    OpConsultationReq:
+      type: object
       required:
-       - performer
-       - text
-       - status
-       - date
+        - doctorDetails
+        - status
+        - date
       properties:
         abhaAddress:
-          $ref : "#/components/schemas/abhaAddress"
-        patientId:  
-          $ref : "#/components/schemas/patientId"  
-        text: 
+          type: string
+        chiefComplaints:
+          type: string
+        medicalHistory:
+          type: string
+        physicalExamination:
+          type: string
+        followUp:
+          type: object
+          properties:
+            startDate:
+              type: string
+              format: date-time
+            endDate:
+              type: string
+              format: date-time
+            comment:
+              type: string
+        opdProcedure:
+          type: object
+          properties:
+            procedureName:
+              type: string
+            procedureDescription:
+              type: string
+            date:
+              type: string
+              format: date-time
+        medicines:
+          $ref: "#/components/schemas/medicines"
+        doctorDetails:
+          $ref: "#/components/schemas/doctorDetails"
+        status:
+          type: string
+        date:
+          type: string
+          format: date-time
+
+    DiagnosticReportReq:
+      type: object
+      required:
+        - performer
+        - text
+        - status
+        - date
+      properties:
+        abhaAddress:
+          $ref: "#/components/schemas/abhaAddress"
+        patientId:
+          $ref: "#/components/schemas/patientId"
+        text:
           type: string
           example: <div>Ultrasoud Report This is in text format and for CBC like reports send HTML  table</div>
         performer:
           allOf:
-            - $ref : "#/components/schemas/doctorDetails"  
-            - description : The term "performer" refers to the individual who signs the report
-                        
-        requester: 
+            - $ref: "#/components/schemas/doctorDetails"
+            - description: The term "performer" refers to the individual who signs the report
+
+        requester:
           allOf:
-            - description : This is an optional field. If not provided, the requester will be assumed to be the patient themselves
-            - $ref : "#/components/schemas/doctorDetails"                
-        status: 
+            - description: This is an optional field. If not provided, the requester will be assumed to be the patient themselves
+            - $ref: "#/components/schemas/doctorDetails"
+        status:
           type: "string"
           example: final or draft
-        date: 
+        date:
           type: string
-          example: 2023-05-08T19:21:23.918Z  
+          example: 2023-05-08T19:21:23.918Z
         conclusion:
           type: string
           example: "Normal Study"
         category:
-          enum : [Hematlogy, Biochemestry, Microbiology, Radiology , Others]
-          type : string
-          example : Radiology
-
-
-  
-    HealthDocumentReq:
-      type : object
-      required:
-       - doctorDetails
-       - text
-       - status
-       - date
-       - page1
-      properties: 
-        abhaAddress:
-          $ref : "#/components/schemas/abhaAddress"
-        patientId:  
-          $ref : "#/components/schemas/patientId"  
-        text: 
+          enum: [Hematlogy, Biochemestry, Microbiology, Radiology, Others]
           type: string
-          example: Title like Prescription, Lab report 
+          example: Radiology
+
+    HealthDocumentReq:
+      type: object
+      required:
+        - doctorDetails
+        - text
+        - status
+        - date
+        - page1
+      properties:
+        abhaAddress:
+          $ref: "#/components/schemas/abhaAddress"
+        patientId:
+          $ref: "#/components/schemas/patientId"
+        text:
+          type: string
+          example: Title like Prescription, Lab report
         doctorDetails:
-          $ref : "#/components/schemas/doctorDetails" 
-        status: 
+          $ref: "#/components/schemas/doctorDetails"
+        status:
           type: "string"
           example: final or draft
-        date: 
+        date:
           type: string
           example: 2023-05-08T19:21:23.918Z
-        page1: 
+        page1:
           type: string
           format: binary
-        page2: 
+        page2:
           type: string
-          format: binary  
-        page3: 
+          format: binary
+        page3:
           type: string
-          format: binary                    
-        page4: 
+          format: binary
+        page4:
           type: string
-          format: binary     
-          
-          
-          
+          format: binary
+
     EncounterRes:
-      type : object
+      type: object
       properties:
-        encounter: 
+        encounter:
           type: object
-          properties: 
-            class: 
+          properties:
+            class:
               type: object
-              properties: 
-                code: 
+              properties:
+                code:
                   type: string
                   example: AMB
-                display: 
+                display:
                   type: string
                   example: ambulatory
-                system: 
+                system:
                   type: string
                   example: http://terminology.hl7.org/CodeSystem/v3-ActCode
-            id: 
+            id:
               type: string
               example: 65cb5b6a-f08e-4e46-a826-67e117573d71
-            meta: 
+            meta:
               type: object
-              properties: 
-                lastUpdated: 
+              properties:
+                lastUpdated:
                   type: string
                   example: 2023-05-11T10:04:31.675645+00:00
-                profile: 
+                profile:
                   type: array
-                  items: 
+                  items:
                     type: string
                     example: https://nrces.in/ndhm/fhir/r4/StructureDefinition/Encounter
-                versionId: 
+                versionId:
                   type: string
                   example: MTY4Mzc5OTQ3MTY3NTY0NTAwMA
-            participant: 
+            participant:
               type: array
-              items: 
+              items:
                 type: object
-                properties: 
-                  individual: 
+                properties:
+                  individual:
                     type: object
-                    properties: 
-                      reference: 
+                    properties:
+                      reference:
                         type: string
                         example: Practitioner/cf4a6ab1-3f32-4b92-adc5-89489da6ca14
-                      type: 
+                      type:
                         type: string
                         example: Practitioner
-                  type: 
+                  type:
                     type: array
-                    items: 
+                    items:
                       type: object
-                      properties: 
-                        coding: 
+                      properties:
+                        coding:
                           type: array
-                          items: 
+                          items:
                             type: object
-                            properties: 
-                              code: 
+                            properties:
+                              code:
                                 type: string
                                 example: ATND
-                              display: 
+                              display:
                                 type: string
                                 example: attender
-                              system: 
+                              system:
                                 type: string
                                 example: http://terminology.hl7.org/CodeSystem/v3-ParticipationType
-                        text: 
+                        text:
                           type: string
                           example: Dr Umesh Bilagi
-            period: 
+            period:
               type: object
               required:
-               - start
-              properties: 
-                start: 
+                - start
+              properties:
+                start:
                   type: string
                   example: 2023-05-08T19:21:23.918Z
-                end: 
+                end:
                   type: string
-                  example: 2023-05-08T29:21:23.918Z  
-                  
-            resourceType: 
+                  example: 2023-05-08T29:21:23.918Z
+
+            resourceType:
               type: string
               example: Encounter
-            status: 
+            status:
               type: string
               example: in-progress
-            subject: 
+            subject:
               type: object
-              properties: 
-                reference: 
+              properties:
+                reference:
                   type: string
                   example: Patient/9b4ec056-991d-4237-b1fd-a65770349610
-            text: 
+            text:
               type: object
-              properties: 
-                div: 
+              properties:
+                div:
                   type: string
                   example: <div xmlns=http://www.w3.org/1999/xhtml>OPD Visit   Tue 9 May 2023 </div>
-                status: 
+                status:
                   type: string
                   example: generated
-    
-              
+
     CompositionRes:
-      type : object
-      properties: 
-        composition: 
+      type: object
+      properties:
+        composition:
           type: object
-          properties: 
-            author: 
+          properties:
+            author:
               type: array
-              items: 
+              items:
                 type: object
-                properties: 
-                  display: 
+                properties:
+                  display:
                     type: string
                     example: Dr Umesh Bilagi
-                  reference: 
+                  reference:
                     type: string
                     example: Practitioner/cf4a6ab1-3f32-4b92-adc5-89489da6ca14
-            custodian: 
+            custodian:
               type: object
-              properties: 
-                reference: 
+              properties:
+                reference:
                   type: string
                   example: Organization/fd6464c1-a8ef-4e95-aa2a-d5eac433b85d
-            date: 
+            date:
               type: string
               example: 2023-05-08T19:21:23.918Z
-            encounter: 
+            encounter:
               type: object
-              properties: 
-                reference: 
+              properties:
+                reference:
                   type: string
                   example: Encounter/8e909449-f3f0-427c-bd45-4f8e5564e251
-            id: 
+            id:
               type: string
               example: e721069a-cc8c-4e5e-a437-b4cfcaee11a4
-            identifier: 
+            identifier:
               type: object
-              properties: 
-                system: 
+              properties:
+                system:
                   type: string
                   example: https://ndhm.in/phr
-                value: 
+                value:
                   type: string
                   example: 2390bb7b-9e23-4732-a081-12b469657d87
-            language: 
+            language:
               type: string
               example: en-IN
-            meta: 
+            meta:
               type: object
-              properties: 
-                lastUpdated: 
+              properties:
+                lastUpdated:
                   type: string
                   example: 2023-05-11T10:06:53.692605+00:00
-                profile: 
+                profile:
                   type: array
-                  items: 
+                  items:
                     type: string
                     example: https://nrces.in/ndhm/fhir/r4/StructureDefinition/DischargeSummaryRecord
-                versionId: 
+                versionId:
                   type: string
                   example: MTY4Mzc5OTYxMzY5MjYwNTAwMA
-            resourceType: 
+            resourceType:
               type: string
               example: Composition
-            section: 
+            section:
               type: array
-              items: 
+              items:
                 type: object
-                properties: 
-                  code: 
+                properties:
+                  code:
                     type: object
-                    properties: 
-                      coding: 
+                    properties:
+                      coding:
                         type: array
-                        items: 
+                        items:
                           type: object
-                          properties: 
-                            code: 
+                          properties:
+                            code:
                               type: string
                               example: 422843007
-                            display: 
+                            display:
                               type: string
                               example: Chief Complaint Section
-                            system: 
+                            system:
                               type: string
                               example: https://projecteka.in/sct
-                  entry: 
+                  entry:
                     type: array
-                    items: 
+                    items:
                       type: object
-                      properties: 
-                        reference: 
+                      properties:
+                        reference:
                           type: string
                           example: Condition/74590d44-8674-4147-8b14-e6fd2cb708dd
-                  title: 
+                  title:
                     type: string
                     example: Presenting Problems
-            status: 
+            status:
               type: string
               example: final
-            subject: 
+            subject:
               type: object
-              properties: 
-                reference: 
+              properties:
+                reference:
                   type: string
                   example: Patient/9b4ec056-991d-4237-b1fd-a65770349610
-            text: 
+            text:
               type: object
-              properties: 
-                div: 
+              properties:
+                div:
                   type: string
                   example: <div>....</div>
-                status: 
+                status:
                   type: string
                   example: generated
-            title: 
+            title:
               type: string
               example: DischargeSummary
-            type: 
+            type:
               type: object
-              properties: 
-                coding: 
+              properties:
+                coding:
                   type: array
-                  items: 
+                  items:
                     type: object
-                    properties: 
-                      code: 
+                    properties:
+                      code:
                         type: string
                         example: 373942005
-                      display: 
+                      display:
                         type: string
                         example: Discharge summary
-                      system: 
+                      system:
                         type: string
                         example: https://ndhm.gov.in/sct
-                text: 
+                text:
                   type: string
                   example: Discharge summary
-      
-      
-                    
-                    

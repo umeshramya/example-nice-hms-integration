@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\" : \"adbilagi@gmail.com\",\r\n    \"password\" : \"Pradyuputti@29\",\r\n    \"returnSecureToken\" : true\r\n}",
+					"raw": "{\r\n    \"email\" : \"{{email}}\",\r\n    \"password\" : \"{{password}}\",\r\n    \"returnSecureToken\" : true\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -41,7 +41,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjFiYjI2MzY4YTNkMWExNDg1YmNhNTJiNGY4M2JkYjQ5YjY0ZWM2MmYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHN5Y2hpYy1jaXR5LTMyODYwOSIsImF1ZCI6InBzeWNoaWMtY2l0eS0zMjg2MDkiLCJhdXRoX3RpbWUiOjE2ODQyNTc2ODIsInVzZXJfaWQiOiIwYWZUdmpod0puTkFhWENwZHRNT0pjSnE2MGIyIiwic3ViIjoiMGFmVHZqaHdKbk5BYVhDcGR0TU9KY0pxNjBiMiIsImlhdCI6MTY4NDI1NzY4MiwiZXhwIjoxNjg0MjYxMjgyLCJlbWFpbCI6InVtZXNoYmlsYWdpQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ1bWVzaGJpbGFnaUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.ChBxXY2PppmtfoiOWLqqb--JSHDQ1G6T-sx9EFFsEBGalk-FiJfzUC-761k-xWd4SF2dAEO-7wcpl3f2km9agkrpOVM3YneTV-o-Ow8Jfb7T3UXZ9HXxc_0RGFPIpPt8upMoOOpJ7hlkw1auaPzPEA-ahaHF6yfvaRmcralKeWYHyhMGGF63-G9KjtbEue1l3W7rXLXLZnNGBJPYygQVjT80LbSdsoA9EnqHjxGrTImBie0GxbZWz4qFp4KAM4qQRB3KbqJsbMpZxGyvsB50E8jwIVapm62euK3pnDAMxSDQ4axrFzB-7-gL1A44c1fxR-gnVlNqcL9bGL3wqNXdXA",
+							"value": "{{authToken}}",
 							"type": "string"
 						}
 					]
@@ -57,7 +57,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"abhaAddress\" : \"savitribilagi@sbx\",\r\n    \"text\" : \"<div>Cough with APD</div><div>cough</div><div>BP 140/80 PR 87/min RR 20/min</div>\",\r\n    \"doctorDetails\" : [{\"doctorName\" : \"Dr Umesh Bilagi\", \"doctorGcpId\" :\"cf4a6ab1-3f32-4b92-adc5-89489da6ca14\" }],\r\n    \"status\" : \"final\",\r\n    \"date\" : \"2023-05-08T19:21:23.918Z\"\r\n}"
+					"raw": "{\r\n    \"abhaAddress\" : \"{{abhaAddress}}\",\r\n    \"text\" : \"<div>Cough with APD</div><div>cough</div><div>BP 140/80 PR 87/min RR 20/min</div>\",\r\n    \"doctorDetails\" : [{\"doctorName\" : \"Dr Umesh Bilagi\", \"doctorGcpId\" :\"cf4a6ab1-3f32-4b92-adc5-89489da6ca14\" }],\r\n    \"status\" : \"final\",\r\n    \"date\" : \"2023-05-08T19:21:23.918Z\"\r\n}"
 				},
 				"url": {
 					"raw": "{{base_url}}/discharge_summary",
@@ -73,14 +73,14 @@
 			"response": []
 		},
 		{
-			"name": "Diagnsotic Report",
+			"name": "OP Consultation",
 			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjFiYjI2MzY4YTNkMWExNDg1YmNhNTJiNGY4M2JkYjQ5YjY0ZWM2MmYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHN5Y2hpYy1jaXR5LTMyODYwOSIsImF1ZCI6InBzeWNoaWMtY2l0eS0zMjg2MDkiLCJhdXRoX3RpbWUiOjE2ODQyNTc2ODIsInVzZXJfaWQiOiIwYWZUdmpod0puTkFhWENwZHRNT0pjSnE2MGIyIiwic3ViIjoiMGFmVHZqaHdKbk5BYVhDcGR0TU9KY0pxNjBiMiIsImlhdCI6MTY4NDI1NzY4MiwiZXhwIjoxNjg0MjYxMjgyLCJlbWFpbCI6InVtZXNoYmlsYWdpQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ1bWVzaGJpbGFnaUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.ChBxXY2PppmtfoiOWLqqb--JSHDQ1G6T-sx9EFFsEBGalk-FiJfzUC-761k-xWd4SF2dAEO-7wcpl3f2km9agkrpOVM3YneTV-o-Ow8Jfb7T3UXZ9HXxc_0RGFPIpPt8upMoOOpJ7hlkw1auaPzPEA-ahaHF6yfvaRmcralKeWYHyhMGGF63-G9KjtbEue1l3W7rXLXLZnNGBJPYygQVjT80LbSdsoA9EnqHjxGrTImBie0GxbZWz4qFp4KAM4qQRB3KbqJsbMpZxGyvsB50E8jwIVapm62euK3pnDAMxSDQ4axrFzB-7-gL1A44c1fxR-gnVlNqcL9bGL3wqNXdXA",
+							"value": "{{authToken}}",
 							"type": "string"
 						}
 					]
@@ -96,7 +96,46 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"abhaAddress\" : \"savitribilagi@sbx\",\r\n    \"text\" : \"<div>Cough with APD</div><div>cough</div><div>BP 140/80 PR 87/min RR 20/min</div>\",\r\n    \"performer\" : [{\"doctorName\" : \"Dr Umesh Bilagi\", \"doctorGcpId\" :\"cf4a6ab1-3f32-4b92-adc5-89489da6ca14\" }],\r\n    \"requester\" : {\"doctorName\" : \"Dr Umesh Bilagi\", \"doctorGcpId\" :\"cf4a6ab1-3f32-4b92-adc5-89489da6ca14\" },\r\n    \"status\" : \"final\",\r\n    \"date\" : \"2023-05-08T19:21:23.918Z\",\r\n    \"testName\" : \"CT Adbomen\",\r\n    \"category\" : \"Radiology\",\r\n    \"conclusion\" : \"Normal Study\"\r\n\r\n}"
+					"raw": "{\r\n    \"abhaAddress\" : \"{{abhaAddress}}\",\r\n    \"chiefComplaints\" : \"C/O Of Fever\",\r\n    \"medicalHistory\" : \"K/C Of Type 2 DM and HTN on Tretament\",\r\n    \"physicalExamination\" : \"BP 130/80 PR 72/min RR 20/min\",\r\n    \"followUp\" : {\"startDate\" : \"2023-05-08T19:21:23.918Z\", \"endDate\":\"2023-05-08T19:21:23.918Z\", \"comment\": \"TMT\"},\r\n    \"opdProcedure\" : {\"procedureName\" : \"ECG\", \"procedureDescription\" : \"ECG is Normal\", \"date\" : \"2023-07-08T19:21:23.918Z\"},\r\n    \"medicines\" : [{\"drug\" : \"Tab Taxim O 200mg\", \"frequency\" : \"1-0-1\", \"instruction\" : \"After Food\", \"duration\" : \"For 5 Days\", \"route\" : \"Oral\"},\r\n    {\"drug\" : \"Tab Dolo 650\", \"frequency\" : \"1-1-1\", \"instruction\" : \"After Food\", \"duration\" : \"For 5 Days\", \"route\" : \"Oral\"}\r\n    ],\r\n    \"doctorDetails\" : [{\"doctorName\" : \"Nice Doctor\", \"doctorGcpId\" :\"399ae751-9f60-432b-bdee-fae4eb4daa49\"}],\r\n    \"status\" : \"final\",\r\n    \"date\" : \"2023-05-08T19:21:23.918Z\"\r\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/op_consultation",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"op_consultation"
+					]
+				},
+				"description": "This is create Discharge Summary"
+			},
+			"response": []
+		},
+		{
+			"name": "Diagnsotic Report",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"abhaAddress\" : \"{{abhaAddress}}\",\r\n    \"text\" : \"<div>Cough with APD</div><div>cough</div><div>BP 140/80 PR 87/min RR 20/min</div>\",\r\n    \"performer\" :  [{\"doctorName\" : \"Nice Doctor\", \"doctorGcpId\" :\"399ae751-9f60-432b-bdee-fae4eb4daa49\"}],\r\n    \"requester\" :  {\"doctorName\" : \"Nice Doctor\", \"doctorGcpId\" :\"399ae751-9f60-432b-bdee-fae4eb4daa49\"},\r\n    \"status\" : \"final\",\r\n    \"date\" : \"2023-05-08T19:21:23.918Z\",\r\n    \"testName\" : \"CT Adbomen\",\r\n    \"category\" : \"Radiology\",\r\n    \"conclusion\" : \"Normal Study\"\r\n\r\n}"
 				},
 				"url": {
 					"raw": "{{base_url}}/diagnostic_report",
@@ -112,6 +151,99 @@
 			"response": []
 		},
 		{
+			"name": "Health Dcoument",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "text"
+					},
+					{
+						"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+						"key": "Content-Type",
+						"value": "image/jpg",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "image/png",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "abhaAddress",
+							"value": "{{abhaAddress}}",
+							"type": "text"
+						},
+						{
+							"key": "text",
+							"value": "Prescrption",
+							"type": "text"
+						},
+						{
+							"key": "doctorDetails",
+							"value": "[{\"doctorName\" : \"Nice Doctor\", \"doctorGcpId\" :\"399ae751-9f60-432b-bdee-fae4eb4daa49\"}]",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "final",
+							"type": "text"
+						},
+						{
+							"key": "date",
+							"value": "2023-05-08T19:21:23.918Z",
+							"type": "text"
+						},
+						{
+							"key": "page1",
+							"type": "file",
+							"src": "/D:/GURU_HOSPITAL.jpg"
+						},
+						{
+							"key": "page2",
+							"type": "file",
+							"src": [],
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/health_document",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"health_document"
+					]
+				},
+				"description": "This is create Discharge Summary"
+			},
+			"response": []
+		},
+		{
 			"name": "Get Patient By Id",
 			"request": {
 				"auth": {
@@ -119,22 +251,22 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjFiYjI2MzY4YTNkMWExNDg1YmNhNTJiNGY4M2JkYjQ5YjY0ZWM2MmYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHN5Y2hpYy1jaXR5LTMyODYwOSIsImF1ZCI6InBzeWNoaWMtY2l0eS0zMjg2MDkiLCJhdXRoX3RpbWUiOjE2ODQyNTc1MzIsInVzZXJfaWQiOiIwYWZUdmpod0puTkFhWENwZHRNT0pjSnE2MGIyIiwic3ViIjoiMGFmVHZqaHdKbk5BYVhDcGR0TU9KY0pxNjBiMiIsImlhdCI6MTY4NDI1NzUzMiwiZXhwIjoxNjg0MjYxMTMyLCJlbWFpbCI6InVtZXNoYmlsYWdpQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ1bWVzaGJpbGFnaUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.EYPDmSQJwKufVQxpv9N0oHFtZhpOkwpAiUi7nkPLoCP1_8H7Bj_hZGMeaRnxTAvbInEpdikI9nKfg-Std7ktf79iaElGYVbqQCHLOndG00fDqDvmsAn8wjqQZsiyY3JXBIVDOAWCTPkgNT1ixrpQ5C3Lv9jo0bxbZ-M1pcnj6sae5WcJBi3IKC-r17a6dhSwqK9p1LqkYIk_0ne83NcFjFDUxXnshnNPrXAwaD7spuB4ZPsnW-gH3rtb0Vg96kGBnQ3tOHg3va4V35JwaYpTtgoPt_ZOPuHp3mv2MjpnpJ4XtVI6G1BZBeoChU_dO5VVyDe-_t6QDtpt8rYA2TuLXQ",
+							"value": "{{authToken}}",
 							"type": "string"
 						}
 					]
 				},
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "patientId",
-							"value": "231",
-							"type": "text"
-						}
-					]
+					"mode": "raw",
+					"raw": "{\r\n  \"patientId\": 289\r\n}"
 				},
 				"url": {
 					"raw": "{{base_url}}/patient_by_id",
@@ -157,22 +289,22 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjFiYjI2MzY4YTNkMWExNDg1YmNhNTJiNGY4M2JkYjQ5YjY0ZWM2MmYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHN5Y2hpYy1jaXR5LTMyODYwOSIsImF1ZCI6InBzeWNoaWMtY2l0eS0zMjg2MDkiLCJhdXRoX3RpbWUiOjE2ODQyNTc1MzIsInVzZXJfaWQiOiIwYWZUdmpod0puTkFhWENwZHRNT0pjSnE2MGIyIiwic3ViIjoiMGFmVHZqaHdKbk5BYVhDcGR0TU9KY0pxNjBiMiIsImlhdCI6MTY4NDI1NzUzMiwiZXhwIjoxNjg0MjYxMTMyLCJlbWFpbCI6InVtZXNoYmlsYWdpQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ1bWVzaGJpbGFnaUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.EYPDmSQJwKufVQxpv9N0oHFtZhpOkwpAiUi7nkPLoCP1_8H7Bj_hZGMeaRnxTAvbInEpdikI9nKfg-Std7ktf79iaElGYVbqQCHLOndG00fDqDvmsAn8wjqQZsiyY3JXBIVDOAWCTPkgNT1ixrpQ5C3Lv9jo0bxbZ-M1pcnj6sae5WcJBi3IKC-r17a6dhSwqK9p1LqkYIk_0ne83NcFjFDUxXnshnNPrXAwaD7spuB4ZPsnW-gH3rtb0Vg96kGBnQ3tOHg3va4V35JwaYpTtgoPt_ZOPuHp3mv2MjpnpJ4XtVI6G1BZBeoChU_dO5VVyDe-_t6QDtpt8rYA2TuLXQ",
+							"value": "{{authToken}}",
 							"type": "string"
 						}
 					]
 				},
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "abhaAddress",
-							"value": "maheshdumale@sbx",
-							"type": "text"
-						}
-					]
+					"mode": "raw",
+					"raw": "{\r\n    \"abhaAddress\" : \"{{abhaAddress}}\"\r\n}"
 				},
 				"url": {
 					"raw": "{{base_url}}/patient_by_abhaAddress",
@@ -195,7 +327,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjFiYjI2MzY4YTNkMWExNDg1YmNhNTJiNGY4M2JkYjQ5YjY0ZWM2MmYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHN5Y2hpYy1jaXR5LTMyODYwOSIsImF1ZCI6InBzeWNoaWMtY2l0eS0zMjg2MDkiLCJhdXRoX3RpbWUiOjE2ODQyNTc2ODIsInVzZXJfaWQiOiIwYWZUdmpod0puTkFhWENwZHRNT0pjSnE2MGIyIiwic3ViIjoiMGFmVHZqaHdKbk5BYVhDcGR0TU9KY0pxNjBiMiIsImlhdCI6MTY4NDI1NzY4MiwiZXhwIjoxNjg0MjYxMjgyLCJlbWFpbCI6InVtZXNoYmlsYWdpQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ1bWVzaGJpbGFnaUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.ChBxXY2PppmtfoiOWLqqb--JSHDQ1G6T-sx9EFFsEBGalk-FiJfzUC-761k-xWd4SF2dAEO-7wcpl3f2km9agkrpOVM3YneTV-o-Ow8Jfb7T3UXZ9HXxc_0RGFPIpPt8upMoOOpJ7hlkw1auaPzPEA-ahaHF6yfvaRmcralKeWYHyhMGGF63-G9KjtbEue1l3W7rXLXLZnNGBJPYygQVjT80LbSdsoA9EnqHjxGrTImBie0GxbZWz4qFp4KAM4qQRB3KbqJsbMpZxGyvsB50E8jwIVapm62euK3pnDAMxSDQ4axrFzB-7-gL1A44c1fxR-gnVlNqcL9bGL3wqNXdXA",
+							"value": "{{authToken}}",
 							"type": "string"
 						}
 					]
@@ -210,7 +342,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n        \"doctorDetails\" : [{\"doctorName\" : \"Dr Umesh Bilagi\", \"doctorGcpId\" :\"cf4a6ab1-3f32-4b92-adc5-89489da6ca14\" }],\r\n        \"doa\" : \"2023-05-08T19:21:23.918Z\",\r\n        \"abhaAddress\" : \"maheshdumale@sbx\"\r\n}"
+					"raw": "{\r\n        \"doctorDetails\" : [{\"doctorName\" : \"Dr Umesh Bilagi\", \"doctorGcpId\" :\"cf4a6ab1-3f32-4b92-adc5-89489da6ca14\" }],\r\n        \"doa\" : \"2023-05-08T19:21:23.918Z\",\r\n        \"abhaAddress\" : \"{{abhaAddress}}\"\r\n}"
 				},
 				"url": {
 					"raw": "{{base_url}}/admit_patient",
@@ -232,7 +364,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjFiYjI2MzY4YTNkMWExNDg1YmNhNTJiNGY4M2JkYjQ5YjY0ZWM2MmYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHN5Y2hpYy1jaXR5LTMyODYwOSIsImF1ZCI6InBzeWNoaWMtY2l0eS0zMjg2MDkiLCJhdXRoX3RpbWUiOjE2ODM5NDY4NDEsInVzZXJfaWQiOiIwYWZUdmpod0puTkFhWENwZHRNT0pjSnE2MGIyIiwic3ViIjoiMGFmVHZqaHdKbk5BYVhDcGR0TU9KY0pxNjBiMiIsImlhdCI6MTY4Mzk0Njg0MSwiZXhwIjoxNjgzOTUwNDQxLCJlbWFpbCI6InVtZXNoYmlsYWdpQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ1bWVzaGJpbGFnaUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.rNwnNuNSb0PSTJCGbJQvD1I_nj-8DmaIXy6ZK72wX8af9xoJyjaC4v4gXK-v4OSpFpDlfIFGs1T5XCu5MsxAPwFuq8qd8nLy9LvUdw1SD7DomquiwxYs9cZdMufsB_sSlj77ddTIf-o58UeB9rtwfi4MKkkMT8GtZIpCHlGer-H9XDEUIVHVUDfqRos0tsmETCPmSr-ryW0VVEYi-Wcmc2Gg6qrioPTXgnBMGcMwndsg7cY4SFXA3QXdaz_fMsp72dNHXUGp51KBnoZ_EuJKqwy3aIvwfZHHrlnZAg_9Kd0zN7tDqJbrrXwi8P_6VqoNgvsDNIhT0vJ1DdHT4k5QVA",
+							"value": "{{authToken}}",
 							"type": "string"
 						}
 					]
@@ -247,7 +379,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\r\n        \"dod\" : \"2023-05-30T19:21:23.918Z\",\r\n        \"abhaAddress\" : \"savitribilagi@sbx\",\r\n        \"encounterId\" : \"21ba04cd-d922-4412-bfdc-c0293e638f1d\"\r\n}"
+					"raw": "{\r\n\r\n        \"dod\" : \"2023-05-30T19:21:23.918Z\",\r\n        \"abhaAddress\" : \"{{abhaAddress}}\",\r\n        \"encounterId\" : \"ee0faedc-7e5c-4524-88e9-b5e2481e252d\"\r\n}"
 				},
 				"url": {
 					"raw": "{{base_url}}/discharge_patient",
@@ -269,7 +401,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjFiYjI2MzY4YTNkMWExNDg1YmNhNTJiNGY4M2JkYjQ5YjY0ZWM2MmYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHN5Y2hpYy1jaXR5LTMyODYwOSIsImF1ZCI6InBzeWNoaWMtY2l0eS0zMjg2MDkiLCJhdXRoX3RpbWUiOjE2ODQyNTkzODMsInVzZXJfaWQiOiIwYWZUdmpod0puTkFhWENwZHRNT0pjSnE2MGIyIiwic3ViIjoiMGFmVHZqaHdKbk5BYVhDcGR0TU9KY0pxNjBiMiIsImlhdCI6MTY4NDI1OTM4MywiZXhwIjoxNjg0MjYyOTgzLCJlbWFpbCI6InVtZXNoYmlsYWdpQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ1bWVzaGJpbGFnaUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.mOLvbpP2S6GDDgS-H9Icdx3mCqrM9GPkqeW2hButnSU1YZAiE2AIz_4yC6fhviZ5JiH1SROEtnjjWiAq_WAAuelLk18zLIBj17sIXcx42SwdmVOl8mlgvYKfWtQ5IQ3QM58khrNWgsg4KNDcNtmOsM76_39zOo4zTcG19v2AAP2vE9DbqLIREPKdf9Uw8rqfL1nFs0Bgo25bP_6ARpxPfmFRGRgvqa7eAlEVgqO_4o8zu4w2gI9PWBtAwP9VgAblvFb4u3mg35nzIbV02dvkpt8mDSo-tvHjiu4jlR9nWsypjsXhjXXFjMZQ1qtEkLRXiyr3r4myxij_jeb_2LFA4g",
+							"value": "{{authToken}}",
 							"type": "string"
 						}
 					]
@@ -284,7 +416,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n        \"doctorDetails\" : [{\"doctorName\" : \"Dr Umesh Bilagi\", \"doctorGcpId\" :\"cf4a6ab1-3f32-4b92-adc5-89489da6ca14\" }],\r\n        \"date\" : \"2023-05-08T19:21:23.918Z\",\r\n        \"abhaAddress\" : \"savitribilagi@sbx\"\r\n}"
+					"raw": "{\r\n        \"doctorDetails\" : [{\"doctorName\" : \"Dr Umesh Bilagi\", \"doctorGcpId\" :\"cf4a6ab1-3f32-4b92-adc5-89489da6ca14\" }],\r\n        \"date\" : \"2023-05-08T19:21:23.918Z\",\r\n        \"abhaAddress\" : \"{{abhaAddress}}\"\r\n}"
 				},
 				"url": {
 					"raw": "{{base_url}}/opd_patient",
@@ -306,7 +438,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjU0NWUyNDZjNTEwNmExMGQ2MzFiMTA0M2E3MWJiNTllNWJhMGM5NGQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHN5Y2hpYy1jaXR5LTMyODYwOSIsImF1ZCI6InBzeWNoaWMtY2l0eS0zMjg2MDkiLCJhdXRoX3RpbWUiOjE2ODU5MzQyMTksInVzZXJfaWQiOiIwYWZUdmpod0puTkFhWENwZHRNT0pjSnE2MGIyIiwic3ViIjoiMGFmVHZqaHdKbk5BYVhDcGR0TU9KY0pxNjBiMiIsImlhdCI6MTY4NTkzNDIxOSwiZXhwIjoxNjg1OTM3ODE5LCJlbWFpbCI6InVtZXNoYmlsYWdpQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ1bWVzaGJpbGFnaUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.lKqpXlWm9vVfjr8r6KGqBUlcYZgv4lYppRP__B9eyAxHaScy1B3-Pp1Cz9DjYQro1Bv1GSVgFcbbXgAXDkQCMaBspaGZG5N9nrgDnoY-JKEvqu4WQdtWFba0q3jndrzI4J6Xma3dFYVO8vuMoPC6D4daL3GeA8J1NEKtHXurU0nSvB_H_k9McKBN_m4GZC4H-KNjxZeUisHb_9lRmdLpIm_jWg0j7_OCcXuH_NQTXnF09aC5SSbW3GM4fiSgIEfmUm5gyyR58lzkCwPAboJ8mONyGwY_0NdOnS2QQVtiEo1owKcKP8MnxJaFhJz8SwfC09OprAKyR6I_H_L1RHp9Wg",
+							"value": "{{authToken}}",
 							"type": "string"
 						}
 					]
@@ -321,7 +453,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"abhaAddress\" : \"91711357678608@sbx\",\r\n    \"authMode\" : \"AADHAAR_OTP\"\r\n}"
+					"raw": "{\r\n    \"abhaAddress\" : \"{{abhaAddress}}\",\r\n    \"authMode\" : \"AADHAAR_OTP\"\r\n}"
 				},
 				"url": {
 					"raw": "{{base_url}}/patient_register_abha_otp_init",
@@ -344,7 +476,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjJkM2E0YTllYjY0OTk0YzUxM2YyYzhlMGMwMTY1MzEzN2U5NTg3Y2EiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHN5Y2hpYy1jaXR5LTMyODYwOSIsImF1ZCI6InBzeWNoaWMtY2l0eS0zMjg2MDkiLCJhdXRoX3RpbWUiOjE2ODU4NTQ1OTcsInVzZXJfaWQiOiIwYWZUdmpod0puTkFhWENwZHRNT0pjSnE2MGIyIiwic3ViIjoiMGFmVHZqaHdKbk5BYVhDcGR0TU9KY0pxNjBiMiIsImlhdCI6MTY4NTg1NDU5NywiZXhwIjoxNjg1ODU4MTk3LCJlbWFpbCI6InVtZXNoYmlsYWdpQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ1bWVzaGJpbGFnaUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.QGaD4CU5djjBD9t0SC83OPtucJTjdV559_eCgxBx2sZjDhsKeHhrWkqkO5U8pjo45ZqdCdMi3n9L3r13sLBsU_G2StLrQnEw3DjUKbOy8BotW_i_N-6ww3nCjLZUvf_senNKB2TNpZEJ1zHGcyQ8AudOLuPutqfZodP4f6U2Z1uud0KTz7tFWDU6h0qmEIlOvC004xnkAn7DHLn_bUoYZltZ6wVqY01EXMqFdBHcs43s1_Y3J6wWkfhotkTRGZbb73VqHiafQ4EemhTdhui94ZFaFifb3TQ0TnpcKcTAJIaw7Zi-fMPVHrKcA9rZxygxhp1ViVms_FfKlbuvqPHawA",
+							"value": "{{authToken}}",
 							"type": "string"
 						}
 					]
@@ -359,7 +491,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"otp\":\"886367\",\r\n    \"transactionId\":\"f455d2f9-18f1-4c6e-bfd0-df5ff2449f97\",\r\n    \"abhaAddress\": \"91711357678608@sbx\"\r\n}"
+					"raw": "{\r\n    \"otp\":\"181540\",\r\n    \"transactionId\":\"92f92c22-1d43-4f08-b944-5e508fb76172\",\r\n    \"abhaAddress\": \"{{abhaAddress}}\"\r\n}"
 				},
 				"url": {
 					"raw": "{{base_url}}/patient_register_abha_otp_confirm",
@@ -382,7 +514,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjJkM2E0YTllYjY0OTk0YzUxM2YyYzhlMGMwMTY1MzEzN2U5NTg3Y2EiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHN5Y2hpYy1jaXR5LTMyODYwOSIsImF1ZCI6InBzeWNoaWMtY2l0eS0zMjg2MDkiLCJhdXRoX3RpbWUiOjE2ODU5MDY2MzMsInVzZXJfaWQiOiIwYWZUdmpod0puTkFhWENwZHRNT0pjSnE2MGIyIiwic3ViIjoiMGFmVHZqaHdKbk5BYVhDcGR0TU9KY0pxNjBiMiIsImlhdCI6MTY4NTkwNjYzMywiZXhwIjoxNjg1OTEwMjMzLCJlbWFpbCI6InVtZXNoYmlsYWdpQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ1bWVzaGJpbGFnaUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.UKSpMVrLmYMMYei3qP5AV675LB1SDgoilrgUsd0LTYXorqsxiVkUPQd-0aeBFrBhSb4vJ2UmDEzYp8fLbbvPLfYvJ1Mwm-nfbL-j7tZDNp5D3eJtY5MJkNIOGJHy3FwXCrRCfMO19q-KdahwanRxMskR0tGnwJ8GAzErgr6gG6p9NAI_2vQ_pMLi_zsBRwCCa3FMvooN9TtJMy-7mUpGwNYJQF1cVG9xFEGah7LWqgHdZbJGcF1UOjW7ahmEDKyPQFEwnLFraEEoXxqimFbg9ncHaGsbVlDXhbjyJdj4wuaTkvLLuAQ82EDEafwm7afcnIIwveYeaNR6RvT22YOslw",
+							"value": "{{authToken}}",
 							"type": "string"
 						}
 					]
@@ -450,6 +582,11 @@
 		{
 			"key": "base_url",
 			"value": "http://127.0.0.1:5001/psychic-city-328609/asia-south1",
+			"type": "string"
+		},
+		{
+			"key": "authToken",
+			"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImY5N2U3ZWVlY2YwMWM4MDhiZjRhYjkzOTczNDBiZmIyOTgyZTg0NzUiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcHN5Y2hpYy1jaXR5LTMyODYwOSIsImF1ZCI6InBzeWNoaWMtY2l0eS0zMjg2MDkiLCJhdXRoX3RpbWUiOjE2ODgzODIwMTEsInVzZXJfaWQiOiJCVVhrRUFpUFhiYlpvOENVd2pZdEh3cHlwazEyIiwic3ViIjoiQlVYa0VBaVBYYmJabzhDVXdqWXRId3B5cGsxMiIsImlhdCI6MTY4ODM4MjAxMSwiZXhwIjoxNjg4Mzg1NjExLCJlbWFpbCI6Im5pY2VobXMyMUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsibmljZWhtczIxQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.VYU0kusumqJQVDVCaoNzlW83hteVkCypq7HzcxR9cl6DvYUfeuxIOCwUsJd_llvldGlO7SHEDfr65pTm3cJoNflaoMY7N5MsEgG1QOsd3JQUhpHIRn18Y0JsqxSua0v27LTqwwdmsb8MDTnvHyVVDdGwXaRK0KDPT96ftoJsUBn-sInvUMiW-akdpOE1WEvR69GhIsVG6AU38LReemz2QWJxyTzPE6hG8hC2NE0BT83BHk-KOQy5ag-ViS2p6ruqSyct8pnQIcNFqr6o-UTIXWPrh8OWJ6k-SArYKxsOuPxsN_tQ-orGyVT4nh0wIPUQCbljc7XPk_xU26l8hmczwA",
 			"type": "string"
 		}
 	]
