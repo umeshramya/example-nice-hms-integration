@@ -299,6 +299,12 @@ components:
   schemas:
     medicines:
       type: array
+      required:
+        - drug
+        - frequency
+        - instruction
+        - duration
+        - route
       items:
         type: object
         properties:
@@ -312,6 +318,20 @@ components:
             type: string
           route:
             type: string
+    
+    followUp:
+      type: object
+      required:
+       - startDate
+      properties:
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        comment:
+          type: string
     doctorDetails:
       type: array
       items:
@@ -658,16 +678,7 @@ components:
         physicalExamination:
           type: string
         followUp:
-          type: object
-          properties:
-            startDate:
-              type: string
-              format: date-time
-            endDate:
-              type: string
-              format: date-time
-            comment:
-              type: string
+          $ref: "#/components/schemas/followUp"
         opdProcedure:
           type: object
           properties:
