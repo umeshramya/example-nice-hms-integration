@@ -33,7 +33,9 @@ paths:
   /create_doctor:
     post:
       tags:
-        - Doctor
+       - Doctor
+      security:
+        - bearerAuth: [] 
       summary: Create a new doctor profile
       requestBody:
         required: true
@@ -42,7 +44,7 @@ paths:
             schema:
               $ref: "#/components/schemas/CreateDoctorDataReq"
       responses:
-        "200":
+        '200':
           description: Success
           content:
             application/json:
@@ -52,22 +54,27 @@ paths:
   /edit_doctor:
     post:
       tags:
-        - Doctor
+       - Doctor
+      security:
+        - bearerAuth: [] 
       summary: Edit doctor information
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/EditDoctorReq"
+              $ref: '#/components/schemas/EditDoctorReq'
       responses:
-        "200":
+        '200':
           description: Successfully edited the doctor's information
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/EditDoctorRes"
-
+                $ref: '#/components/schemas/EditDoctorRes'  
+  
+  
+  
+  
   /patient_by_id:
     post:
       tags:
@@ -335,13 +342,14 @@ components:
       scheme: bearer
       bearerFormat: JWT
   schemas:
+  
     User:
       type: object
       required:
-        - email
-        - firstName
-        - lastName
-        - mobile
+       - email
+       - firstName
+       - lastName
+       - mobile
       properties:
         email:
           type: string
@@ -353,6 +361,9 @@ components:
         mobile:
           type: string
 
+
+  
+  
     medicines:
       type: array
       required:
@@ -374,11 +385,11 @@ components:
             type: string
           route:
             type: string
-
+    
     followUp:
       type: object
       required:
-        - startDate
+       - startDate
       properties:
         startDate:
           type: string
@@ -428,16 +439,17 @@ components:
         token:
           type: string
 
+
     CreateDoctorDataReq:
       type: object
       required:
-        - user
-        - doctorPrintName
-        - medicalLicenseNumber
-        - specialty
-        - qualification
-        - abdmProfessionalId
-        - gender
+       - user
+       - doctorPrintName
+       - medicalLicenseNumber
+       - specialty
+       - qualification
+       - abdmProfessionalId
+       - gender
       properties:
         user:
           $ref: "#/components/schemas/User"
@@ -477,8 +489,8 @@ components:
         userId:
           type: integer
         id:
-          type: integer
-
+          type: integer  
+    
     EditDoctorReq:
       required:
         - doctorPrintName
@@ -510,7 +522,7 @@ components:
       properties:
         mes:
           type: string
-
+    
     PatientByIdReq:
       type: object
       required:
