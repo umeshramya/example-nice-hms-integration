@@ -543,6 +543,44 @@
 				"description": "This is for registering ABHA patient by using otp method eithor MOBILE_OTP or AADHAAR_OTP"
 			},
 			"response": []
+		},
+		{
+			"name": "Create Doctor",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\" : {\r\n        \"email\": \"jamesbond@gmail.com\",\r\n        \"firstName\": \"James\",\r\n        \"lastName\": \"Bond\",\r\n        \"mobile\": \"934562887\"\r\n    },\r\n    \"doctorPrintName\" : \"Dr James Bond\",\r\n    \"medicalLicenseNumber\" : \"KMC 123456\",\r\n    \"specialty\" : \"Oncology\",\r\n    \"qualification\" : \"MBBS MD DM\",\r\n    \"abdmProfessionalId\" : \"jamesbond@hpr.abdm\",\r\n    \"gender\" : \"Male\"\r\n\r\n\r\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/create_doctor",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"create_doctor"
+					]
+				},
+				"description": "This is for registering ABHA patient by using otp method eithor MOBILE_OTP or AADHAAR_OTP"
+			},
+			"response": []
 		}
 	],
 	"event": [
