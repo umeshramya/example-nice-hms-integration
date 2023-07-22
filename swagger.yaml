@@ -30,6 +30,25 @@ paths:
               schema:
                 $ref: "#/components/schemas/authTokenRes"
 
+  /create_doctor:
+    post:
+      tags:
+       - Auth
+      summary: Create a new doctor profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateDoctorDataReq"
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DoctorRes"
+
   /patient_by_id:
     post:
       tags:
@@ -297,6 +316,28 @@ components:
       scheme: bearer
       bearerFormat: JWT
   schemas:
+  
+    User:
+      type: object
+      required:
+       - email
+       - firstName
+       - lastName
+       - mobile
+      properties:
+        email:
+          type: string
+          format: email
+        firstName:
+          type: string
+        lastName:
+          type: string
+        mobile:
+          type: string
+
+
+  
+  
     medicines:
       type: array
       required:
@@ -372,6 +413,60 @@ components:
         token:
           type: string
 
+
+    CreateDoctorDataReq:
+      type: object
+      required:
+       - user
+       - doctorPrintName
+       - medicalLicenseNumber
+       - specialty
+       - qualification
+       - abdmProfessionalId
+       - gender
+      properties:
+        user:
+          $ref: "#/components/schemas/User"
+        doctorPrintName:
+          type: string
+        medicalLicenseNumber:
+          type: string
+        specialty:
+          type: string
+        qualification:
+          type: string
+        abdmProfessionalId:
+          type: string
+        gender:
+          type: string
+    DoctorRes:
+      type: object
+      properties:
+        name:
+          type: string
+        orgId:
+          type: integer
+        gcpFhirId:
+          type: string
+        qualification:
+          type: string
+        ndhmProfessionalId:
+          type: string
+        registration:
+          type: string
+        gender:
+          type: string
+        speciality:
+          type: string
+        type:
+          type: string
+        userId:
+          type: integer
+        id:
+          type: integer  
+    
+    
+    
     PatientByIdReq:
       type: object
       required:
@@ -379,7 +474,6 @@ components:
       properties:
         patientId:
           $ref: "#/components/schemas/patientId"
-
     PatientByAbhaAddressReq:
       type: object
       required:
@@ -400,7 +494,6 @@ components:
         authMode:
           type: string
           enum: ["MOBILE_OTP", "AADHAAR_OTP"]
-
     AbhaOtpInitRes:
       type: object
       properties:
