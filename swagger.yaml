@@ -360,10 +360,8 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/OpdRegistrationResult"
-        "400":
+        "403":
           description: "Bad Request – Missing or invalid parameters."
-        "401":
-          description: "Unauthorized – Bearer token missing or invalid."
         "500":
           description: "Internal Server Error – Unexpected failure."
 
