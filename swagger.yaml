@@ -334,6 +334,39 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CompositionRes"
+                
+  
+  paths:
+  /get_doctor_opd_patients_by_date:
+    post:
+      tags:
+        - Doctor Interaction
+      security:
+        - bearerAuth: []
+      description: "This API returns a list of OPD patients for a given doctor on a specific date within a healthcare organization. The doctor must be an active user."
+      requestBody:
+        description: "Request payload containing the organization ID, doctor's FHIR ID, and the date for which OPD patient data is required."
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetOpdPatientByDoctorAndDateRequest"
+      responses:
+        "200":
+          description: "Successful response containing a list of OPD patient registrations."
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OpdRegistrationResult"
+        "400":
+          description: "Bad Request – Missing or invalid parameters."
+        "401":
+          description: "Unauthorized – Bearer token missing or invalid."
+        "500":
+          description: "Internal Server Error – Unexpected failure."
+
 
 components:
   securitySchemes:
@@ -1166,3 +1199,108 @@ components:
                 text:
                   type: string
                   example: Discharge summary
+    
+    GetOpdPatientByDoctorAndDateRequest:
+      type: object
+      properties:
+        orgId:
+          type: number
+          description: "The organization ID to filter by."
+          example: 1
+        date:
+          type: string
+          format: date
+          description: "The date (YYYY-MM-DD) for which to fetch the data. Timezone conversion to IST is applied."
+          example: "2025-02-02"
+        doctorGcpId:
+          type: string
+          description: "The GCP FHIR ID of the doctor."
+          example: "cf4a6ab1-3f32-4b92-adc5-8948ey1da6ca156"
+      required:
+        - orgId
+        - date
+        - doctorGcpId
+        
+        
+
+    OpdRegistrationResult:
+      type: object
+      properties:
+        token:
+          type: string
+          description: "The token associated with the OPD registration."
+          example: "some-token-value"
+        opdId:
+          type: number
+          description: "The ID of the OPD registration."
+          example: 123
+        orgId:
+          type: number
+          description: "The organization ID."
+          example: 1
+        date:
+          type: string
+          format: date-time
+          description: "The date of the OPD registration."
+          example: "2025-02-02T00:00:00+05:30"
+        patientId:
+          type: number
+          description: "The patient ID."
+          example: 456
+        doctorId:
+          type: number
+          description: "The doctor ID."
+          example: 789
+        prefix:
+          type: string
+          nullable: true
+          description: "Patient's prefix (e.g., Mr, Ms)."
+          example: "Mr"
+        firstName:
+          type: string
+          description: "Patient's first name."
+          example: "John"
+        middleName:
+          type: string
+          nullable: true
+          description: "Patient's middle name."
+          example: "A."
+        lastName:
+          type: string
+          nullable: true
+          description: "Patient's last name."
+          example: "Doe"
+        gender:
+          type: string
+          description: "Patient's gender."
+          example: "Male"
+        dob:
+          type: string
+          format: date
+          description: "Patient's date of birth."
+          example: "1990-01-01"
+        abhaAddress:
+          type: string
+          nullable: true
+          description: "Alias for the patient's phrAddress."
+          example: "123, ABC Street, City"
+        abhaNumber:
+          type: string
+          nullable: true
+          description: "Alias for the patient's healthIdNumber."
+          example: "ABHA1234567890"
+        mobile:
+          type: string
+          description: "Patient's mobile number."
+          example: "+911234567890"
+      required:
+        - token
+        - opdId
+        - orgId
+        - date
+        - patientId
+        - doctorId
+        - firstName
+        - gender
+        - dob
+        - mobile
