@@ -850,7 +850,9 @@ components:
         - date
       properties:
         abhaAddress:
-          type: string
+          $ref: "#/components/schemas/abhaAddress"
+        patientId:
+          $ref: "#/components/schemas/patientId"
         chiefComplaints:
           type: string
         medicalHistory:
