@@ -336,7 +336,7 @@ paths:
                 $ref: "#/components/schemas/CompositionRes"
                 
   
-  paths:
+
   /get_doctor_opd_patients_by_date:
     post:
       tags:
@@ -365,6 +365,34 @@ paths:
         "500":
           description: "Internal Server Error – Unexpected failure."
 
+
+  /get_doctor_opd_patients_by_date:
+    post:
+      tags:
+        - Doctor Interaction
+      security:
+        - bearerAuth: []
+      description: "This API returns a list of IPD patients for a given doctor within a healthcare organization. The doctor must be an active user."
+      requestBody:
+        description: "Request payload containing the , doctor's FHIR ID,  for which IPD patient data is required."
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetIpdPatientByDoctorAndDateRequest"
+      responses:
+        "200":
+          description: "Successful response containing a list of OPD patient registrations."
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/IpdPatientResponse"
+        "403":
+          description: "Bad Request – Missing or invalid parameters."
+        "500":
+          description: "Internal Server Error – Unexpected failure."
 
 components:
   securitySchemes:
@@ -1220,6 +1248,22 @@ components:
         - orgId
         - date
         - doctorGcpId
+
+    GetIpdPatientByDoctorAndDateRequest:
+    type: object
+    properties:
+      orgId:
+        type: number
+        description: "The organization ID to filter by."
+        example: 1
+      doctorGcpId:
+        type: string
+        description: "The GCP FHIR ID of the doctor."
+        example: "cf4a6ab1-3f32-4b92-adc5-8948ey1da6ca156"
+    required:
+      - orgId
+      - doctorGcpId
+  
         
         
 
@@ -1293,6 +1337,10 @@ components:
           type: string
           description: "Patient's mobile number."
           example: "+911234567890"
+        status:
+          type: string
+          description : "status of visit"
+          example : "in-progress"
       required:
         - token
         - opdId
@@ -1304,8 +1352,9 @@ components:
         - gender
         - dob
         - mobile
+        - status
 
-    IpDPatientREsponse:
+    IpdPatientResponse:
       type: object
       properties:
         patientId:
@@ -1329,7 +1378,7 @@ components:
         doctors:
           type: array
           items:
-            $ref: "#/components/schemas/Doctor"
+            $ref: "#/components/schemas/IPDDoctor"
         dob:
           type: string
           format: date
@@ -1338,7 +1387,7 @@ components:
           type: integer
           example: 65
 
-    Doctor:
+    IPDDoctor:
       type: object
       properties:
         id:
