@@ -366,15 +366,15 @@ paths:
           description: "Internal Server Error – Unexpected failure."
 
 
-  /get_doctor_Ipd_patients_by_date:
+  /get_doctor_ipd_patients_by_date:
     post:
       tags:
         - Doctor Interaction
       security:
         - bearerAuth: []
-      description: "This API returns a list of IPD patients for a given doctor within a healthcare organization. The doctor must be an active user."
+      description: "Returns a list of IPD patients for a given doctor within a healthcare organization. The doctor must be an active user."
       requestBody:
-        description: "Request payload containing the , doctor's FHIR ID,  for which IPD patient data is required."
+        description: "Request payload containing the doctor's FHIR ID for which IPD patient data is required."
         required: true
         content:
           application/json:
@@ -382,17 +382,20 @@ paths:
               $ref: "#/components/schemas/GetIpdPatientByDoctorAndDateRequest"
       responses:
         "200":
-          description: "Successful response containing a list of OPD patient registrations."
+          description: "Successful response containing a list of IPD patient registrations."
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/IpdPatientResponse"
-        "403":
+        "400":
           description: "Bad Request – Missing or invalid parameters."
+        "403":
+          description: "Forbidden – The user does not have permission to access this resource."
         "500":
           description: "Internal Server Error – Unexpected failure."
+
 
 components:
   securitySchemes:
@@ -1253,16 +1256,18 @@ components:
       type: object
       properties:
         orgId:
-          type: number
+          type: integer
           description: "The organization ID to filter by."
           example: 1
         doctorGcpId:
           type: string
+          format: uuid
           description: "The GCP FHIR ID of the doctor."
           example: "cf4a6ab1-3f32-4b92-adc5-8948ey1da6ca156"
       required:
         - orgId
         - doctorGcpId
+
   
         
         
