@@ -1304,3 +1304,47 @@ components:
         - gender
         - dob
         - mobile
+
+    IpDPatientREsponse:
+      type: object
+      properties:
+        patientId:
+          type: integer
+          example: 131
+        name:
+          type: string
+          example: "Bhargav Chandrashekhar Hede"
+        gender:
+          type: string
+          enum: [male, female, other]
+          example: "male"
+        mobile:
+          type: string
+          pattern: "^[0-9]{10}$"
+          example: "8554901073"
+        doa:
+          type: string
+          format: date-time
+          example: "2025-03-07T18:14:26.556Z"
+        doctors:
+          type: array
+          items:
+            $ref: "#/components/schemas/Doctor"
+        dob:
+          type: string
+          format: date
+          example: "1999-11-12"
+        ipNo:
+          type: integer
+          example: 65
+
+    Doctor:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "cf4a6ab1-3f32-4b92-adc5-89489da6ca14"
+        name:
+          type: string
+          example: "Dr U R Bilagi"
