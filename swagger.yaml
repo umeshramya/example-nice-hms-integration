@@ -1250,19 +1250,19 @@ components:
         - doctorGcpId
 
     GetIpdPatientByDoctorAndDateRequest:
-    type: object
-    properties:
-      orgId:
-        type: number
-        description: "The organization ID to filter by."
-        example: 1
-      doctorGcpId:
-        type: string
-        description: "The GCP FHIR ID of the doctor."
-        example: "cf4a6ab1-3f32-4b92-adc5-8948ey1da6ca156"
-    required:
-      - orgId
-      - doctorGcpId
+      type: object
+      properties:
+        orgId:
+          type: number
+          description: "The organization ID to filter by."
+          example: 1
+        doctorGcpId:
+          type: string
+          description: "The GCP FHIR ID of the doctor."
+          example: "cf4a6ab1-3f32-4b92-adc5-8948ey1da6ca156"
+      required:
+        - orgId
+        - doctorGcpId
   
         
         
