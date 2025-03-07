@@ -366,7 +366,7 @@ paths:
           description: "Internal Server Error – Unexpected failure."
 
 
-  /get_doctor_opd_patients_by_date:
+  /get_doctor_Ipd_patients_by_date:
     post:
       tags:
         - Doctor Interaction
