@@ -908,31 +908,28 @@ components:
           $ref: "#/components/schemas/patientId"
         chiefComplaints:
           type: string
+          description: "Primary complaints reported by the patient"
         medicalHistory:
           type: string
+          description: "Patient's past medical history"
         physicalExamination:
           type: string
+          description: "Findings from the physical examination"
         followUp:
           $ref: "#/components/schemas/followUp"
         opdProcedure:
-          type: object
-          properties:
-            procedureName:
-              type: string
-            procedureDescription:
-              type: string
-            date:
-              type: string
-              format: date-time
+          $ref: "#/components/schemas/opdProcedure"
         medicines:
           $ref: "#/components/schemas/medicines"
         doctorDetails:
           $ref: "#/components/schemas/doctorDetails"
         status:
           type: string
+          description: "Current status of the consultation"
         date:
           type: string
           format: date-time
+          description: "Date of the consultation"
 
     ProcedureOtNotesReq:
       type: object
@@ -948,24 +945,33 @@ components:
         followUp:
           $ref: "#/components/schemas/followUp"
         opdProcedure:
-          type: object
-          properties:
-            procedureName:
-              type: string
-            procedureDescription:
-              type: string
-            date:
-              type: string
-              format: date-time
+          $ref: "#/components/schemas/opdProcedure"
         medicines:
           $ref: "#/components/schemas/medicines"
         doctorDetails:
           $ref: "#/components/schemas/doctorDetails"
         status:
           type: string
+          description: "Current status of the procedure"
         date:
           type: string
           format: date-time
+          description: "Date of the procedure"
+
+    opdProcedure:
+      type: object
+      properties:
+        procedureName:
+          type: string
+          description: "Name of the procedure performed"
+        procedureDescription:
+          type: string
+          description: "Detailed description of the procedure"
+        date:
+          type: string
+          format: date-time
+          description: "Date when the procedure was performed"
+
 
 
 
