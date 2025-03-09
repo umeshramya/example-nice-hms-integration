@@ -4,11 +4,15 @@ info:
   description: Welcome to the integration documentation for Nice HMS ABDM (Ayushman Bharath Digital mission) Triple Milestone Certified HIMS! These APIs are specifically designed for developers who are looking to incorporate ABDM APIs into their projects. We understand the complexity involved in implementing ABDM APIs, and our aim is to simplify the process for you, making it effortless to achieve ABDM compatibility within your HIMS (Health Information Management System). Whether you're a medical college, a large hospital, or a hospital chain, and currently using a non-ABDM compatibility application (whether it's on-premise or in the cloud), our APIs are here to help you leverage the benefits of ABDM within your organization. We have carefully designed these APIs to meet the requirements of ABDM, ensuring a smooth and efficient integration experience.Take advantage of our simplified implementation of complex ABDM APIs and empower your HIMS with ABDM compatibility. Enhance your data management processes and unlock the full potential of ABDM within your organization. To get started, refer to our comprehensive integration documentation, which provides detailed instructions and examples to facilitate a seamless integration process. We look forward to supporting you in successfully integrating ABDM APIs.
   version: 1.1.0
   contact:
-    email: nicehms21@gmail.com
+    email: admin@nicehms.com
     name: Nice HMS
 servers:
   - url: ""
     description: Sandbox
+externalDocs:
+  description: Postman Collection for Nice HMS Integration
+  url: "https://raw.githubusercontent.com/umeshramya/example-nice-hms-integration/refs/heads/main/Nice%20HMS%20integration.postman_collection.json"
+  
 paths:
   /auth_token:
     post:
@@ -304,6 +308,28 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/OpConsultationReq"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CompositionRes"
+
+  /procedure_ot_notes:
+    post:
+      tags:
+        - Documents
+      security:
+        - bearerAuth: []
+      description: This endpoint allows you to create an OPD Consultation and send the necessary information to Ayushman Bharat Digital Mission (ABDM). You can identify the patient either by the patient ID obtained from Nice HMS or the ABHA address
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProcedureOtNotesReq"
       responses:
         "200":
           description: "200 response"
@@ -886,31 +912,73 @@ components:
           $ref: "#/components/schemas/patientId"
         chiefComplaints:
           type: string
+          description: "Primary complaints reported by the patient"
         medicalHistory:
           type: string
+          description: "Patient's past medical history"
         physicalExamination:
           type: string
+          description: "Findings from the physical examination"
         followUp:
           $ref: "#/components/schemas/followUp"
         opdProcedure:
-          type: object
-          properties:
-            procedureName:
-              type: string
-            procedureDescription:
-              type: string
-            date:
-              type: string
-              format: date-time
+          $ref: "#/components/schemas/opdProcedure"
         medicines:
           $ref: "#/components/schemas/medicines"
         doctorDetails:
           $ref: "#/components/schemas/doctorDetails"
         status:
           type: string
+          description: "Current status of the consultation"
         date:
           type: string
           format: date-time
+          description: "Date of the consultation"
+
+    ProcedureOtNotesReq:
+      type: object
+      required:
+        - doctorDetails
+        - status
+        - date
+      properties:
+        abhaAddress:
+          $ref: "#/components/schemas/abhaAddress"
+        patientId:
+          $ref: "#/components/schemas/patientId"
+        followUp:
+          $ref: "#/components/schemas/followUp"
+        opdProcedure:
+          $ref: "#/components/schemas/opdProcedure"
+        medicines:
+          $ref: "#/components/schemas/medicines"
+        doctorDetails:
+          $ref: "#/components/schemas/doctorDetails"
+        status:
+          type: string
+          description: "Current status of the procedure"
+        date:
+          type: string
+          format: date-time
+          description: "Date of the procedure"
+
+    opdProcedure:
+      type: object
+      properties:
+        procedureName:
+          type: string
+          description: "Name of the procedure performed"
+        procedureDescription:
+          type: string
+          description: "Detailed description of the procedure"
+        date:
+          type: string
+          format: date-time
+          description: "Date when the procedure was performed"
+
+
+
+
 
     DiagnosticReportReq:
       type: object
