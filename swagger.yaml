@@ -895,77 +895,77 @@ components:
           type: string
           example: 2023-05-08T19:21:23.918Z
 
-      OpConsultationReq:
-        type: object
-        required:
-          - doctorDetails
-          - status
-          - date
-        properties:
-          abhaAddress:
-            $ref: "#/components/schemas/abhaAddress"
-          patientId:
-            $ref: "#/components/schemas/patientId"
-          chiefComplaints:
-            type: string
-          medicalHistory:
-            type: string
-          physicalExamination:
-            type: string
-          followUp:
-            $ref: "#/components/schemas/followUp"
-          opdProcedure:
-            type: object
-            properties:
-              procedureName:
-                type: string
-              procedureDescription:
-                type: string
-              date:
-                type: string
-                format: date-time
-          medicines:
-            $ref: "#/components/schemas/medicines"
-          doctorDetails:
-            $ref: "#/components/schemas/doctorDetails"
-          status:
-            type: string
-          date:
-            type: string
-            format: date-time
+    OpConsultationReq:
+      type: object
+      required:
+        - doctorDetails
+        - status
+        - date
+      properties:
+        abhaAddress:
+          $ref: "#/components/schemas/abhaAddress"
+        patientId:
+          $ref: "#/components/schemas/patientId"
+        chiefComplaints:
+          type: string
+        medicalHistory:
+          type: string
+        physicalExamination:
+          type: string
+        followUp:
+          $ref: "#/components/schemas/followUp"
+        opdProcedure:
+          type: object
+          properties:
+            procedureName:
+              type: string
+            procedureDescription:
+              type: string
+            date:
+              type: string
+              format: date-time
+        medicines:
+          $ref: "#/components/schemas/medicines"
+        doctorDetails:
+          $ref: "#/components/schemas/doctorDetails"
+        status:
+          type: string
+        date:
+          type: string
+          format: date-time
 
-      ProcedureOtNotesReq:
-        type: object
-        required:
-          - doctorDetails
-          - status
-          - date
-        properties:
-          abhaAddress:
-            $ref: "#/components/schemas/abhaAddress"
-          patientId:
-            $ref: "#/components/schemas/patientId"
-          followUp:
-            $ref: "#/components/schemas/followUp"
-          opdProcedure:
-            type: object
-            properties:
-              procedureName:
-                type: string
-              procedureDescription:
-                type: string
-              date:
-                type: string
-                format: date-time
-          medicines:
-            $ref: "#/components/schemas/medicines"
-          doctorDetails:
-            $ref: "#/components/schemas/doctorDetails"
-          status:
-            type: string
-          date:
-            type: string
-            format: date-time
+    ProcedureOtNotesReq:
+      type: object
+      required:
+        - doctorDetails
+        - status
+        - date
+      properties:
+        abhaAddress:
+          $ref: "#/components/schemas/abhaAddress"
+        patientId:
+          $ref: "#/components/schemas/patientId"
+        followUp:
+          $ref: "#/components/schemas/followUp"
+        opdProcedure:
+          type: object
+          properties:
+            procedureName:
+              type: string
+            procedureDescription:
+              type: string
+            date:
+              type: string
+              format: date-time
+        medicines:
+          $ref: "#/components/schemas/medicines"
+        doctorDetails:
+          $ref: "#/components/schemas/doctorDetails"
+        status:
+          type: string
+        date:
+          type: string
+          format: date-time
 
 
 
