@@ -9,6 +9,10 @@ info:
 servers:
   - url: ""
     description: Sandbox
+externalDocs:
+  description: Postman Collection for Nice HMS Integration
+  url: "https://raw.githubusercontent.com/umeshramya/example-nice-hms-integration/refs/heads/main/Nice%20HMS%20integration.postman_collection.json"
+  
 paths:
   /auth_token:
     post:
