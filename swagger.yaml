@@ -26,7 +26,15 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/authTokenReq"
+      parameters:
+        - $ref: '#/components/parameters/XRequestId'
       responses:
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "500":
+          $ref: '#/components/responses/InternalError'
         "200":
           description: "200 response"
           content:
@@ -47,7 +55,19 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/CreateDoctorDataReq"
+      parameters:
+        - $ref: '#/components/parameters/XRequestId'
       responses:
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "409":
+          $ref: '#/components/responses/Conflict'
+        "500":
+          $ref: '#/components/responses/InternalError'
         '200':
           description: Success
           content:
@@ -68,7 +88,19 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/EditDoctorReq'
+      parameters:
+        - $ref: '#/components/parameters/XRequestId'
       responses:
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "500":
+          $ref: '#/components/responses/InternalError'
         '200':
           description: Successfully edited the doctor's information
           content:
@@ -93,7 +125,19 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/PatientByIdReq"
+      parameters:
+        - $ref: '#/components/parameters/XRequestId'
       responses:
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "500":
+          $ref: '#/components/responses/InternalError'
         "200":
           description: "200 response"
           content:
@@ -114,7 +158,19 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/PatientByAbhaAddressReq"
+      parameters:
+        - $ref: '#/components/parameters/XRequestId'
       responses:
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "500":
+          $ref: '#/components/responses/InternalError'
         "200":
           description: "200 response"
           content:
@@ -135,7 +191,17 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/PatientReq"
+      parameters:
+        - $ref: '#/components/parameters/XRequestId'
       responses:
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "500":
+          $ref: '#/components/responses/InternalError'
         "200":
           description: "200 response"
           content:
@@ -156,7 +222,19 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/AbhaOtpInitReq"
+      parameters:
+        - $ref: '#/components/parameters/XRequestId'
       responses:
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "502":
+          $ref: '#/components/responses/BadGateway'
+        "500":
+          $ref: '#/components/responses/InternalError'
         "200":
           description: "200 response"
           content:
@@ -177,7 +255,19 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/AbhaOtpConfirmReq"
+      parameters:
+        - $ref: '#/components/parameters/XRequestId'
       responses:
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "502":
+          $ref: '#/components/responses/BadGateway'
+        "500":
+          $ref: '#/components/responses/InternalError'
         "200":
           description: "200 response"
           content:
@@ -199,7 +289,19 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/OpdPatientReq"
+      parameters:
+        - $ref: '#/components/parameters/XRequestId'
       responses:
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "500":
+          $ref: '#/components/responses/InternalError'
         "200":
           description: "200 response"
           content:
@@ -221,7 +323,19 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/AdmitPatientReq"
+      parameters:
+        - $ref: '#/components/parameters/XRequestId'
       responses:
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "500":
+          $ref: '#/components/responses/InternalError'
         "200":
           description: "200 response"
           content:
@@ -242,7 +356,19 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/DischargePatientReq"
+      parameters:
+        - $ref: '#/components/parameters/XRequestId'
       responses:
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "500":
+          $ref: '#/components/responses/InternalError'
         "200":
           description: "200 response"
           content:
@@ -264,7 +390,21 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/DischargeSummaryReq"
+      parameters:
+        - $ref: '#/components/parameters/XRequestId'
       responses:
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "502":
+          $ref: '#/components/responses/BadGateway'
+        "500":
+          $ref: '#/components/responses/InternalError'
         "200":
           description: "200 response"
           content:
@@ -286,7 +426,21 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/DiagnosticReportReq"
+      parameters:
+        - $ref: '#/components/parameters/XRequestId'
       responses:
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "502":
+          $ref: '#/components/responses/BadGateway'
+        "500":
+          $ref: '#/components/responses/InternalError'
         "200":
           description: "200 response"
           content:
@@ -308,7 +462,21 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/OpConsultationReq"
+      parameters:
+        - $ref: '#/components/parameters/XRequestId'
       responses:
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "502":
+          $ref: '#/components/responses/BadGateway'
+        "500":
+          $ref: '#/components/responses/InternalError'
         "200":
           description: "200 response"
           content:
@@ -330,7 +498,21 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ProcedureOtNotesReq"
+      parameters:
+        - $ref: '#/components/parameters/XRequestId'
       responses:
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "502":
+          $ref: '#/components/responses/BadGateway'
+        "500":
+          $ref: '#/components/responses/InternalError'
         "200":
           description: "200 response"
           content:
@@ -353,7 +535,21 @@ paths:
           multipart/form-data:
             schema:
               $ref: "#/components/schemas/HealthDocumentReq"
+      parameters:
+        - $ref: '#/components/parameters/XRequestId'
       responses:
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/NotFound'
+        "502":
+          $ref: '#/components/responses/BadGateway'
+        "500":
+          $ref: '#/components/responses/InternalError'
         "200":
           description: "200 response"
           content:
@@ -377,6 +573,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/GetOpdPatientByDoctorAndDateRequest"
+      parameters:
+        - $ref: '#/components/parameters/XRequestId'
       responses:
         "200":
           description: "Successful response containing a list of OPD patient registrations."
@@ -386,10 +584,14 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/OpdRegistrationResult"
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
         "403":
-          description: "Bad Request – Missing or invalid parameters."
+          $ref: '#/components/responses/Forbidden'
         "500":
-          description: "Internal Server Error – Unexpected failure."
+          $ref: '#/components/responses/InternalError'
 
 
   /get_doctor_ipd_patients_by_date:
@@ -406,6 +608,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/GetIpdPatientByDoctorAndDateRequest"
+      parameters:
+        - $ref: '#/components/parameters/XRequestId'
       responses:
         "200":
           description: "Successful response containing a list of IPD patient registrations."
@@ -416,11 +620,13 @@ paths:
                 items:
                   $ref: "#/components/schemas/IpdPatientResponse"
         "400":
-          description: "Bad Request – Missing or invalid parameters."
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
         "403":
-          description: "Forbidden – The user does not have permission to access this resource."
+          $ref: '#/components/responses/Forbidden'
         "500":
-          description: "Internal Server Error – Unexpected failure."
+          $ref: '#/components/responses/InternalError'
 
 
 components:
@@ -429,7 +635,122 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+  parameters:
+    XRequestId:
+      name: x-request-id
+      in: header
+      required: false
+      description: Optional correlation ID. Echoed back unchanged in the response header if provided; otherwise a new UUID is generated. Log this against your request/response pair and include it when escalating issues to Nice HMS support.
+      schema:
+        type: string
+  headers:
+    XRequestId:
+      description: Correlation ID (echoed from the request, or newly generated)
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: Bad request or validation error
+      headers:
+        x-request-id:
+          $ref: '#/components/headers/XRequestId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing, invalid or expired token
+      headers:
+        x-request-id:
+          $ref: '#/components/headers/XRequestId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Subscription is invalid or expired
+      headers:
+        x-request-id:
+          $ref: '#/components/headers/XRequestId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      headers:
+        x-request-id:
+          $ref: '#/components/headers/XRequestId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Conflict:
+      description: Conflict (e.g. duplicate email)
+      headers:
+        x-request-id:
+          $ref: '#/components/headers/XRequestId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalError:
+      description: Internal server error
+      headers:
+        x-request-id:
+          $ref: '#/components/headers/XRequestId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadGateway:
+      description: Upstream ABDM gateway error
+      headers:
+        x-request-id:
+          $ref: '#/components/headers/XRequestId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ErrorDetail:
+      type: object
+      required:
+        - field
+        - message
+      properties:
+        field:
+          type: string
+          description: Dot-notation path to the failing field (e.g. patient.mobile, doctorDetails.0.doctorGcpId)
+        message:
+          type: string
+          description: Human-readable reason for the failure
+    ErrorResponse:
+      type: object
+      required:
+        - message
+        - error
+      properties:
+        message:
+          type: string
+          description: Top-level summary (kept for backward compatibility)
+        error:
+          type: object
+          required:
+            - code
+            - message
+          properties:
+            code:
+              type: string
+              description: Stable machine-readable code. Match on this (e.g. VALIDATION_ERROR, PATIENT_NOT_FOUND, SUBSCRIPTION_EXPIRED)
+            message:
+              type: string
+              description: Curated human-readable message
+            details:
+              type: array
+              description: Present only on VALIDATION_ERROR; one entry per failed field
+              items:
+                $ref: '#/components/schemas/ErrorDetail'
   
     User:
       type: object
@@ -513,7 +834,6 @@ components:
       required:
         - email
         - password
-        - returnSecureToken
       properties:
         email:
           type: string
@@ -536,7 +856,6 @@ components:
        - medicalLicenseNumber
        - specialty
        - qualification
-       - abdmProfessionalId
        - gender
       properties:
         user:
@@ -586,7 +905,6 @@ components:
         - doctorGcpFhirId
         - specialty
         - qualification
-        - abdmProfessionalId
         - gender
       type: object
       properties:
@@ -637,7 +955,7 @@ components:
           example: "abcd@abdm"
         authMode:
           type: string
-          enum: ["MOBILE_OTP", "AADHAAR_OTP"]
+          enum: ["MOBILE_OTP", "AADHAAR_OTP", "DONT_KNOW"]
     AbhaOtpInitRes:
       type: object
       properties:
@@ -655,7 +973,7 @@ components:
                   example: "2023-06-04T06:57:19.082288652"
             mode:
               type: string
-              enum: ["MOBILE_OTP", "AADHAAR_OTP"]
+              enum: ["MOBILE_OTP", "AADHAAR_OTP", "DONT_KNOW"]
             transactionId:
               type: string
               example: "f455d2f9-18f1-4c6e-bfd0-df5ff2449f97"
@@ -698,7 +1016,6 @@ components:
         patient:
           type: object
           required:
-            - prefix
             - firstName
             - gender
             - dob
@@ -721,11 +1038,12 @@ components:
               example: Bilagi
             gender:
               type: string
-              enum: [Male, Female, other, unknown]
+              enum: [Male, Female, Other]
               example: Male
             dob:
               type: string
-              example: "1989-04-26T00:00:00.000Z"
+              format: date
+              example: "1989-04-26"
             district:
               type: string
               example: Dharwad
@@ -984,9 +1302,10 @@ components:
       type: object
       required:
         - performer
+        - testName
+        - category
         - text
         - status
-        - date
       properties:
         abhaAddress:
           $ref: "#/components/schemas/abhaAddress"
@@ -1013,8 +1332,11 @@ components:
         conclusion:
           type: string
           example: "Normal Study"
+        testName:
+          type: string
+          example: CT Abdomen
         category:
-          enum: [Hematlogy, Biochemestry, Microbiology, Radiology, Others]
+          enum: [Hematology, Biochemistry, Microbiology, Radiology, Others]
           type: string
           example: Radiology
 
@@ -1024,7 +1346,6 @@ components:
         - doctorDetails
         - text
         - status
-        - date
         - page1
       properties:
         abhaAddress:
@@ -1136,7 +1457,7 @@ components:
                   example: 2023-05-08T19:21:23.918Z
                 end:
                   type: string
-                  example: 2023-05-08T29:21:23.918Z
+                  example: 2023-05-08T23:21:23.918Z
 
             resourceType:
               type: string
@@ -1304,7 +1625,7 @@ components:
       properties:
         orgId:
           type: number
-          description: "The organization ID to filter by."
+          description: "Ignored - the organization is derived from the auth token."
           example: 1
         date:
           type: string
@@ -1316,7 +1637,6 @@ components:
           description: "The GCP FHIR ID of the doctor."
           example: "cf4a6ab1-3f32-4b92-adc5-8948ey1da6ca156"
       required:
-        - orgId
         - date
         - doctorGcpId
 
@@ -1325,7 +1645,7 @@ components:
       properties:
         orgId:
           type: integer
-          description: "The organization ID to filter by."
+          description: "Ignored - the organization is derived from the auth token."
           example: 1
         doctorGcpId:
           type: string
@@ -1333,7 +1653,6 @@ components:
           description: "The GCP FHIR ID of the doctor."
           example: "cf4a6ab1-3f32-4b92-adc5-8948ey1da6ca156"
       required:
-        - orgId
         - doctorGcpId
 
   
