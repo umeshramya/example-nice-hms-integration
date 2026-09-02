@@ -857,8 +857,6 @@ components:
           type: string
         password:
           type: string
-        returnSecureToken:
-          type: boolean
     authTokenRes:
       type: object
       properties:

@@ -17,7 +17,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\" : \"{{email}}\",\r\n    \"password\" : \"{{passwor}}\",\r\n    \"returnSecureToken\" : true\r\n}",
+							"raw": "{\r\n    \"email\" : \"{{email}}\",\r\n    \"password\" : \"{{passwor}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
