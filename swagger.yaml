@@ -648,12 +648,18 @@ components:
       description: Correlation ID (echoed from the request, or newly generated)
       schema:
         type: string
+    AccessControlAllowOrigin:
+      description: CORS header — value is `*` (all origins allowed)
+      schema:
+        type: string
   responses:
     BadRequest:
       description: Bad request or validation error
       headers:
         x-request-id:
           $ref: '#/components/headers/XRequestId'
+        Access-Control-Allow-Origin:
+          $ref: '#/components/headers/AccessControlAllowOrigin'
       content:
         application/json:
           schema:
@@ -663,6 +669,8 @@ components:
       headers:
         x-request-id:
           $ref: '#/components/headers/XRequestId'
+        Access-Control-Allow-Origin:
+          $ref: '#/components/headers/AccessControlAllowOrigin'
       content:
         application/json:
           schema:
@@ -672,6 +680,8 @@ components:
       headers:
         x-request-id:
           $ref: '#/components/headers/XRequestId'
+        Access-Control-Allow-Origin:
+          $ref: '#/components/headers/AccessControlAllowOrigin'
       content:
         application/json:
           schema:
@@ -681,6 +691,8 @@ components:
       headers:
         x-request-id:
           $ref: '#/components/headers/XRequestId'
+        Access-Control-Allow-Origin:
+          $ref: '#/components/headers/AccessControlAllowOrigin'
       content:
         application/json:
           schema:
@@ -690,6 +702,8 @@ components:
       headers:
         x-request-id:
           $ref: '#/components/headers/XRequestId'
+        Access-Control-Allow-Origin:
+          $ref: '#/components/headers/AccessControlAllowOrigin'
       content:
         application/json:
           schema:
@@ -699,6 +713,8 @@ components:
       headers:
         x-request-id:
           $ref: '#/components/headers/XRequestId'
+        Access-Control-Allow-Origin:
+          $ref: '#/components/headers/AccessControlAllowOrigin'
       content:
         application/json:
           schema:
@@ -708,6 +724,8 @@ components:
       headers:
         x-request-id:
           $ref: '#/components/headers/XRequestId'
+        Access-Control-Allow-Origin:
+          $ref: '#/components/headers/AccessControlAllowOrigin'
       content:
         application/json:
           schema:
