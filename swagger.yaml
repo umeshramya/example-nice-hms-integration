@@ -403,6 +403,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         "409":
           $ref: '#/components/responses/NoActiveEncounter'
+        "429":
+          $ref: '#/components/responses/LinkTokenRateLimited'
         "502":
           $ref: '#/components/responses/BadGateway'
         "500":
@@ -441,6 +443,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         "409":
           $ref: '#/components/responses/NoActiveEncounter'
+        "429":
+          $ref: '#/components/responses/LinkTokenRateLimited'
         "502":
           $ref: '#/components/responses/BadGateway'
         "500":
@@ -479,6 +483,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         "409":
           $ref: '#/components/responses/NoActiveEncounter'
+        "429":
+          $ref: '#/components/responses/LinkTokenRateLimited'
         "502":
           $ref: '#/components/responses/BadGateway'
         "500":
@@ -517,6 +523,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         "409":
           $ref: '#/components/responses/NoActiveEncounter'
+        "429":
+          $ref: '#/components/responses/LinkTokenRateLimited'
         "502":
           $ref: '#/components/responses/BadGateway'
         "500":
@@ -762,6 +770,17 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     BadGateway:
       description: Upstream ABDM gateway error
+      headers:
+        x-request-id:
+          $ref: '#/components/headers/XRequestId'
+        Access-Control-Allow-Origin:
+          $ref: '#/components/headers/AccessControlAllowOrigin'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    LinkTokenRateLimited:
+      description: "LINK_TOKEN_RATE_LIMITED — ABDM refused to issue a care-context link token because its cap of 3 new link tokens per ABHA address per 24 hours was reached. Reuse the existing token (valid ~6 months); retry after 24 hours."
       headers:
         x-request-id:
           $ref: '#/components/headers/XRequestId'
