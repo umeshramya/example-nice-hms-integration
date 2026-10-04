@@ -401,6 +401,8 @@ paths:
           $ref: '#/components/responses/Forbidden'
         "404":
           $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/NoActiveEncounter'
         "502":
           $ref: '#/components/responses/BadGateway'
         "500":
@@ -437,6 +439,8 @@ paths:
           $ref: '#/components/responses/Forbidden'
         "404":
           $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/NoActiveEncounter'
         "502":
           $ref: '#/components/responses/BadGateway'
         "500":
@@ -473,6 +477,8 @@ paths:
           $ref: '#/components/responses/Forbidden'
         "404":
           $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/NoActiveEncounter'
         "502":
           $ref: '#/components/responses/BadGateway'
         "500":
@@ -509,6 +515,8 @@ paths:
           $ref: '#/components/responses/Forbidden'
         "404":
           $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/NoActiveEncounter'
         "502":
           $ref: '#/components/responses/BadGateway'
         "500":
@@ -546,6 +554,8 @@ paths:
           $ref: '#/components/responses/Forbidden'
         "404":
           $ref: '#/components/responses/NotFound'
+        "409":
+          $ref: '#/components/responses/NoActiveEncounter'
         "413":
           $ref: '#/components/responses/PayloadTooLarge'
         "502":
@@ -728,6 +738,17 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    NoActiveEncounter:
+      description: "NO_ACTIVE_ENCOUNTER — the patient has no encounter at all (not even a finished one). Create a visit before pushing a document."
+      headers:
+        x-request-id:
+          $ref: '#/components/headers/XRequestId'
+        Access-Control-Allow-Origin:
+          $ref: '#/components/headers/AccessControlAllowOrigin'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     InternalError:
       description: Internal server error
       headers:
@@ -866,6 +887,14 @@ components:
     patientId:
       type: integer
       example: 236
+    encounterId:
+      type: string
+      description: >-
+        Optional. Attaches the document to a specific encounter; it must belong to the given patient and
+        to your organization. When omitted, the patient's open encounter is used, else their most recent
+        encounter (even a finished one). If the patient has no encounter at all, the request fails with
+        409 NO_ACTIVE_ENCOUNTER.
+      example: 21ba04cd-d922-4412-bfdc-c0293e638f1d
 
     authTokenReq:
       type: object
@@ -992,6 +1021,11 @@ components:
         authMode:
           type: string
           enum: ["MOBILE_OTP", "AADHAAR_OTP", "DONT_KNOW"]
+          description: >-
+            Which OTP to send. MOBILE_OTP sends it to the mobile registered against the ABHA in
+            ABDM; AADHAAR_OTP sends it to the Aadhaar-linked mobile; DONT_KNOW sends nothing and
+            returns the modes the ABHA supports. Repeat the same mode in
+            /patient_register_abha_otp_confirm.
     AbhaOtpInitRes:
       type: object
       properties:
@@ -1045,6 +1079,13 @@ components:
         abhaAddress:
           type: string
           example: abcd1234@abdm
+        authMode:
+          type: string
+          enum: ["MOBILE_OTP", "AADHAAR_OTP"]
+          default: MOBILE_OTP
+          description: >-
+            Optional. Must match the authMode used in /patient_register_abha_otp_init.
+            Defaults to MOBILE_OTP.
 
     PatientReq:
       type: object
@@ -1241,6 +1282,8 @@ components:
           $ref: "#/components/schemas/abhaAddress"
         patientId:
           $ref: "#/components/schemas/patientId"
+        encounterId:
+          $ref: "#/components/schemas/encounterId"
         text:
           type: string
           example: <div>Cough with APD</div><div>cough</div><div>BP 140/80 PR 87/min RR 20/min</div>
@@ -1264,6 +1307,8 @@ components:
           $ref: "#/components/schemas/abhaAddress"
         patientId:
           $ref: "#/components/schemas/patientId"
+        encounterId:
+          $ref: "#/components/schemas/encounterId"
         chiefComplaints:
           type: string
           description: "Primary complaints reported by the patient"
@@ -1300,6 +1345,8 @@ components:
           $ref: "#/components/schemas/abhaAddress"
         patientId:
           $ref: "#/components/schemas/patientId"
+        encounterId:
+          $ref: "#/components/schemas/encounterId"
         followUp:
           $ref: "#/components/schemas/followUp"
         opdProcedure:
@@ -1347,6 +1394,8 @@ components:
           $ref: "#/components/schemas/abhaAddress"
         patientId:
           $ref: "#/components/schemas/patientId"
+        encounterId:
+          $ref: "#/components/schemas/encounterId"
         text:
           type: string
           example: <div>Ultrasoud Report This is in text format and for CBC like reports send HTML  table</div>
@@ -1388,6 +1437,8 @@ components:
           $ref: "#/components/schemas/abhaAddress"
         patientId:
           $ref: "#/components/schemas/patientId"
+        encounterId:
+          $ref: "#/components/schemas/encounterId"
         text:
           type: string
           example: Title like Prescription, Lab report

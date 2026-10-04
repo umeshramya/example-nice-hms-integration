@@ -76,7 +76,7 @@
 								"patient_register_abha_otp_init"
 							]
 						},
-						"description": "This is for registering ABHA patient by using otp method eithor MOBILE_OTP or AADHAAR_OTP"
+						"description": "Register an ABHA patient via OTP. authMode selects the channel: MOBILE_OTP (mobile registered against the ABHA), AADHAAR_OTP (Aadhaar-linked mobile), or DONT_KNOW (sends no OTP; returns the modes the ABHA supports). Use the same authMode in the confirm request."
 					},
 					"response": []
 				},
@@ -103,7 +103,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"otp\":\"181540\",\r\n    \"transactionId\":\"92f92c22-1d43-4f08-b944-5e508fb76172\",\r\n    \"abhaAddress\": \"{{abhaAddress}}\"\r\n}"
+							"raw": "{\r\n    \"otp\":\"181540\",\r\n    \"transactionId\":\"92f92c22-1d43-4f08-b944-5e508fb76172\",\r\n    \"abhaAddress\": \"{{abhaAddress}}\",\r\n    \"authMode\": \"AADHAAR_OTP\"\r\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/patient_register_abha_otp_confirm",
@@ -114,7 +114,7 @@
 								"patient_register_abha_otp_confirm"
 							]
 						},
-						"description": "This is for registering ABHA patient by using otp method eithor MOBILE_OTP or AADHAAR_OTP"
+						"description": "Register an ABHA patient via OTP. authMode selects the channel: MOBILE_OTP (mobile registered against the ABHA), AADHAAR_OTP (Aadhaar-linked mobile), or DONT_KNOW (sends no OTP; returns the modes the ABHA supports). Use the same authMode in the confirm request."
 					},
 					"response": []
 				},
@@ -152,7 +152,7 @@
 								"create_patient"
 							]
 						},
-						"description": "This is for registering ABHA patient by using otp method eithor MOBILE_OTP or AADHAAR_OTP"
+						"description": "Register an ABHA patient via OTP. authMode selects the channel: MOBILE_OTP (mobile registered against the ABHA), AADHAAR_OTP (Aadhaar-linked mobile), or DONT_KNOW (sends no OTP; returns the modes the ABHA supports). Use the same authMode in the confirm request."
 					},
 					"response": []
 				},
@@ -381,7 +381,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"abhaAddress\" : \"{{abhaAddress}}\",\r\n    \"text\" : \"<div>Cough with APD</div><div>cough</div><div>BP 140/80 PR 87/min RR 20/min</div>\",\r\n    \"doctorDetails\" : [{\"doctorName\" : \"Dr Umesh Bilagi\", \"doctorGcpId\" :\"cf4a6ab1-3f32-4b92-adc5-89489da6ca14\" }],\r\n    \"status\" : \"final\",\r\n    \"date\" : \"2023-05-08T19:21:23.918Z\"\r\n}"
+							"raw": "{\r\n    \"abhaAddress\" : \"{{abhaAddress}}\",\r\n    // \"encounterId\" : \"{{encounterId}}\",\r\n    \"text\" : \"<div>Cough with APD</div><div>cough</div><div>BP 140/80 PR 87/min RR 20/min</div>\",\r\n    \"doctorDetails\" : [{\"doctorName\" : \"Dr Umesh Bilagi\", \"doctorGcpId\" :\"cf4a6ab1-3f32-4b92-adc5-89489da6ca14\" }],\r\n    \"status\" : \"final\",\r\n    \"date\" : \"2023-05-08T19:21:23.918Z\"\r\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/discharge_summary",
@@ -419,7 +419,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    // \"abhaAddress\" : \"{{abhaAddress}}\",\r\n    \"patientId\" : 393,\r\n    \"chiefComplaints\" : \"C/O Of Fever\",\r\n    \"medicalHistory\" : \"K/C Of Type 2 DM and HTN on Tretament\",\r\n    \"physicalExamination\" : \"BP 130/80 PR 72/min RR 20/min\",\r\n    \"followUp\" : {\"startDate\" : \"2023-05-08T19:21:23.918Z\", \"endDate\":\"2023-05-08T19:21:23.918Z\", \"comment\": \"TMT\"},\r\n    \"opdProcedure\" : {\"procedureName\" : \"ECG\", \"procedureDescription\" : \"ECG is Normal\", \"date\" : \"2023-07-08T19:21:23.918Z\"},\r\n    \"medicines\" : [{\"drug\" : \"Tab Taxim O 200mg\", \"frequency\" : \"1-0-1\", \"instruction\" : \"After Food\", \"duration\" : \"For 5 Days\", \"route\" : \"Oral\"},\r\n    {\"drug\" : \"Tab Dolo 650\", \"frequency\" : \"1-1-1\", \"instruction\" : \"After Food\", \"duration\" : \"For 5 Days\", \"route\" : \"Oral\"}\r\n    ],\r\n    \"doctorDetails\" : [{\"doctorName\" : \"Dr James 007 Bond\", \"doctorGcpId\" :\"5a3af357-7956-41db-b489-335c13bab828\"}],\r\n    \"status\" : \"final\",\r\n    \"date\" : \"2023-05-08T19:21:23.918Z\"\r\n}"
+							"raw": "{\r\n    // \"abhaAddress\" : \"{{abhaAddress}}\",\r\n    \"patientId\" : 393,\r\n    // \"encounterId\" : \"{{encounterId}}\",\r\n    \"chiefComplaints\" : \"C/O Of Fever\",\r\n    \"medicalHistory\" : \"K/C Of Type 2 DM and HTN on Tretament\",\r\n    \"physicalExamination\" : \"BP 130/80 PR 72/min RR 20/min\",\r\n    \"followUp\" : {\"startDate\" : \"2023-05-08T19:21:23.918Z\", \"endDate\":\"2023-05-08T19:21:23.918Z\", \"comment\": \"TMT\"},\r\n    \"opdProcedure\" : {\"procedureName\" : \"ECG\", \"procedureDescription\" : \"ECG is Normal\", \"date\" : \"2023-07-08T19:21:23.918Z\"},\r\n    \"medicines\" : [{\"drug\" : \"Tab Taxim O 200mg\", \"frequency\" : \"1-0-1\", \"instruction\" : \"After Food\", \"duration\" : \"For 5 Days\", \"route\" : \"Oral\"},\r\n    {\"drug\" : \"Tab Dolo 650\", \"frequency\" : \"1-1-1\", \"instruction\" : \"After Food\", \"duration\" : \"For 5 Days\", \"route\" : \"Oral\"}\r\n    ],\r\n    \"doctorDetails\" : [{\"doctorName\" : \"Dr James 007 Bond\", \"doctorGcpId\" :\"5a3af357-7956-41db-b489-335c13bab828\"}],\r\n    \"status\" : \"final\",\r\n    \"date\" : \"2023-05-08T19:21:23.918Z\"\r\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/op_consultation",
@@ -457,7 +457,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    // \"abhaAddress\" : \"{{abhaAddress}}\",\r\n    \"patientId\" : 393,\r\n    \"followUp\" : {\"startDate\" : \"2023-05-08T19:21:23.918Z\", \"endDate\":\"2023-05-08T19:21:23.918Z\", \"comment\": \"TMT\"},\r\n    \"opdProcedure\" : {\"procedureName\" : \"ECG\", \"procedureDescription\" : \"ECG is Normal\", \"date\" : \"2023-07-08T19:21:23.918Z\"},\r\n    \"doctorDetails\" : [{\"doctorName\" : \"Dr James 007 Bond\", \"doctorGcpId\" :\"5a3af357-7956-41db-b489-335c13bab828\"}],\r\n    \"status\" : \"final\",\r\n    \"date\" : \"2023-05-08T19:21:23.918Z\"\r\n}"
+							"raw": "{\r\n    // \"abhaAddress\" : \"{{abhaAddress}}\",\r\n    \"patientId\" : 393,\r\n    // \"encounterId\" : \"{{encounterId}}\",\r\n    \"followUp\" : {\"startDate\" : \"2023-05-08T19:21:23.918Z\", \"endDate\":\"2023-05-08T19:21:23.918Z\", \"comment\": \"TMT\"},\r\n    \"opdProcedure\" : {\"procedureName\" : \"ECG\", \"procedureDescription\" : \"ECG is Normal\", \"date\" : \"2023-07-08T19:21:23.918Z\"},\r\n    \"doctorDetails\" : [{\"doctorName\" : \"Dr James 007 Bond\", \"doctorGcpId\" :\"5a3af357-7956-41db-b489-335c13bab828\"}],\r\n    \"status\" : \"final\",\r\n    \"date\" : \"2023-05-08T19:21:23.918Z\"\r\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/procedure_ot_notes",
@@ -495,7 +495,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"abhaAddress\" : \"{{abhaAddress}}\",\r\n    \"text\" : \"<div>Cough with APD</div><div>cough</div><div>BP 140/80 PR 87/min RR 20/min</div>\",\r\n    \"performer\" :  [{\"doctorName\" : \"Nice Doctor\", \"doctorGcpId\" :\"399ae751-9f60-432b-bdee-fae4eb4daa49\"}],\r\n    \"requester\" :  {\"doctorName\" : \"Nice Doctor\", \"doctorGcpId\" :\"399ae751-9f60-432b-bdee-fae4eb4daa49\"},\r\n    \"status\" : \"final\",\r\n    \"date\" : \"2023-05-08T19:21:23.918Z\",\r\n    \"testName\" : \"CT Adbomen\",\r\n    \"category\" : \"Radiology\",\r\n    \"conclusion\" : \"Normal Study\"\r\n\r\n}"
+							"raw": "{\r\n    \"abhaAddress\" : \"{{abhaAddress}}\",\r\n    // \"encounterId\" : \"{{encounterId}}\",\r\n    \"text\" : \"<div>Cough with APD</div><div>cough</div><div>BP 140/80 PR 87/min RR 20/min</div>\",\r\n    \"performer\" :  [{\"doctorName\" : \"Nice Doctor\", \"doctorGcpId\" :\"399ae751-9f60-432b-bdee-fae4eb4daa49\"}],\r\n    \"requester\" :  {\"doctorName\" : \"Nice Doctor\", \"doctorGcpId\" :\"399ae751-9f60-432b-bdee-fae4eb4daa49\"},\r\n    \"status\" : \"final\",\r\n    \"date\" : \"2023-05-08T19:21:23.918Z\",\r\n    \"testName\" : \"CT Adbomen\",\r\n    \"category\" : \"Radiology\",\r\n    \"conclusion\" : \"Normal Study\"\r\n\r\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/diagnostic_report",
@@ -542,6 +542,12 @@
 									"key": "doctorDetails",
 									"value": "[{\"doctorName\" : \"Nice Doctor\", \"doctorGcpId\" :\"399ae751-9f60-432b-bdee-fae4eb4daa49\"}]",
 									"type": "text"
+								},
+								{
+									"key": "encounterId",
+									"value": "{{encounterId}}",
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "status",
@@ -618,7 +624,7 @@
 								"create_doctor"
 							]
 						},
-						"description": "This is for registering ABHA patient by using otp method eithor MOBILE_OTP or AADHAAR_OTP"
+						"description": "Register an ABHA patient via OTP. authMode selects the channel: MOBILE_OTP (mobile registered against the ABHA), AADHAAR_OTP (Aadhaar-linked mobile), or DONT_KNOW (sends no OTP; returns the modes the ABHA supports). Use the same authMode in the confirm request."
 					},
 					"response": []
 				},
@@ -656,7 +662,7 @@
 								"edit_doctor"
 							]
 						},
-						"description": "This is for registering ABHA patient by using otp method eithor MOBILE_OTP or AADHAAR_OTP"
+						"description": "Register an ABHA patient via OTP. authMode selects the channel: MOBILE_OTP (mobile registered against the ABHA), AADHAAR_OTP (Aadhaar-linked mobile), or DONT_KNOW (sends no OTP; returns the modes the ABHA supports). Use the same authMode in the confirm request."
 					},
 					"response": []
 				}
