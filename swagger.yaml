@@ -178,6 +178,41 @@ paths:
               schema:
                 $ref: "#/components/schemas/PatientRes"
 
+  /scan_and_share:
+    post:
+      tags:
+        - Patient
+      security:
+        - bearerAuth: []
+      description: This function registers and returns a patient from an ABDM Scan-and-Share token. The patient scans the facility's HFR QR code with their ABHA/PHR app; ABDM pushes the shared demography to Nice HMS and the patient's app displays a token number. Submit that token number here to register the patient in Nice HMS (and on the FHIR store) and retrieve their demography. If the patient is already registered under your organization, the existing record is returned instead of creating a duplicate. The token expires 48 hours after the scan.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScanAndShareReq"
+      parameters:
+        - $ref: '#/components/parameters/XRequestId'
+      responses:
+        "400":
+          $ref: '#/components/responses/BadRequest'
+        "401":
+          $ref: '#/components/responses/Unauthorized'
+        "403":
+          $ref: '#/components/responses/Forbidden'
+        "404":
+          $ref: '#/components/responses/ScanTokenNotFound'
+        "410":
+          $ref: '#/components/responses/ScanTokenExpired'
+        "500":
+          $ref: '#/components/responses/InternalError'
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PatientRes"
+
   /create_patient:
     post:
       tags:
@@ -790,6 +825,28 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    ScanTokenNotFound:
+      description: "SCAN_TOKEN_NOT_FOUND — no scanned profile exists for this token under your facility (wrong token, wrong facility, or the shared body carried no patient demography)."
+      headers:
+        x-request-id:
+          $ref: '#/components/headers/XRequestId'
+        Access-Control-Allow-Origin:
+          $ref: '#/components/headers/AccessControlAllowOrigin'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ScanTokenExpired:
+      description: "SCAN_TOKEN_EXPIRED — the scan-and-share token is older than 48 hours. Ask the patient to scan the QR code again."
+      headers:
+        x-request-id:
+          $ref: '#/components/headers/XRequestId'
+        Access-Control-Allow-Origin:
+          $ref: '#/components/headers/AccessControlAllowOrigin'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     ErrorDetail:
       type: object
@@ -1027,6 +1084,16 @@ components:
       properties:
         abhaAddress:
           $ref: "#/components/schemas/abhaAddress"
+
+    ScanAndShareReq:
+      type: object
+      required:
+        - tokenNumber
+      properties:
+        tokenNumber:
+          type: integer
+          example: 128
+          description: The token number displayed in the patient's ABHA/PHR app after scanning the facility QR code.
 
     AbhaOtpInitReq:
       type: object
