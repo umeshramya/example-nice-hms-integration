@@ -1337,6 +1337,17 @@ components:
           $ref: "#/components/schemas/abhaAddress"
         patientId:
           $ref: "#/components/schemas/patientId"
+        admitSource:
+          type: string
+          enum:
+            - emd
+            - outp
+          description: >-
+            How the patient was admitted — `emd` for an emergency admission, `outp` for a
+            planned (routine) one. Optional: leave it out and the visit is stored as not
+            reported, never defaulted. Any other value is rejected with a 400
+            VALIDATION_ERROR naming the accepted codes.
+          example: emd
 
     DischargePatientReq:
       type: object
@@ -1355,6 +1366,27 @@ components:
         encounterId:
           type: string
           example: 21ba04cd-d922-4412-bfdc-c0293e638f1d
+        dischargeDisposition:
+          type: string
+          enum:
+            - home
+            - alt-home
+            - other-hcf
+            - hosp
+            - long
+            - aadvice
+            - exp
+            - psy
+            - rehab
+            - smf
+            - oth
+          description: >-
+            How the stay ended, as a FHIR discharge disposition — `home` for a normal
+            discharge, `aadvice` for discharge against medical advice (LAMA), `exp` for
+            death, plus the remaining FHIR codes. Optional: leave it out and the outcome is
+            stored as not reported, never defaulted. Any other value is rejected with a 400
+            VALIDATION_ERROR naming the accepted codes.
+          example: home
 
     DischargeSummaryReq:
       type: object

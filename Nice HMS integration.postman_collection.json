@@ -303,7 +303,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"doctorDetails\" : [{\"doctorName\" : \"Dr Umesh Bilagi\", \"doctorGcpId\" :\"cf4a6ab1-3f32-4b92-adc5-89489da6ca14\" }],\r\n        \"doa\" : \"2023-05-08T19:21:23.918Z\",\r\n        \"abhaAddress\" : \"{{abhaAddress}}\"\r\n}"
+							"raw": "{\r\n        \"doctorDetails\" : [{\"doctorName\" : \"Dr Umesh Bilagi\", \"doctorGcpId\" :\"cf4a6ab1-3f32-4b92-adc5-89489da6ca14\" }],\r\n        \"doa\" : \"2023-05-08T19:21:23.918Z\",\r\n        \"abhaAddress\" : \"{{abhaAddress}}\",\r\n        \"admitSource\" : \"emd\"\r\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/admit_patient",
@@ -377,7 +377,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\r\n        \"dod\" : \"2023-05-30T19:21:23.918Z\",\r\n        \"abhaAddress\" : \"{{abhaAddress}}\",\r\n        \"encounterId\" : \"ee0faedc-7e5c-4524-88e9-b5e2481e252d\"\r\n}"
+							"raw": "{\r\n\r\n        \"dod\" : \"2023-05-30T19:21:23.918Z\",\r\n        \"abhaAddress\" : \"{{abhaAddress}}\",\r\n        \"encounterId\" : \"ee0faedc-7e5c-4524-88e9-b5e2481e252d\",\r\n        \"dischargeDisposition\" : \"home\"\r\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/discharge_patient",

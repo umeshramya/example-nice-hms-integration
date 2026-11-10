@@ -38,9 +38,9 @@ Credentials are also hardcoded in a few example functions (ABHA address `savitri
   - `authToken(email, password, baseUrl)` → `{ token }`. The token expires in 15–30 minutes and must be sent as `Authorization: Bearer <token>` on all subsequent calls.
   - `dischareSummary(options, token, baseUrl)` → a FHIR `COMPOSITION`. **Note the misspelling `dischareSummary`** — this is the real exported name (also `DISCHARGE_SUMMARY` / `COMPOSITION` types). The `options` shape is `{ abhaAddress? | patientId?, text, doctorDetails: [{doctorName, doctorGcpId}], status: "final"|"draft", date }`.
 
-- **`swagger.yaml`** is the canonical OpenAPI 3.0 spec for the full Nice HMS API — broader than the SDK. It documents all endpoints and request/response schemas, so prefer it over `index.js` for request shapes.
+- **`swagger.yaml`** is the canonical OpenAPI 3.0 spec for the full Nice HMS API — broader than the SDK. It documents all endpoints and request/response schemas, so prefer it over `index.js` for request shapes. `swagger.json` is the same spec in JSON, generated from the YAML — edit the YAML and re-emit the JSON, never the other way round.
 
-- **`Nice HMS integration.postman_collection.json`** — Postman collection for exercising the API; `ERROR_REFERENCE.pdf` — the error-envelope / per-route error code reference. `x509-self-signed-certificate.pem` is an unused self-signed cert.
+- **`Nice HMS integration.postman_collection.json`** — Postman collection for exercising the API; `Nice HMS integration.postman_collection.yaml` is the same collection in YAML, generated from the JSON. `ERROR_REFERENCE.pdf` — the error-envelope / per-route error code reference, generated from `docs/ERROR_REFERENCE.md` in the `non-abdm-to-abdm` repo. `x509-self-signed-certificate.pem` is an unused self-signed cert.
 
 ## API conventions worth knowing
 

@@ -1,0 +1,2959 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Nice HMS integration",
+    "description": "Welcome to the integration documentation for Nice HMS ABDM (Ayushman Bharath Digital mission) Triple Milestone Certified HIMS! These APIs are specifically designed for developers who are looking to incorporate ABDM APIs into their projects. We understand the complexity involved in implementing ABDM APIs, and our aim is to simplify the process for you, making it effortless to achieve ABDM compatibility within your HIMS (Health Information Management System). Whether you're a medical college, a large hospital, or a hospital chain, and currently using a non-ABDM compatibility application (whether it's on-premise or in the cloud), our APIs are here to help you leverage the benefits of ABDM within your organization. We have carefully designed these APIs to meet the requirements of ABDM, ensuring a smooth and efficient integration experience.Take advantage of our simplified implementation of complex ABDM APIs and empower your HIMS with ABDM compatibility. Enhance your data management processes and unlock the full potential of ABDM within your organization. To get started, refer to our comprehensive integration documentation, which provides detailed instructions and examples to facilitate a seamless integration process. We look forward to supporting you in successfully integrating ABDM APIs. For details on how errors are reported — the error envelope, error codes, HTTP status codes, and a per-route error reference — see the [Error Reporting Reference (PDF)](https://raw.githubusercontent.com/umeshramya/example-nice-hms-integration/refs/heads/main/ERROR_REFERENCE.pdf).",
+    "version": "1.1.0",
+    "contact": {
+      "email": "admin@nicehms.com",
+      "name": "Nice HMS"
+    }
+  },
+  "servers": [
+    {
+      "url": "",
+      "description": "Sandbox"
+    }
+  ],
+  "externalDocs": {
+    "description": "Postman Collection for Nice HMS Integration",
+    "url": "https://raw.githubusercontent.com/umeshramya/example-nice-hms-integration/refs/heads/main/Nice%20HMS%20integration.postman_collection.json"
+  },
+  "paths": {
+    "/auth_token": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "This returns an authorization token that can be used in the header as a bearer token. The token has an expiration time of 15 to 30 minutes. It is necessary to use this token in subsequent calls for authentication",
+        "requestBody": {
+          "description": "To obtain your email and password, please contact Nice HMS directly.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/authTokenReq"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/XRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/authTokenRes"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/create_doctor": {
+      "post": {
+        "tags": [
+          "Doctor"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Create a new doctor profile",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDoctorDataReq"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/XRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateDoctorRes"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/edit_doctor": {
+      "post": {
+        "tags": [
+          "Doctor"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Edit doctor information",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditDoctorReq"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/XRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully edited the doctor's information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EditDoctorRes"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/patient_by_id": {
+      "post": {
+        "tags": [
+          "Patient"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "This retuns patient by Nice HMS id",
+        "requestBody": {
+          "description": "The term \"ID\" refers to the unique identifier generated within Nice HMS.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientByIdReq"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/XRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientRes"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/patient_by_abhaAddress": {
+      "post": {
+        "tags": [
+          "Patient"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "This function enables you to retrieve a patient's information using their ABHA address, provided that the ABHA address is registered with Nice HMS under your organization. To utilize this feature, the patient must be registered in Nice HMS using their ABHA address. Registration can be completed through various methods, including Aadhar or mobile OTP verification, scanning the ABHA card QR code, or having the patient scan the QR code displayed at the reception using the PHR app. The reception-generated QR code is created by the Health Facility Registry (HFR)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientByAbhaAddressReq"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/XRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientRes"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/scan_and_share": {
+      "post": {
+        "tags": [
+          "Patient"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "This function registers and returns a patient from an ABDM Scan-and-Share token. The patient scans the facility's HFR QR code with their ABHA/PHR app; ABDM pushes the shared demography to Nice HMS and the patient's app displays a token number. Submit that token number here to register the patient in Nice HMS (and on the FHIR store) and retrieve their demography. If the patient is already registered under your organization, the existing record is returned instead of creating a duplicate. The token expires 48 hours after the scan.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScanAndShareReq"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/XRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientRes"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/ScanTokenNotFound"
+          },
+          "410": {
+            "$ref": "#/components/responses/ScanTokenExpired"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/create_patient": {
+      "post": {
+        "tags": [
+          "Patient"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "This api is for creating non ABDM new patient in Nice HMS",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientReq"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/XRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientRes"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/patient_register_abha_otp_init": {
+      "post": {
+        "tags": [
+          "Patient"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "This api is for creating new Patient with ABHA card using Mobile or aadhar otp",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AbhaOtpInitReq"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/XRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AbhaOtpInitRes"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "502": {
+            "$ref": "#/components/responses/BadGateway"
+          }
+        }
+      }
+    },
+    "/patient_register_abha_otp_confirm": {
+      "post": {
+        "tags": [
+          "Patient"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "The \"patient_register_abha_otp_confirm\" API is called after the \"patient_register_abha_otp_init\" API. The \"patient_register_abha_otp_init\" API is responsible for sending an OTP to the patient and providing a transaction ID. Please include the OTP and transaction ID in the request body when using the \"patient_register_abha_otp_confirm\" API",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AbhaOtpConfirmReq"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/XRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientRes"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "502": {
+            "$ref": "#/components/responses/BadGateway"
+          }
+        }
+      }
+    },
+    "/opd_patient": {
+      "post": {
+        "tags": [
+          "Patient Visits"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "This function creates an OPD (Outpatient Department) visit and care context within the ABDM (Ayushman Bharat Digital Mission) framework. It is important to note that you have the option to use either the patient ID provided by Nice HMS or the ABHA address when making API requests. Before sending data, it is essential to check whether there are any OPD (Outpatient Department) active visits available",
+        "requestBody": {
+          "description": "Optional description in *Markdown*",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OpdPatientReq"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/XRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EncounterRes"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/admit_patient": {
+      "post": {
+        "tags": [
+          "Patient Visits"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "This function creates an inpatient (inpatient Department) visit and care context within the ABDM (Ayushman Bharat Digital Mission) framework. It is important to note that you have the option to use either the patient ID provided by Nice HMS or the ABHA address when making API requests. Before sending data, it is essential to check whether there are any active IPD (Inpatient Department) visits available,",
+        "requestBody": {
+          "description": "Optional description in *Markdown*",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdmitPatientReq"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/XRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EncounterRes"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/discharge_patient": {
+      "put": {
+        "tags": [
+          "Patient Visits"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "This function updates the admission visit for a patient by specifying the discharge date. It is important to call this API before sending the discharge summary document, as it updates the discharge date accordingly.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DischargePatientReq"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/XRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EncounterRes"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/discharge_summary": {
+      "post": {
+        "tags": [
+          "Documents"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "This function creates a Discharge Summary and notifies ABDM (Ayushman Bharat Digital Mission). Please note that you have the option to use either the patient ID provided by Nice HMS or the ABHA address when using this API",
+        "requestBody": {
+          "description": "Optional description in *Markdown*",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DischargeSummaryReq"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/XRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompositionRes"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/NoActiveEncounter"
+          },
+          "429": {
+            "$ref": "#/components/responses/LinkTokenRateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "502": {
+            "$ref": "#/components/responses/BadGateway"
+          }
+        }
+      }
+    },
+    "/diagnostic_report": {
+      "post": {
+        "tags": [
+          "Documents"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "This function creates a Diagnostic Report and notifies ABDM (Ayushman Bharat Digital Mission). Please note that you have the option to use either the patient ID provided by Nice HMS or the ABHA address when using this API",
+        "requestBody": {
+          "description": "Optional description in *Markdown*",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiagnosticReportReq"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/XRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompositionRes"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/NoActiveEncounter"
+          },
+          "429": {
+            "$ref": "#/components/responses/LinkTokenRateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "502": {
+            "$ref": "#/components/responses/BadGateway"
+          }
+        }
+      }
+    },
+    "/op_consultation": {
+      "post": {
+        "tags": [
+          "Documents"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "This endpoint allows you to create an OPD Consultation and send the necessary information to Ayushman Bharat Digital Mission (ABDM). You can identify the patient either by the patient ID obtained from Nice HMS or the ABHA address",
+        "requestBody": {
+          "description": "Optional description in *Markdown*",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OpConsultationReq"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/XRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompositionRes"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/NoActiveEncounter"
+          },
+          "429": {
+            "$ref": "#/components/responses/LinkTokenRateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "502": {
+            "$ref": "#/components/responses/BadGateway"
+          }
+        }
+      }
+    },
+    "/procedure_ot_notes": {
+      "post": {
+        "tags": [
+          "Documents"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "This endpoint allows you to create an OPD Consultation and send the necessary information to Ayushman Bharat Digital Mission (ABDM). You can identify the patient either by the patient ID obtained from Nice HMS or the ABHA address",
+        "requestBody": {
+          "description": "Optional description in *Markdown*",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcedureOtNotesReq"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/XRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompositionRes"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/NoActiveEncounter"
+          },
+          "429": {
+            "$ref": "#/components/responses/LinkTokenRateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "502": {
+            "$ref": "#/components/responses/BadGateway"
+          }
+        }
+      }
+    },
+    "/health_document": {
+      "post": {
+        "tags": [
+          "Documents"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "This API allows you to create a Health Document by uploading a PDF, JPEG or PNG. Each file must be less than 5MB in size. At least one file (`page1`) is required, and a PDF must be uploaded on its own — a PDF cannot be combined with images. Upon successful creation, the API notifies the Ayushman Bharat Digital Mission (ABDM) when `status` is `final`. You have the option to use either the patient ID provided by Nice HMS or the ABHA address when using this API. Send the request as `multipart/form-data`; do not set a `Content-Type` header manually, or the multipart boundary is lost and the request is rejected.",
+        "requestBody": {
+          "description": "Optional description in *Markdown*",
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/HealthDocumentReq"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/XRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/CompositionRes"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "abdmNotified": {
+                          "type": "boolean",
+                          "description": "Whether the document was pushed to ABDM. False when `status` is not `final`."
+                        },
+                        "abdmNotifiedReason": {
+                          "type": "string",
+                          "description": "Present only when `abdmNotified` is false — why the document was not pushed."
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/NoActiveEncounter"
+          },
+          "413": {
+            "$ref": "#/components/responses/PayloadTooLarge"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "502": {
+            "$ref": "#/components/responses/BadGateway"
+          }
+        }
+      }
+    },
+    "/get_doctor_opd_patients_by_date": {
+      "post": {
+        "tags": [
+          "Doctor Interaction"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "This API returns a list of OPD patients for a given doctor on a specific date within a healthcare organization. The doctor must be an active user.",
+        "requestBody": {
+          "description": "Request payload containing the organization ID, doctor's FHIR ID, and the date for which OPD patient data is required.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetOpdPatientByDoctorAndDateRequest"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/XRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response containing a list of OPD patient registrations.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OpdRegistrationResult"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/get_doctor_ipd_patients_by_date": {
+      "post": {
+        "tags": [
+          "Doctor Interaction"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Returns a list of IPD patients for a given doctor within a healthcare organization. The doctor must be an active user.",
+        "requestBody": {
+          "description": "Request payload containing the doctor's FHIR ID for which IPD patient data is required.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetIpdPatientByDoctorAndDateRequest"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/XRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response containing a list of IPD patient registrations.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IpdPatientResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "parameters": {
+      "XRequestId": {
+        "name": "x-request-id",
+        "in": "header",
+        "required": false,
+        "description": "Optional correlation ID. Echoed back unchanged in the response header if provided; otherwise a new UUID is generated. Log this against your request/response pair and include it when escalating issues to Nice HMS support.",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "headers": {
+      "XRequestId": {
+        "description": "Correlation ID (echoed from the request, or newly generated)",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "AccessControlAllowOrigin": {
+        "description": "CORS header — value is `*` (all origins allowed)",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad request or validation error",
+        "headers": {
+          "x-request-id": {
+            "$ref": "#/components/headers/XRequestId"
+          },
+          "Access-Control-Allow-Origin": {
+            "$ref": "#/components/headers/AccessControlAllowOrigin"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "PayloadTooLarge": {
+        "description": "An uploaded file exceeds the 5MB limit",
+        "headers": {
+          "x-request-id": {
+            "$ref": "#/components/headers/XRequestId"
+          },
+          "Access-Control-Allow-Origin": {
+            "$ref": "#/components/headers/AccessControlAllowOrigin"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Missing, invalid or expired token",
+        "headers": {
+          "x-request-id": {
+            "$ref": "#/components/headers/XRequestId"
+          },
+          "Access-Control-Allow-Origin": {
+            "$ref": "#/components/headers/AccessControlAllowOrigin"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Subscription is invalid or expired",
+        "headers": {
+          "x-request-id": {
+            "$ref": "#/components/headers/XRequestId"
+          },
+          "Access-Control-Allow-Origin": {
+            "$ref": "#/components/headers/AccessControlAllowOrigin"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Resource not found",
+        "headers": {
+          "x-request-id": {
+            "$ref": "#/components/headers/XRequestId"
+          },
+          "Access-Control-Allow-Origin": {
+            "$ref": "#/components/headers/AccessControlAllowOrigin"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "Conflict": {
+        "description": "Conflict (e.g. duplicate email)",
+        "headers": {
+          "x-request-id": {
+            "$ref": "#/components/headers/XRequestId"
+          },
+          "Access-Control-Allow-Origin": {
+            "$ref": "#/components/headers/AccessControlAllowOrigin"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "NoActiveEncounter": {
+        "description": "NO_ACTIVE_ENCOUNTER — the patient has no encounter at all (not even a finished one). Create a visit before pushing a document.",
+        "headers": {
+          "x-request-id": {
+            "$ref": "#/components/headers/XRequestId"
+          },
+          "Access-Control-Allow-Origin": {
+            "$ref": "#/components/headers/AccessControlAllowOrigin"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "InternalError": {
+        "description": "Internal server error",
+        "headers": {
+          "x-request-id": {
+            "$ref": "#/components/headers/XRequestId"
+          },
+          "Access-Control-Allow-Origin": {
+            "$ref": "#/components/headers/AccessControlAllowOrigin"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "BadGateway": {
+        "description": "Upstream ABDM gateway error",
+        "headers": {
+          "x-request-id": {
+            "$ref": "#/components/headers/XRequestId"
+          },
+          "Access-Control-Allow-Origin": {
+            "$ref": "#/components/headers/AccessControlAllowOrigin"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "LinkTokenRateLimited": {
+        "description": "LINK_TOKEN_RATE_LIMITED — ABDM refused to issue a care-context link token because its cap of 3 new link tokens per ABHA address per 24 hours was reached. Reuse the existing token (valid ~6 months); retry after 24 hours.",
+        "headers": {
+          "x-request-id": {
+            "$ref": "#/components/headers/XRequestId"
+          },
+          "Access-Control-Allow-Origin": {
+            "$ref": "#/components/headers/AccessControlAllowOrigin"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "ScanTokenNotFound": {
+        "description": "SCAN_TOKEN_NOT_FOUND — no scanned profile exists for this token under your facility (wrong token, wrong facility, or the shared body carried no patient demography).",
+        "headers": {
+          "x-request-id": {
+            "$ref": "#/components/headers/XRequestId"
+          },
+          "Access-Control-Allow-Origin": {
+            "$ref": "#/components/headers/AccessControlAllowOrigin"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "ScanTokenExpired": {
+        "description": "SCAN_TOKEN_EXPIRED — the scan-and-share token is older than 48 hours. Ask the patient to scan the QR code again.",
+        "headers": {
+          "x-request-id": {
+            "$ref": "#/components/headers/XRequestId"
+          },
+          "Access-Control-Allow-Origin": {
+            "$ref": "#/components/headers/AccessControlAllowOrigin"
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "ErrorDetail": {
+        "type": "object",
+        "required": [
+          "field",
+          "message"
+        ],
+        "properties": {
+          "field": {
+            "type": "string",
+            "description": "Dot-notation path to the failing field (e.g. patient.mobile, doctorDetails.0.doctorGcpId)"
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable reason for the failure"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "required": [
+          "message",
+          "error"
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Top-level summary (kept for backward compatibility)"
+          },
+          "error": {
+            "type": "object",
+            "required": [
+              "code",
+              "message"
+            ],
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Stable machine-readable code. Match on this (e.g. VALIDATION_ERROR, PATIENT_NOT_FOUND, SUBSCRIPTION_EXPIRED)"
+              },
+              "message": {
+                "type": "string",
+                "description": "Curated human-readable message"
+              },
+              "details": {
+                "type": "array",
+                "description": "Present only on VALIDATION_ERROR; one entry per failed field",
+                "items": {
+                  "$ref": "#/components/schemas/ErrorDetail"
+                }
+              }
+            }
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "required": [
+          "email",
+          "firstName",
+          "lastName",
+          "mobile"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "mobile": {
+            "type": "string"
+          }
+        }
+      },
+      "medicines": {
+        "type": "array",
+        "required": [
+          "drug",
+          "frequency",
+          "instruction",
+          "duration",
+          "route"
+        ],
+        "items": {
+          "type": "object",
+          "properties": {
+            "drug": {
+              "type": "string"
+            },
+            "frequency": {
+              "type": "string"
+            },
+            "instruction": {
+              "type": "string"
+            },
+            "duration": {
+              "type": "string"
+            },
+            "route": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "followUp": {
+        "type": "object",
+        "required": [
+          "startDate"
+        ],
+        "properties": {
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "comment": {
+            "type": "string"
+          }
+        }
+      },
+      "doctorDetails": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "doctorName",
+            "doctorGcpId"
+          ],
+          "properties": {
+            "doctorName": {
+              "type": "string",
+              "example": "Dr Umesh Bilagi"
+            },
+            "doctorGcpId": {
+              "type": "string",
+              "example": "cf4a6ab1-3f32-4b92-adc5-89489da6ca14"
+            }
+          }
+        }
+      },
+      "abhaAddress": {
+        "type": "string",
+        "example": "savitribilagi@sbx"
+      },
+      "patientId": {
+        "type": "integer",
+        "example": 236
+      },
+      "encounterId": {
+        "type": "string",
+        "description": "Optional. Attaches the document to a specific encounter; it must belong to the given patient and to your organization. When omitted, the patient's open encounter is used, else their most recent encounter (even a finished one). If the patient has no encounter at all, the request fails with 409 NO_ACTIVE_ENCOUNTER.",
+        "example": "21ba04cd-d922-4412-bfdc-c0293e638f1d"
+      },
+      "authTokenReq": {
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "authTokenRes": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateDoctorDataReq": {
+        "type": "object",
+        "required": [
+          "user",
+          "doctorPrintName",
+          "medicalLicenseNumber",
+          "specialty",
+          "qualification",
+          "gender"
+        ],
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "doctorPrintName": {
+            "type": "string"
+          },
+          "medicalLicenseNumber": {
+            "type": "string"
+          },
+          "specialty": {
+            "type": "string"
+          },
+          "qualification": {
+            "type": "string"
+          },
+          "abdmProfessionalId": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateDoctorRes": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "orgId": {
+            "type": "integer"
+          },
+          "gcpFhirId": {
+            "type": "string"
+          },
+          "qualification": {
+            "type": "string"
+          },
+          "ndhmProfessionalId": {
+            "type": "string"
+          },
+          "registration": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "speciality": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "integer"
+          },
+          "id": {
+            "type": "integer"
+          }
+        }
+      },
+      "EditDoctorReq": {
+        "required": [
+          "doctorPrintName",
+          "medicalLicenseNumber",
+          "doctorGcpFhirId",
+          "specialty",
+          "qualification",
+          "gender"
+        ],
+        "type": "object",
+        "properties": {
+          "doctorPrintName": {
+            "type": "string"
+          },
+          "medicalLicenseNumber": {
+            "type": "string"
+          },
+          "doctorGcpFhirId": {
+            "type": "string"
+          },
+          "specialty": {
+            "type": "string"
+          },
+          "qualification": {
+            "type": "string"
+          },
+          "abdmProfessionalId": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string"
+          }
+        }
+      },
+      "EditDoctorRes": {
+        "type": "object",
+        "properties": {
+          "mes": {
+            "type": "string"
+          }
+        }
+      },
+      "PatientByIdReq": {
+        "type": "object",
+        "required": [
+          "patientId"
+        ],
+        "properties": {
+          "patientId": {
+            "$ref": "#/components/schemas/patientId"
+          }
+        }
+      },
+      "PatientByAbhaAddressReq": {
+        "type": "object",
+        "required": [
+          "abhaAddress"
+        ],
+        "properties": {
+          "abhaAddress": {
+            "$ref": "#/components/schemas/abhaAddress"
+          }
+        }
+      },
+      "ScanAndShareReq": {
+        "type": "object",
+        "required": [
+          "tokenNumber"
+        ],
+        "properties": {
+          "tokenNumber": {
+            "type": "integer",
+            "example": 128,
+            "description": "The token number displayed in the patient's ABHA/PHR app after scanning the facility QR code."
+          }
+        }
+      },
+      "AbhaOtpInitReq": {
+        "type": "object",
+        "required": [
+          "abhaAddress",
+          "authMode"
+        ],
+        "properties": {
+          "abhaAddress": {
+            "type": "string",
+            "example": "abcd@abdm"
+          },
+          "authMode": {
+            "type": "string",
+            "enum": [
+              "MOBILE_OTP",
+              "AADHAAR_OTP",
+              "DONT_KNOW"
+            ],
+            "description": "Which OTP to send. MOBILE_OTP sends it to the mobile registered against the ABHA in ABDM; AADHAAR_OTP sends it to the Aadhaar-linked mobile; DONT_KNOW sends nothing and returns the modes the ABHA supports. Repeat the same mode in /patient_register_abha_otp_confirm."
+          }
+        }
+      },
+      "AbhaOtpInitRes": {
+        "type": "object",
+        "properties": {
+          "auth": {
+            "type": "object",
+            "properties": {
+              "meta": {
+                "type": "object",
+                "properties": {
+                  "hint": {
+                    "type": "object"
+                  },
+                  "expiry": {
+                    "type": "string",
+                    "example": "2023-06-04T06:57:19.082288652"
+                  }
+                }
+              },
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "MOBILE_OTP",
+                  "AADHAAR_OTP",
+                  "DONT_KNOW"
+                ]
+              },
+              "transactionId": {
+                "type": "string",
+                "example": "f455d2f9-18f1-4c6e-bfd0-df5ff2449f97"
+              }
+            }
+          },
+          "resp": {
+            "type": "object",
+            "properties": {
+              "requestId": {
+                "type": "string",
+                "example": "48c0f79a-a3aa-465c-a07d-f1e20663d1f4"
+              }
+            }
+          },
+          "error": {
+            "type": "object"
+          },
+          "requestId": {
+            "type": "string",
+            "example": "4615b2d6-6275-4122-9eba-01da0faf8aa6"
+          },
+          "timestamp": {
+            "type": "string",
+            "example": "2023-06-04T04:57:19.082281323"
+          }
+        }
+      },
+      "AbhaOtpConfirmReq": {
+        "type": "object",
+        "required": [
+          "otp",
+          "transactionId",
+          "abhaAddress"
+        ],
+        "properties": {
+          "otp": {
+            "type": "string",
+            "example": "886367"
+          },
+          "transactionId": {
+            "type": "string",
+            "example": "f455d2f9-18f1-4c6e-bfd0-df5ff2449f97"
+          },
+          "abhaAddress": {
+            "type": "string",
+            "example": "abcd1234@abdm"
+          },
+          "authMode": {
+            "type": "string",
+            "enum": [
+              "MOBILE_OTP",
+              "AADHAAR_OTP"
+            ],
+            "default": "MOBILE_OTP",
+            "description": "Optional. Must match the authMode used in /patient_register_abha_otp_init. Defaults to MOBILE_OTP."
+          }
+        }
+      },
+      "PatientReq": {
+        "type": "object",
+        "properties": {
+          "patient": {
+            "type": "object",
+            "required": [
+              "firstName",
+              "gender",
+              "dob",
+              "district",
+              "state",
+              "mobile"
+            ],
+            "properties": {
+              "prefix": {
+                "enum": [
+                  "Mr",
+                  "Mrs",
+                  "Ms",
+                  "Dr",
+                  "NA",
+                  "Master",
+                  "Er"
+                ],
+                "type": "string",
+                "example": "Mr"
+              },
+              "firstName": {
+                "type": "string",
+                "example": "Umesh"
+              },
+              "middleName": {
+                "type": "string",
+                "example": ""
+              },
+              "lastName": {
+                "type": "string",
+                "example": "Bilagi"
+              },
+              "gender": {
+                "type": "string",
+                "enum": [
+                  "Male",
+                  "Female",
+                  "Other"
+                ],
+                "example": "Male"
+              },
+              "dob": {
+                "type": "string",
+                "format": "date",
+                "example": "1989-04-26"
+              },
+              "district": {
+                "type": "string",
+                "example": "Dharwad"
+              },
+              "state": {
+                "type": "string",
+                "example": "KARNATAKA"
+              },
+              "mobile": {
+                "type": "string",
+                "example": "9233235620"
+              },
+              "address": {
+                "type": "string",
+                "example": "Hno11 , near pulley school"
+              },
+              "panNumber": {
+                "type": "string",
+                "example": "APYVB3402Q"
+              },
+              "aadharNumber": {
+                "type": "string",
+                "example": 514782451234
+              },
+              "email": {
+                "type": "string",
+                "example": "rameshH007@gmail.com"
+              },
+              "alternatePhoneNumber": {
+                "type": "string",
+                "example": "0836223456"
+              }
+            }
+          }
+        }
+      },
+      "PatientRes": {
+        "type": "object",
+        "properties": {
+          "patient": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "description": "This is nothing but patientId",
+                "type": "integer",
+                "format": "int32",
+                "example": 231
+              },
+              "prefix": {
+                "enum": [
+                  "Mr",
+                  "Mrs",
+                  "Ms",
+                  "Dr",
+                  "NA",
+                  "Master",
+                  "Er"
+                ],
+                "type": "string",
+                "example": "Mr"
+              },
+              "firstName": {
+                "type": "string",
+                "example": "Umesh"
+              },
+              "middleName": {
+                "type": "string",
+                "example": ""
+              },
+              "lastName": {
+                "type": "string",
+                "example": "Bilagi"
+              },
+              "gender": {
+                "type": "string",
+                "enum": [
+                  "Male",
+                  "Female",
+                  "other",
+                  "unknown"
+                ],
+                "example": "Male"
+              },
+              "dob": {
+                "type": "string",
+                "example": "1989-04-26T00:00:00.000Z"
+              },
+              "orgId": {
+                "type": "integer",
+                "format": "int32",
+                "example": "1"
+              },
+              "gcpFhirId": {
+                "type": "string",
+                "example": "b6165fd2-b76a-48e3-81ad-202b3919d668"
+              },
+              "abhaAddress": {
+                "type": "string",
+                "example": ""
+              },
+              "abhaNumber": {
+                "type": "string",
+                "example": ""
+              },
+              "district": {
+                "type": "string",
+                "example": "Dharwad"
+              },
+              "state": {
+                "type": "string",
+                "example": "KARNATAKA"
+              },
+              "mobile": {
+                "type": "string",
+                "example": "9233235620"
+              },
+              "address": {
+                "type": "string",
+                "example": "Hno11 , near pulley school"
+              },
+              "panNumber": {
+                "type": "string",
+                "example": "APYVB3402Q"
+              },
+              "aadharNumber": {
+                "type": "string",
+                "example": 514782451234
+              },
+              "email": {
+                "type": "string",
+                "example": "rameshH007@gmail.com"
+              },
+              "alternatePhoneNumber": {
+                "type": "string",
+                "example": "0836223456"
+              },
+              "pincode": {
+                "type": "number",
+                "example": 580030
+              }
+            }
+          }
+        }
+      },
+      "OpdPatientReq": {
+        "type": "object",
+        "required": [
+          "doctorDetails",
+          "date"
+        ],
+        "properties": {
+          "doctorDetails": {
+            "$ref": "#/components/schemas/doctorDetails"
+          },
+          "date": {
+            "type": "string",
+            "example": "2023-05-08T19:21:23.918Z"
+          },
+          "abhaAddress": {
+            "type": "string",
+            "example": "savitribilagi@sbx"
+          },
+          "patientId": {
+            "type": "integer",
+            "example": 236
+          }
+        }
+      },
+      "AdmitPatientReq": {
+        "type": "object",
+        "required": [
+          "doctorDetails",
+          "doa"
+        ],
+        "properties": {
+          "doctorDetails": {
+            "$ref": "#/components/schemas/doctorDetails"
+          },
+          "doa": {
+            "type": "string",
+            "example": "2023-05-10T19:21:23.918Z"
+          },
+          "abhaAddress": {
+            "$ref": "#/components/schemas/abhaAddress"
+          },
+          "patientId": {
+            "$ref": "#/components/schemas/patientId"
+          },
+          "admitSource": {
+            "type": "string",
+            "enum": [
+              "emd",
+              "outp"
+            ],
+            "description": "How the patient was admitted — `emd` for an emergency admission, `outp` for a planned (routine) one. Optional: leave it out and the visit is stored as not reported, never defaulted. Any other value is rejected with a 400 VALIDATION_ERROR naming the accepted codes.",
+            "example": "emd"
+          }
+        }
+      },
+      "DischargePatientReq": {
+        "type": "object",
+        "required": [
+          "encounterId",
+          "dod"
+        ],
+        "properties": {
+          "doctorDetails": {
+            "$ref": "#/components/schemas/doctorDetails"
+          },
+          "dod": {
+            "type": "string"
+          },
+          "abhaAddress": {
+            "$ref": "#/components/schemas/abhaAddress"
+          },
+          "patientId": {
+            "$ref": "#/components/schemas/patientId"
+          },
+          "encounterId": {
+            "type": "string",
+            "example": "21ba04cd-d922-4412-bfdc-c0293e638f1d"
+          },
+          "dischargeDisposition": {
+            "type": "string",
+            "enum": [
+              "home",
+              "alt-home",
+              "other-hcf",
+              "hosp",
+              "long",
+              "aadvice",
+              "exp",
+              "psy",
+              "rehab",
+              "smf",
+              "oth"
+            ],
+            "description": "How the stay ended, as a FHIR discharge disposition — `home` for a normal discharge, `aadvice` for discharge against medical advice (LAMA), `exp` for death, plus the remaining FHIR codes. Optional: leave it out and the outcome is stored as not reported, never defaulted. Any other value is rejected with a 400 VALIDATION_ERROR naming the accepted codes.",
+            "example": "home"
+          }
+        }
+      },
+      "DischargeSummaryReq": {
+        "type": "object",
+        "required": [
+          "doctorDetails",
+          "text",
+          "status",
+          "date"
+        ],
+        "properties": {
+          "abhaAddress": {
+            "$ref": "#/components/schemas/abhaAddress"
+          },
+          "patientId": {
+            "$ref": "#/components/schemas/patientId"
+          },
+          "encounterId": {
+            "$ref": "#/components/schemas/encounterId"
+          },
+          "text": {
+            "type": "string",
+            "example": "<div>Cough with APD</div><div>cough</div><div>BP 140/80 PR 87/min RR 20/min</div>"
+          },
+          "doctorDetails": {
+            "$ref": "#/components/schemas/doctorDetails"
+          },
+          "status": {
+            "type": "string",
+            "example": "final or draft"
+          },
+          "date": {
+            "type": "string",
+            "example": "2023-05-08T19:21:23.918Z"
+          }
+        }
+      },
+      "OpConsultationReq": {
+        "type": "object",
+        "required": [
+          "doctorDetails",
+          "status",
+          "date"
+        ],
+        "properties": {
+          "abhaAddress": {
+            "$ref": "#/components/schemas/abhaAddress"
+          },
+          "patientId": {
+            "$ref": "#/components/schemas/patientId"
+          },
+          "encounterId": {
+            "$ref": "#/components/schemas/encounterId"
+          },
+          "chiefComplaints": {
+            "type": "string",
+            "description": "Primary complaints reported by the patient"
+          },
+          "medicalHistory": {
+            "type": "string",
+            "description": "Patient's past medical history"
+          },
+          "physicalExamination": {
+            "type": "string",
+            "description": "Findings from the physical examination"
+          },
+          "followUp": {
+            "$ref": "#/components/schemas/followUp"
+          },
+          "opdProcedure": {
+            "$ref": "#/components/schemas/opdProcedure"
+          },
+          "medicines": {
+            "$ref": "#/components/schemas/medicines"
+          },
+          "doctorDetails": {
+            "$ref": "#/components/schemas/doctorDetails"
+          },
+          "status": {
+            "type": "string",
+            "description": "Current status of the consultation"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of the consultation"
+          }
+        }
+      },
+      "ProcedureOtNotesReq": {
+        "type": "object",
+        "required": [
+          "doctorDetails",
+          "status",
+          "date"
+        ],
+        "properties": {
+          "abhaAddress": {
+            "$ref": "#/components/schemas/abhaAddress"
+          },
+          "patientId": {
+            "$ref": "#/components/schemas/patientId"
+          },
+          "encounterId": {
+            "$ref": "#/components/schemas/encounterId"
+          },
+          "followUp": {
+            "$ref": "#/components/schemas/followUp"
+          },
+          "opdProcedure": {
+            "$ref": "#/components/schemas/opdProcedure"
+          },
+          "medicines": {
+            "$ref": "#/components/schemas/medicines"
+          },
+          "doctorDetails": {
+            "$ref": "#/components/schemas/doctorDetails"
+          },
+          "status": {
+            "type": "string",
+            "description": "Current status of the procedure"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of the procedure"
+          }
+        }
+      },
+      "opdProcedure": {
+        "type": "object",
+        "properties": {
+          "procedureName": {
+            "type": "string",
+            "description": "Name of the procedure performed"
+          },
+          "procedureDescription": {
+            "type": "string",
+            "description": "Detailed description of the procedure"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date when the procedure was performed"
+          }
+        }
+      },
+      "DiagnosticReportReq": {
+        "type": "object",
+        "required": [
+          "performer",
+          "testName",
+          "category",
+          "text",
+          "status"
+        ],
+        "properties": {
+          "abhaAddress": {
+            "$ref": "#/components/schemas/abhaAddress"
+          },
+          "patientId": {
+            "$ref": "#/components/schemas/patientId"
+          },
+          "encounterId": {
+            "$ref": "#/components/schemas/encounterId"
+          },
+          "text": {
+            "type": "string",
+            "example": "<div>Ultrasoud Report This is in text format and for CBC like reports send HTML  table</div>"
+          },
+          "performer": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/doctorDetails"
+              },
+              {
+                "description": "The term \"performer\" refers to the individual who signs the report"
+              }
+            ]
+          },
+          "requester": {
+            "allOf": [
+              {
+                "description": "This is an optional field. If not provided, the requester will be assumed to be the patient themselves"
+              },
+              {
+                "$ref": "#/components/schemas/doctorDetails"
+              }
+            ]
+          },
+          "status": {
+            "type": "string",
+            "example": "final or draft"
+          },
+          "date": {
+            "type": "string",
+            "example": "2023-05-08T19:21:23.918Z"
+          },
+          "conclusion": {
+            "type": "string",
+            "example": "Normal Study"
+          },
+          "testName": {
+            "type": "string",
+            "example": "CT Abdomen"
+          },
+          "category": {
+            "enum": [
+              "Hematology",
+              "Biochemistry",
+              "Microbiology",
+              "Radiology",
+              "Others"
+            ],
+            "type": "string",
+            "example": "Radiology"
+          }
+        }
+      },
+      "HealthDocumentReq": {
+        "type": "object",
+        "required": [
+          "doctorDetails",
+          "text",
+          "status",
+          "page1"
+        ],
+        "properties": {
+          "abhaAddress": {
+            "$ref": "#/components/schemas/abhaAddress"
+          },
+          "patientId": {
+            "$ref": "#/components/schemas/patientId"
+          },
+          "encounterId": {
+            "$ref": "#/components/schemas/encounterId"
+          },
+          "text": {
+            "type": "string",
+            "example": "Title like Prescription, Lab report"
+          },
+          "doctorDetails": {
+            "$ref": "#/components/schemas/doctorDetails"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "preliminary",
+              "final",
+              "amended",
+              "entered-in-error"
+            ],
+            "description": "Only `final` is pushed to ABDM. Any other value stores the document without notifying ABDM; the response then reports `abdmNotified: false` with the reason.",
+            "example": "final"
+          },
+          "date": {
+            "type": "string",
+            "example": "2023-05-08T19:21:23.918Z"
+          },
+          "page1": {
+            "type": "string",
+            "format": "binary",
+            "description": "Required. A PDF, JPEG or PNG file, max 5MB."
+          },
+          "page2": {
+            "type": "string",
+            "format": "binary",
+            "description": "Optional PDF, JPEG or PNG file, max 5MB. A PDF must be uploaded as the only file."
+          },
+          "page3": {
+            "type": "string",
+            "format": "binary",
+            "description": "Optional PDF, JPEG or PNG file, max 5MB. A PDF must be uploaded as the only file."
+          },
+          "page4": {
+            "type": "string",
+            "format": "binary",
+            "description": "Optional PDF, JPEG or PNG file, max 5MB. A PDF must be uploaded as the only file."
+          }
+        }
+      },
+      "EncounterRes": {
+        "type": "object",
+        "properties": {
+          "encounter": {
+            "type": "object",
+            "properties": {
+              "class": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "example": "AMB"
+                  },
+                  "display": {
+                    "type": "string",
+                    "example": "ambulatory"
+                  },
+                  "system": {
+                    "type": "string",
+                    "example": "http://terminology.hl7.org/CodeSystem/v3-ActCode"
+                  }
+                }
+              },
+              "id": {
+                "type": "string",
+                "example": "65cb5b6a-f08e-4e46-a826-67e117573d71"
+              },
+              "meta": {
+                "type": "object",
+                "properties": {
+                  "lastUpdated": {
+                    "type": "string",
+                    "example": "2023-05-11T10:04:31.675Z"
+                  },
+                  "profile": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "example": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Encounter"
+                    }
+                  },
+                  "versionId": {
+                    "type": "string",
+                    "example": "MTY4Mzc5OTQ3MTY3NTY0NTAwMA"
+                  }
+                }
+              },
+              "participant": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "individual": {
+                      "type": "object",
+                      "properties": {
+                        "reference": {
+                          "type": "string",
+                          "example": "Practitioner/cf4a6ab1-3f32-4b92-adc5-89489da6ca14"
+                        },
+                        "type": {
+                          "type": "string",
+                          "example": "Practitioner"
+                        }
+                      }
+                    },
+                    "type": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "coding": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "code": {
+                                  "type": "string",
+                                  "example": "ATND"
+                                },
+                                "display": {
+                                  "type": "string",
+                                  "example": "attender"
+                                },
+                                "system": {
+                                  "type": "string",
+                                  "example": "http://terminology.hl7.org/CodeSystem/v3-ParticipationType"
+                                }
+                              }
+                            }
+                          },
+                          "text": {
+                            "type": "string",
+                            "example": "Dr Umesh Bilagi"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "period": {
+                "type": "object",
+                "required": [
+                  "start"
+                ],
+                "properties": {
+                  "start": {
+                    "type": "string",
+                    "example": "2023-05-08T19:21:23.918Z"
+                  },
+                  "end": {
+                    "type": "string",
+                    "example": "2023-05-08T23:21:23.918Z"
+                  }
+                }
+              },
+              "resourceType": {
+                "type": "string",
+                "example": "Encounter"
+              },
+              "status": {
+                "type": "string",
+                "example": "in-progress"
+              },
+              "subject": {
+                "type": "object",
+                "properties": {
+                  "reference": {
+                    "type": "string",
+                    "example": "Patient/9b4ec056-991d-4237-b1fd-a65770349610"
+                  }
+                }
+              },
+              "text": {
+                "type": "object",
+                "properties": {
+                  "div": {
+                    "type": "string",
+                    "example": "<div xmlns=http://www.w3.org/1999/xhtml>OPD Visit   Tue 9 May 2023 </div>"
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "generated"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "CompositionRes": {
+        "type": "object",
+        "properties": {
+          "composition": {
+            "type": "object",
+            "properties": {
+              "author": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "display": {
+                      "type": "string",
+                      "example": "Dr Umesh Bilagi"
+                    },
+                    "reference": {
+                      "type": "string",
+                      "example": "Practitioner/cf4a6ab1-3f32-4b92-adc5-89489da6ca14"
+                    }
+                  }
+                }
+              },
+              "custodian": {
+                "type": "object",
+                "properties": {
+                  "reference": {
+                    "type": "string",
+                    "example": "Organization/fd6464c1-a8ef-4e95-aa2a-d5eac433b85d"
+                  }
+                }
+              },
+              "date": {
+                "type": "string",
+                "example": "2023-05-08T19:21:23.918Z"
+              },
+              "encounter": {
+                "type": "object",
+                "properties": {
+                  "reference": {
+                    "type": "string",
+                    "example": "Encounter/8e909449-f3f0-427c-bd45-4f8e5564e251"
+                  }
+                }
+              },
+              "id": {
+                "type": "string",
+                "example": "e721069a-cc8c-4e5e-a437-b4cfcaee11a4"
+              },
+              "identifier": {
+                "type": "object",
+                "properties": {
+                  "system": {
+                    "type": "string",
+                    "example": "https://ndhm.in/phr"
+                  },
+                  "value": {
+                    "type": "string",
+                    "example": "2390bb7b-9e23-4732-a081-12b469657d87"
+                  }
+                }
+              },
+              "language": {
+                "type": "string",
+                "example": "en-IN"
+              },
+              "meta": {
+                "type": "object",
+                "properties": {
+                  "lastUpdated": {
+                    "type": "string",
+                    "example": "2023-05-11T10:06:53.692Z"
+                  },
+                  "profile": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "example": "https://nrces.in/ndhm/fhir/r4/StructureDefinition/DischargeSummaryRecord"
+                    }
+                  },
+                  "versionId": {
+                    "type": "string",
+                    "example": "MTY4Mzc5OTYxMzY5MjYwNTAwMA"
+                  }
+                }
+              },
+              "resourceType": {
+                "type": "string",
+                "example": "Composition"
+              },
+              "section": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "object",
+                      "properties": {
+                        "coding": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "code": {
+                                "type": "string",
+                                "example": 422843007
+                              },
+                              "display": {
+                                "type": "string",
+                                "example": "Chief Complaint Section"
+                              },
+                              "system": {
+                                "type": "string",
+                                "example": "https://projecteka.in/sct"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "entry": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "reference": {
+                            "type": "string",
+                            "example": "Condition/74590d44-8674-4147-8b14-e6fd2cb708dd"
+                          }
+                        }
+                      }
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "Presenting Problems"
+                    }
+                  }
+                }
+              },
+              "status": {
+                "type": "string",
+                "example": "final"
+              },
+              "subject": {
+                "type": "object",
+                "properties": {
+                  "reference": {
+                    "type": "string",
+                    "example": "Patient/9b4ec056-991d-4237-b1fd-a65770349610"
+                  }
+                }
+              },
+              "text": {
+                "type": "object",
+                "properties": {
+                  "div": {
+                    "type": "string",
+                    "example": "<div>....</div>"
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "generated"
+                  }
+                }
+              },
+              "title": {
+                "type": "string",
+                "example": "DischargeSummary"
+              },
+              "type": {
+                "type": "object",
+                "properties": {
+                  "coding": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "example": 373942005
+                        },
+                        "display": {
+                          "type": "string",
+                          "example": "Discharge summary"
+                        },
+                        "system": {
+                          "type": "string",
+                          "example": "https://ndhm.gov.in/sct"
+                        }
+                      }
+                    }
+                  },
+                  "text": {
+                    "type": "string",
+                    "example": "Discharge summary"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetOpdPatientByDoctorAndDateRequest": {
+        "type": "object",
+        "properties": {
+          "orgId": {
+            "type": "number",
+            "description": "Ignored - the organization is derived from the auth token.",
+            "example": 1
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date (YYYY-MM-DD) for which to fetch the data. Timezone conversion to IST is applied.",
+            "example": "2025-02-02"
+          },
+          "doctorGcpId": {
+            "type": "string",
+            "description": "The GCP FHIR ID of the doctor.",
+            "example": "cf4a6ab1-3f32-4b92-adc5-8948ey1da6ca156"
+          }
+        },
+        "required": [
+          "date",
+          "doctorGcpId"
+        ]
+      },
+      "GetIpdPatientByDoctorAndDateRequest": {
+        "type": "object",
+        "properties": {
+          "orgId": {
+            "type": "integer",
+            "description": "Ignored - the organization is derived from the auth token.",
+            "example": 1
+          },
+          "doctorGcpId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The GCP FHIR ID of the doctor.",
+            "example": "cf4a6ab1-3f32-4b92-adc5-8948ey1da6ca156"
+          }
+        },
+        "required": [
+          "doctorGcpId"
+        ]
+      },
+      "OpdRegistrationResult": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "The token associated with the OPD registration.",
+            "example": "some-token-value"
+          },
+          "opdId": {
+            "type": "number",
+            "description": "The ID of the OPD registration.",
+            "example": 123
+          },
+          "orgId": {
+            "type": "number",
+            "description": "The organization ID.",
+            "example": 1
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date of the OPD registration.",
+            "example": "2025-02-02T00:00:00+05:30"
+          },
+          "patientId": {
+            "type": "number",
+            "description": "The patient ID.",
+            "example": 456
+          },
+          "doctorId": {
+            "type": "number",
+            "description": "The doctor ID.",
+            "example": 789
+          },
+          "prefix": {
+            "type": "string",
+            "nullable": true,
+            "description": "Patient's prefix (e.g., Mr, Ms).",
+            "example": "Mr"
+          },
+          "firstName": {
+            "type": "string",
+            "description": "Patient's first name.",
+            "example": "John"
+          },
+          "middleName": {
+            "type": "string",
+            "nullable": true,
+            "description": "Patient's middle name.",
+            "example": "A."
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true,
+            "description": "Patient's last name.",
+            "example": "Doe"
+          },
+          "gender": {
+            "type": "string",
+            "description": "Patient's gender.",
+            "example": "Male"
+          },
+          "dob": {
+            "type": "string",
+            "format": "date",
+            "description": "Patient's date of birth.",
+            "example": "1990-01-01"
+          },
+          "abhaAddress": {
+            "type": "string",
+            "nullable": true,
+            "description": "Alias for the patient's phrAddress.",
+            "example": "123, ABC Street, City"
+          },
+          "abhaNumber": {
+            "type": "string",
+            "nullable": true,
+            "description": "Alias for the patient's healthIdNumber.",
+            "example": "ABHA1234567890"
+          },
+          "mobile": {
+            "type": "string",
+            "description": "Patient's mobile number.",
+            "example": "+911234567890"
+          },
+          "status": {
+            "type": "string",
+            "description": "status of visit",
+            "example": "in-progress"
+          }
+        },
+        "required": [
+          "token",
+          "opdId",
+          "orgId",
+          "date",
+          "patientId",
+          "doctorId",
+          "firstName",
+          "gender",
+          "dob",
+          "mobile",
+          "status"
+        ]
+      },
+      "IpdPatientResponse": {
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "integer",
+            "example": 131
+          },
+          "name": {
+            "type": "string",
+            "example": "Bhargav Chandrashekhar Hede"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "male",
+              "female",
+              "other"
+            ],
+            "example": "male"
+          },
+          "mobile": {
+            "type": "string",
+            "pattern": "^[0-9]{10}$",
+            "example": "8554901073"
+          },
+          "doa": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-03-07T18:14:26.556Z"
+          },
+          "doctors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IPDDoctor"
+            }
+          },
+          "dob": {
+            "type": "string",
+            "format": "date",
+            "example": "1999-11-12"
+          },
+          "ipNo": {
+            "type": "integer",
+            "example": 65
+          }
+        }
+      },
+      "IPDDoctor": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "cf4a6ab1-3f32-4b92-adc5-89489da6ca14"
+          },
+          "name": {
+            "type": "string",
+            "example": "Dr U R Bilagi"
+          }
+        }
+      }
+    }
+  }
+}
